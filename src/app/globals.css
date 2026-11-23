@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   SULCIS RENT — TOKENS «TRAMA»
+   Colori in triplette RGB per supportare l'alpha di Tailwind.
+   ========================================================================== */
+:root {
+  /* Brand — dal logo. TODO cliente: ricampionare da public/brand/logo HD quando disponibile */
+  --sulcis-blue: 26 111 163;        /* #1A6FA3  mare profondo · primario */
+  --sulcis-blue-deep: 15 76 117;    /* #0F4C75  blu per testo piccolo su sabbia (7.8:1) */
+  --rent-magenta: 209 31 110;       /* #D11F6E  accento · CTA */
+  --rent-magenta-deep: 176 24 91;   /* #B0185B  hover CTA / magenta per testo piccolo su sabbia (5.8:1) */
+
+  /* Territorio */
+  --sand: 243 237 226;              /* #F3EDE2  calcare · fondo principale */
+  --sand-200: 232 223 207;          /* #E8DFCF  fondo alternato */
+  --sand-300: 214 202 182;          /* #D6CAB6  fili e divisori */
+  --trachite: 30 26 23;             /* #1E1A17  trachite · testo e sezioni d'impatto */
+  --trachite-800: 43 37 33;         /* #2B2521 */
+  --trachite-600: 74 66 60;         /* #4A423C */
+  --stone: 94 85 78;                /* #5E554E  testo secondario su sabbia (6.2:1) */
+  --turquoise: 63 184 175;          /* #3FB8AF  acqua bassa · solo su trachite o decorativo */
+  --ochre: 201 119 47;              /* #C9772F  miniera · solo pannello notte su trachite (5.1:1) */
+  --ochre-deep: 142 74 28;          /* #8E4A1C  ocra per testo su sabbia (5.7:1) */
+
+  /* Layout */
+  --gutter: clamp(1rem, 3.2vw, 2.75rem);
+  --section-y: clamp(5rem, 13vw, 13rem);
+  --u: clamp(14px, 2.2vw, 28px);    /* cella della trama */
+
+  /* Motion */
+  --ease-trama: cubic-bezier(.77, 0, .18, 1);
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+
+  /* Assi variabili del display — scritti da useStretchAxes() allo scroll */
+  --wdth: 72;
+  --wght: 850;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-sand text-trachite font-sans text-base antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: rgb(var(--rent-magenta)); color: #fff; }
+
+  /* Focus sempre visibile: filo magenta spesso + alone sabbia per staccare su ogni fondo */
+  :focus-visible {
+    outline: 3px solid rgb(var(--rent-magenta));
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgb(var(--sand));
+  }
+}
+
+@layer components {
+  /* Display variabile: Archivo con assi wdth + wght */
+  .display {
+    font-family: var(--font-display), "Arial Narrow", sans-serif;
+    font-variation-settings: "wdth" 72, "wght" 850;
+    text-transform: uppercase;
+    font-kerning: normal;
+  }
+  /* Titoli che respirano con la velocità di scroll */
+  .display-stretch {
+    font-variation-settings: "wdth" var(--wdth), "wght" var(--wght);
+  }
+  .eyebrow {
+    @apply font-sans text-eyebrow font-semibold uppercase;
+  }
+  .wrap { @apply mx-auto w-full max-w-content px-gutter; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .display-stretch { font-variation-settings: "wdth" 72, "wght" 850; }
+}
