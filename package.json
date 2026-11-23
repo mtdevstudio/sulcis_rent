@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "docker:refresh": "sh scripts/docker-refresh.sh",
     "test:php": "server/vendor/bin/phpunit",
-    "test:e2e": "playwright test --trace off"
+    "test:e2e": "playwright test --trace off",
+    "preview:page": "node scripts/build-preview-page.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
