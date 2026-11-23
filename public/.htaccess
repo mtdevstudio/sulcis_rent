@@ -1,0 +1,80 @@
+# =====================================================================
+# SULCIS RENT · Apache (Aruba / Plesk) — identico su entrambi
+# Richiede: mod_rewrite, mod_headers (mod_deflate/mod_expires consigliati)
+# =====================================================================
+Options -Indexes -MultiViews
+DirectoryIndex index.html index.php
+AddDefaultCharset utf-8
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # --- HTTPS forzato (anche dietro proxy che passa X-Forwarded-Proto) ---
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:[0-9]+)?$
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # --- File e cartelle mai raggiungibili via browser ---
+  RewriteRule (^|/)\.(?!well-known/) - [F,L]
+  RewriteRule ^_private(/|$) - [F,L]
+  RewriteRule ^(sulcis-private|server|database|vendor|node_modules)(/|$) - [F,L]
+  RewriteRule \.(?i:sql|log|md|lock|bak|dist|sh|ini|env|yml|yaml)$ - [F,L]
+  RewriteRule (^|/)(composer\.(json|lock)|package(-lock)?\.json|config(\.example)?\.php)$ - [F,L]
+
+  # --- Scheda auto: meta SEO iniettati da car.php (anche per auto aggiunte dopo il build) ---
+  RewriteRule ^flotta/([a-z0-9]+(?:-[a-z0-9]+)*)/?$ car.php?slug=$1&lang=it [L,QSA]
+  RewriteRule ^en/fleet/([a-z0-9]+(?:-[a-z0-9]+)*)/?$ car.php?slug=$1&lang=en [L,QSA]
+
+  # --- Sitemap dinamica ---
+  RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+  # --- Pagine con slash finale (export Next con trailingSlash) ---
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # --- Header di sicurezza su tutto il sito ---
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(self), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  # CSP compatibile con GSAP (nessun eval) e Google Maps (iframe caricato al click).
+  # 'unsafe-inline' sugli script è necessario per l'export statico di Next (payload RSC inline): vedi README → Sicurezza.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.googleapis.com https://*.gstatic.com https://*.google.com; font-src 'self'; connect-src 'self'; frame-src https://www.google.com https://maps.google.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+  Header unset X-Powered-By
+  Header always unset X-Powered-By
+
+  # --- Area riservata e shell: mai indicizzate ---
+  <If "%{REQUEST_URI} =~ m#^/(admin|api|shell|en/shell|design-system)(/|$)#">
+    Header always set X-Robots-Tag "noindex, nofollow"
+    Header always set Cache-Control "no-store"
+  </If>
+
+  # --- Cache ---
+  <FilesMatch "\.(?i:html)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <If "%{REQUEST_URI} =~ m#^/_next/static/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+  <FilesMatch "\.(?i:webp|avif|jpe?g|png|svg|ico|woff2)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml application/xml text/plain
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType application/manifest+json .webmanifest
+</IfModule>

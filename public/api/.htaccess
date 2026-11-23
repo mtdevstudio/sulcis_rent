@@ -1,0 +1,22 @@
+# API: solo gli endpoint .php previsti; niente listing; niente file di supporto.
+Options -Indexes
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set Cache-Control "no-store"
+</IfModule>
+# _boot.php non è un endpoint
+<Files "_boot.php">
+  Require all denied
+</Files>
+<FilesMatch "\.(?i:inc|ini|log|sql|md|json|lock|dist|bak|sh)$">
+  Require all denied
+</FilesMatch>
+<IfModule mod_php.c>
+  php_flag display_errors off
+</IfModule>
+<IfModule mod_php7.c>
+  php_flag display_errors off
+</IfModule>
+<IfModule mod_php8.c>
+  php_flag display_errors off
+</IfModule>

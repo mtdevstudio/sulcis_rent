@@ -4,3 +4,7 @@ out
 next-env.d.ts
 *.tsbuildinfo
 .DS_Store
+src/data/snapshot.generated.ts
+server/vendor/
+server/config.php
+public/_private/config.php

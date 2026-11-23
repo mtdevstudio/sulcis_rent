@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/snapshot.mjs",
     "dev": "next dev",
-    "build": "next build",
+    "prebuild": "node scripts/snapshot.mjs",
+    "build": "next build && node scripts/postbuild.mjs",
     "start": "npx serve out",
-    "lint": "next lint"
+    "placeholders": "node scripts/gen-placeholders.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "gsap": "^3.15.1",
@@ -21,7 +24,9 @@
     "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.7.0",
     "postcss": "^8.5.33",
+    "sharp": "^0.35.5",
     "tailwindcss": "3.4",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
 }

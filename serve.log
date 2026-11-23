@@ -1,0 +1,476 @@
+ UPDATE  The latest version of `serve` is 14.2.8
+ INFO  Accepting connections at http://0.0.0.0:4321
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 15 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/media/b8dfa3d21eb22018-s.p.3lxpqujs87tck.woff2
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/2x_pf4__sua4x.css
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/media/db545dba463279ae-s.p.1cp9-4nby68jc.woff2
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /images/placeholder/places/hero-costa-1920.webp
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/1pcw6gskne7pf.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/1wnov70f88xjy.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/092r-mewpaf3q.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/0c98xzjfks9hq.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/turbopack-2u1d16houkiyo.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/3qfy96eoyh-ek.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/1vztu2tu5psmu.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/0-qf62c5p7mm5.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/44cuw1d-h8ook.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/2ivrlkw-gmwdq.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /images/placeholder/cars/fiat-panda-640.webp
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /images/placeholder/cars/renault-clio-640.webp
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /images/placeholder/cars/jeep-renegade-640.webp
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /images/placeholder/cars/dacia-duster-640.webp
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /images/placeholder/cars/ford-tourneo-custom-640.webp
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /images/placeholder/cars/fiat-ducato-640.webp
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /data/version.json
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/2a3iml0rheide.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/04s0sdy-i_vwo.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 404 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /_next/static/chunks/2j1qdg6u05qhu.js
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 HEAD /
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 GET /__next.!KGl0KQ.__PAGE__.txt?_rsc=lxZthDenEKIm8jMp
+ HTTP  11/23/2026 11:40:52 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /images/placeholder/places/sant-antioco-1280.webp
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /images/placeholder/places/calasetta-1280.webp
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /images/placeholder/places/carloforte-1280.webp
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 HEAD /flotta/fiat-panda/
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 HEAD /flotta/renault-clio/
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 HEAD /flotta/jeep-renegade/
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/fiat-panda/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/jeep-renegade/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/renault-clio/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/fiat-panda/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/jeep-renegade/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/renault-clio/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /_next/static/chunks/36ob2o2c3h_39.js
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 HEAD /flotta/dacia-duster/
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 HEAD /flotta/ford-tourneo-custom/
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 HEAD /flotta/fiat-ducato/
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 12 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 12 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 12 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/dacia-duster/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/ford-tourneo-custom/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/fiat-ducato/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/dacia-duster/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/ford-tourneo-custom/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 GET /flotta/fiat-ducato/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:54 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:55 AM 127.0.0.1 GET /images/placeholder/places/porto-pino-1280.webp
+ HTTP  11/23/2026 11:40:55 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:55 AM 127.0.0.1 GET /images/placeholder/places/masua-1280.webp
+ HTTP  11/23/2026 11:40:55 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:56 AM 127.0.0.1 GET /images/placeholder/places/porto-flavia-640.webp
+ HTTP  11/23/2026 11:40:56 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:56 AM 127.0.0.1 GET /images/placeholder/places/nebida-1280.webp
+ HTTP  11/23/2026 11:40:56 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:56 AM 127.0.0.1 GET /images/placeholder/places/iglesias-1280.webp
+ HTTP  11/23/2026 11:40:56 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:56 AM 127.0.0.1 GET /images/placeholder/places/carbonia-1280.webp
+ HTTP  11/23/2026 11:40:56 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:57 AM 127.0.0.1 GET /images/placeholder/places/tratalias-1280.webp
+ HTTP  11/23/2026 11:40:57 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:40:57 AM 127.0.0.1 GET /images/placeholder/places/punta-trettu-1280.webp
+ HTTP  11/23/2026 11:40:57 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:57 AM 127.0.0.1 GET /images/placeholder/places/maladroxia-1280.webp
+ HTTP  11/23/2026 11:40:57 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 HEAD /privacy/
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 HEAD /cookie/
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 GET /privacy/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 GET /cookie/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 GET /privacy/__next.!KGl0KQ.privacy.__PAGE__.txt?_rsc=KN3sPNMQGaFcmpju
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 GET /cookie/__next.!KGl0KQ.cookie.__PAGE__.txt?_rsc=ttRsuWU681wi7nVm
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 GET /_next/static/chunks/3sfyq23s0q2yz.js
+ HTTP  11/23/2026 11:40:59 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/media/b8dfa3d21eb22018-s.p.3lxpqujs87tck.woff2
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/2x_pf4__sua4x.css
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/media/db545dba463279ae-s.p.1cp9-4nby68jc.woff2
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /images/placeholder/places/hero-costa-1920.webp
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/1pcw6gskne7pf.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/1wnov70f88xjy.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/092r-mewpaf3q.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/0c98xzjfks9hq.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/turbopack-2u1d16houkiyo.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/3qfy96eoyh-ek.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/1vztu2tu5psmu.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/0-qf62c5p7mm5.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/44cuw1d-h8ook.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /_next/static/chunks/2ivrlkw-gmwdq.js
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /images/placeholder/cars/fiat-panda-640.webp
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /images/placeholder/cars/renault-clio-640.webp
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /images/placeholder/cars/jeep-renegade-640.webp
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /images/placeholder/cars/dacia-duster-640.webp
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /images/placeholder/cars/ford-tourneo-custom-640.webp
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 GET /images/placeholder/cars/fiat-ducato-640.webp
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 GET /data/version.json
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 GET /_next/static/chunks/2a3iml0rheide.js
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 GET /_next/static/chunks/04s0sdy-i_vwo.js
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 GET /_next/static/chunks/2j1qdg6u05qhu.js
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 HEAD /
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 Returned 304 in 0 ms
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 GET /__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 GET /__next.!KGl0KQ.__PAGE__.txt?_rsc=lxZthDenEKIm8jMp
+ HTTP  11/23/2026 11:42:06 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /images/placeholder/places/sant-antioco-1280.webp
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /images/placeholder/places/calasetta-1280.webp
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /images/placeholder/places/carloforte-1280.webp
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 HEAD /flotta/fiat-panda/
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 HEAD /flotta/renault-clio/
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 HEAD /flotta/jeep-renegade/
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /flotta/fiat-panda/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /flotta/renault-clio/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /flotta/jeep-renegade/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /flotta/fiat-panda/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /flotta/renault-clio/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /flotta/jeep-renegade/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 GET /_next/static/chunks/36ob2o2c3h_39.js
+ HTTP  11/23/2026 11:42:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 HEAD /flotta/dacia-duster/
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 HEAD /flotta/ford-tourneo-custom/
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 HEAD /flotta/fiat-ducato/
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 GET /flotta/dacia-duster/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 GET /flotta/ford-tourneo-custom/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 GET /flotta/fiat-ducato/__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 GET /flotta/dacia-duster/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 7 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 GET /flotta/ford-tourneo-custom/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 GET /flotta/fiat-ducato/__next.!KGl0KQ.flotta.$d$slug.__PAGE__.txt?_rsc=2eLz4yC1rwWq2tzL
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:10 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/media/b8dfa3d21eb22018-s.p.3lxpqujs87tck.woff2
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/2x_pf4__sua4x.css
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/media/db545dba463279ae-s.p.1cp9-4nby68jc.woff2
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /images/placeholder/places/hero-costa-1920.webp
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/1pcw6gskne7pf.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/1wnov70f88xjy.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/092r-mewpaf3q.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/0c98xzjfks9hq.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/turbopack-2u1d16houkiyo.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/3qfy96eoyh-ek.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 6 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/1vztu2tu5psmu.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/0-qf62c5p7mm5.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/2p-dmvkfpvwyg.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 6 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/2ivrlkw-gmwdq.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 5 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /images/placeholder/cars/fiat-panda-640.webp
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /images/placeholder/cars/renault-clio-640.webp
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /images/placeholder/cars/jeep-renegade-640.webp
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /images/placeholder/cars/dacia-duster-640.webp
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /images/placeholder/cars/ford-tourneo-custom-640.webp
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /images/placeholder/cars/fiat-ducato-640.webp
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 7 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 6 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 11 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 7 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 7 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 7 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /data/version.json
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/2a3iml0rheide.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/04s0sdy-i_vwo.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 404 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 GET /_next/static/chunks/2j1qdg6u05qhu.js
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 HEAD /
+ HTTP  11/23/2026 11:42:33 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/23/2026 11:42:34 AM 127.0.0.1 GET /__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:34 AM 127.0.0.1 GET /__next.!KGl0KQ.__PAGE__.txt?_rsc=lxZthDenEKIm8jMp
+ HTTP  11/23/2026 11:42:34 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/media/b8dfa3d21eb22018-s.p.3lxpqujs87tck.woff2
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/2x_pf4__sua4x.css
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/media/db545dba463279ae-s.p.1cp9-4nby68jc.woff2
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /images/placeholder/places/hero-costa-1920.webp
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/1pcw6gskne7pf.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/1wnov70f88xjy.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/092r-mewpaf3q.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/0c98xzjfks9hq.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/turbopack-2u1d16houkiyo.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/3qfy96eoyh-ek.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/1vztu2tu5psmu.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/0-qf62c5p7mm5.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/2p-dmvkfpvwyg.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/2ivrlkw-gmwdq.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /images/placeholder/cars/fiat-panda-640.webp
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /images/placeholder/cars/renault-clio-640.webp
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /images/placeholder/cars/jeep-renegade-640.webp
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /images/placeholder/cars/dacia-duster-640.webp
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /images/placeholder/cars/ford-tourneo-custom-640.webp
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /images/placeholder/cars/fiat-ducato-640.webp
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /data/version.json
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/2a3iml0rheide.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/04s0sdy-i_vwo.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /_next/static/chunks/2j1qdg6u05qhu.js
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 HEAD /
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 GET /__next.!KGl0KQ.__PAGE__.txt?_rsc=lxZthDenEKIm8jMp
+ HTTP  11/23/2026 11:42:48 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:42:52 AM 127.0.0.1 GET /images/placeholder/places/sant-antioco-1280.webp
+ HTTP  11/23/2026 11:42:52 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:42:52 AM 127.0.0.1 GET /images/placeholder/places/calasetta-1280.webp
+ HTTP  11/23/2026 11:42:52 AM 127.0.0.1 GET /images/placeholder/places/carloforte-1280.webp
+ HTTP  11/23/2026 11:42:52 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:42:52 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/media/b8dfa3d21eb22018-s.p.3lxpqujs87tck.woff2
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/2x_pf4__sua4x.css
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/media/db545dba463279ae-s.p.1cp9-4nby68jc.woff2
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /images/placeholder/places/hero-costa-1920.webp
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/1pcw6gskne7pf.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/1wnov70f88xjy.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/092r-mewpaf3q.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/0c98xzjfks9hq.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/turbopack-2u1d16houkiyo.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/3qfy96eoyh-ek.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/1vztu2tu5psmu.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/0-qf62c5p7mm5.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 9 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/2p-dmvkfpvwyg.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/2ivrlkw-gmwdq.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /images/placeholder/cars/fiat-panda-640.webp
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /images/placeholder/cars/renault-clio-640.webp
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /images/placeholder/cars/jeep-renegade-640.webp
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /images/placeholder/cars/dacia-duster-640.webp
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /images/placeholder/cars/ford-tourneo-custom-640.webp
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /images/placeholder/cars/fiat-ducato-640.webp
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /data/version.json
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/2a3iml0rheide.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/04s0sdy-i_vwo.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /_next/static/chunks/2j1qdg6u05qhu.js
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 3 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 HEAD /
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 GET /__next.!KGl0KQ.__PAGE__.txt?_rsc=lxZthDenEKIm8jMp
+ HTTP  11/23/2026 11:43:05 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:09 AM 127.0.0.1 GET /images/placeholder/places/sant-antioco-1280.webp
+ HTTP  11/23/2026 11:43:09 AM 127.0.0.1 GET /images/placeholder/places/calasetta-1280.webp
+ HTTP  11/23/2026 11:43:09 AM 127.0.0.1 GET /images/placeholder/places/carloforte-1280.webp
+ HTTP  11/23/2026 11:43:09 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:09 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:09 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/media/b8dfa3d21eb22018-s.p.3lxpqujs87tck.woff2
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/2x_pf4__sua4x.css
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/media/db545dba463279ae-s.p.1cp9-4nby68jc.woff2
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /images/placeholder/places/hero-costa-1920.webp
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/1pcw6gskne7pf.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 4 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/1wnov70f88xjy.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/092r-mewpaf3q.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/0c98xzjfks9hq.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/turbopack-2u1d16houkiyo.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/3qfy96eoyh-ek.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/1vztu2tu5psmu.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/0-qf62c5p7mm5.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/2p-dmvkfpvwyg.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/2ivrlkw-gmwdq.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 11 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 8 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /images/placeholder/cars/fiat-panda-640.webp
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /images/placeholder/cars/renault-clio-640.webp
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /images/placeholder/cars/jeep-renegade-640.webp
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /images/placeholder/cars/dacia-duster-640.webp
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /images/placeholder/cars/ford-tourneo-custom-640.webp
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /images/placeholder/cars/fiat-ducato-640.webp
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /data/version.json
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 404 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/2a3iml0rheide.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/04s0sdy-i_vwo.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /_next/static/chunks/2j1qdg6u05qhu.js
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 HEAD /
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 304 in 1 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /__next._tree.txt?_rsc=5CB68i4pnAekjehf
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 0 ms
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 GET /__next.!KGl0KQ.__PAGE__.txt?_rsc=lxZthDenEKIm8jMp
+ HTTP  11/23/2026 11:43:27 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:31 AM 127.0.0.1 GET /images/placeholder/places/sant-antioco-1280.webp
+ HTTP  11/23/2026 11:43:31 AM 127.0.0.1 Returned 200 in 2 ms
+ HTTP  11/23/2026 11:43:31 AM 127.0.0.1 GET /images/placeholder/places/calasetta-1280.webp
+ HTTP  11/23/2026 11:43:31 AM 127.0.0.1 GET /images/placeholder/places/carloforte-1280.webp
+ HTTP  11/23/2026 11:43:31 AM 127.0.0.1 Returned 200 in 1 ms
+ HTTP  11/23/2026 11:43:31 AM 127.0.0.1 Returned 200 in 0 ms

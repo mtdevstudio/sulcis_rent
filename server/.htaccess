@@ -1,0 +1,2 @@
+# Cartella privata: se finisce dentro la document root (_private/server), Apache la nega comunque.
+Require all denied

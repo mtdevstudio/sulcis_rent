@@ -82,3 +82,42 @@
   }
   .display-stretch { font-variation-settings: "wdth" 72, "wght" 850; }
 }
+
+/* ---------- keyframes ---------- */
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes sheetIn { from { transform: translateY(24px); opacity: 0 } to { transform: none; opacity: 1 } }
+
+/* ---------- reveal di parole (attivo solo con html.motion, impostato da uno script inline) ---------- */
+.rv-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }
+.rv-w > span { display: inline-block; will-change: transform; }
+html.motion .rv:not(.rv-done) .rv-w > span { transform: translateY(105%); }
+html.motion .fx-fade:not(.fx-done) { opacity: 0; transform: translateY(24px); }
+.fx-fade { transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+
+/* ---------- preloader ---------- */
+.preloader { display: none; }
+html[data-pl="on"] .preloader { display: grid; }
+html[data-pl="on"] body { overflow: hidden; }
+
+/* ---------- marquee ---------- */
+.marquee-track { display: flex; width: max-content; }
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* View transitions (immagine auto che si espande) */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .35s; }
+::view-transition-group(car-hero) { animation-duration: .55s; animation-timing-function: cubic-bezier(.77,0,.18,1); }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+
+/* Testo ricco dalle descrizioni (HTML sanificato lato server) */
+.prose-car p { margin: 0 0 1em; }
+.prose-car ul { list-style: square; padding-left: 1.2em; margin: 0 0 1em; }
+.prose-car ol { list-style: decimal; padding-left: 1.2em; margin: 0 0 1em; }
+.prose-car a { color: rgb(var(--rent-magenta-deep)); text-decoration: underline; text-underline-offset: 3px; }
+.prose-car strong, .prose-car b { font-weight: 700; }
+@keyframes draw { to { stroke-dashoffset: 0; } }

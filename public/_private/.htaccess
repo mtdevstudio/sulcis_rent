@@ -1,0 +1,2 @@
+# Contenuto privato (config.php, server/, database/, logs/, tmp/) quando non si può stare fuori dalla document root.
+Require all denied

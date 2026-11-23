@@ -1,0 +1,13 @@
+# /data: JSON pubblici generati dall'API (solo campi pubblici). Cache breve + versione in query string.
+Options -Indexes
+Require all denied
+<FilesMatch "\.json$">
+  Require all granted
+</FilesMatch>
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header set Cache-Control "public, max-age=60, stale-while-revalidate=300"
+  <Files "version.json">
+    Header set Cache-Control "no-store"
+  </Files>
+</IfModule>

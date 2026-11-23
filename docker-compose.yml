@@ -1,0 +1,34 @@
+# Ambiente locale "come Aruba/Plesk": Apache + PHP 8.1 + MariaDB.
+#   npm run build            → genera out/ (sito statico + api PHP)
+#   docker compose up -d     → http://localhost:8080
+# La cartella privata (server/, database/, config.php) è montata FUORI dalla docroot, come in produzione.
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: sulcisrent
+      MARIADB_USER: sulcisrent_app
+      MARIADB_PASSWORD: localdev
+      MARIADB_ROOT_PASSWORD: localroot
+    ports: ["3307:3306"]
+    volumes: [dbdata:/var/lib/mysql]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 3s
+      retries: 30
+  web:
+    build: ./docker
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["8080:80"]
+    environment:
+      SR_PRIVATE_DIR: /var/www/sulcis-private
+    volumes:
+      - ./out:/var/www/html
+      - ./server:/var/www/sulcis-private/server:ro
+      - ./database:/var/www/sulcis-private/database:ro
+      - ./docker/config.local.php:/var/www/sulcis-private/config.php:ro
+      - privdata:/var/www/sulcis-private/runtime
+volumes:
+  dbdata:
+  privdata:
