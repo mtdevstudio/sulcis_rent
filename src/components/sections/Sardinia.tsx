@@ -10,29 +10,32 @@ import { RevealText } from "@/components/site/RevealText";
 import { SardiniaMap } from "@/components/site/SardiniaMap";
 import { Trama } from "@/components/trama/Trama";
 import { SectionHead } from "@/components/ui/SectionHead";
-import { IconArrow, Nodo } from "@/components/ui/icons";
+import { IconArrow } from "@/components/ui/icons";
 
 /**
- * SARDEGNA — «Partenze da San Giovanni Suergiu».
- * Un tabellone di mete su fondo trachite: a sinistra la mappa (sticky su desktop) che disegna la rotta
- * da noi alla meta scelta, a destra l'elenco in tipografia gigante filtrabile per zona.
+ * SARDEGNA — «Scegli la tua Sardegna».
+ * Un tabellone di mete su fondo trachite: a sinistra la mappa dell'isola (sticky su desktop) che segna
+ * la meta scelta, a destra l'elenco in tipografia gigante filtrabile per zona. Nessuna zona «centrale».
  * Nessun pin, nessuno scroll orizzontale: funziona identica con reduced-motion e da tastiera.
  * Nessun dato su distanze o tempi (// TODO cliente se servono).
  */
 type Dest = { slug: string; name: string; area: L10n; line: L10n; zone: Zone; night?: boolean };
 
-const ALL: Dest[] = [
-  ...islandPlaces,
-  ...places.map((p) => ({ ...p, zone: "sulcis" as Zone })),
-];
+// Ordine geografico, dal sud verso nord-est. Il sud-ovest è una zona come le altre.
+const ORDER: Zone[] = ["sud", "sudovest", "ovest", "nord", "est"];
+const ALL: Dest[] = [...islandPlaces, ...places.map((p) => ({ ...p, zone: "sudovest" as Zone }))]
+  .sort((a, b) => ORDER.indexOf(a.zone) - ORDER.indexOf(b.zone));
+// «Tutta l'isola»: tutte le mete dell'isola + le più note del sud-ovest (il resto nel filtro dedicato)
+const HIGHLIGHT_SW = ["sant-antioco", "carloforte", "porto-pino", "masua"];
+const inAll = (x: Dest) => x.zone !== "sudovest" || HIGHLIGHT_SW.includes(x.slug);
 
 const zoneLabel: Record<"tutte" | Zone, L10n> = {
   tutte: { it: "Tutta l'isola", en: "Whole island" },
   sud: { it: "Sud", en: "South" },
+  sudovest: { it: "Sud-ovest e isole", en: "South-west & islands" },
   ovest: { it: "Ovest", en: "West" },
   nord: { it: "Nord", en: "North" },
   est: { it: "Est e Barbagia", en: "East & Barbagia" },
-  sulcis: { it: "Sulcis, casa nostra", en: "Sulcis, our home" },
 };
 
 const img = (slug: string) => ({
@@ -46,7 +49,7 @@ export function Sardinia() {
   const c = useContact();
   const open = useContactModal();
   const [zone, setZone] = useState<"tutte" | Zone>("tutte");
-  const list = useMemo(() => (zone === "tutte" ? ALL.filter((x) => x.zone !== "sulcis") : ALL.filter((x) => x.zone === zone)), [zone]);
+  const list = useMemo(() => (zone === "tutte" ? ALL.filter(inAll) : ALL.filter((x) => x.zone === zone)), [zone]);
   const [activeSlug, setActive] = useState<string>(ALL[0].slug);
   const active = list.find((x) => x.slug === activeSlug) ?? list[0];
   const delivery = c.deliveryAreas(lang);
@@ -65,17 +68,17 @@ export function Sardinia() {
 
         {/* filtri per zona */}
         <div className="mt-10 flex flex-wrap gap-2" role="group" aria-label={d.island.filter}>
-          {(["tutte", "sud", "ovest", "nord", "est", "sulcis"] as const).map((z) => (
+          {(["tutte", "sud", "sudovest", "ovest", "nord", "est"] as const).map((z) => (
             <button
               key={z}
               type="button"
               aria-pressed={zone === z}
-              onClick={() => { setZone(z); const first = z === "tutte" ? ALL.find((x) => x.zone !== "sulcis") : ALL.find((x) => x.zone === z); if (first) setActive(first.slug); }}
+              onClick={() => { setZone(z); const first = z === "tutte" ? ALL.find(inAll) : ALL.find((x) => x.zone === z); if (first) setActive(first.slug); }}
               className={`inline-flex h-11 items-center gap-2 border-filo px-4 text-sm font-semibold uppercase tracking-[0.06em] transition-colors ${
                 zone === z ? "border-magenta bg-magenta text-white" : "border-sand/30 text-sand hover:border-sand"
               }`}
             >
-              {z === "sulcis" && <Nodo className="h-2 w-2" />}{tr(zoneLabel[z], lang)}
+              {tr(zoneLabel[z], lang)}
             </button>
           ))}
         </div>
@@ -90,12 +93,14 @@ export function Sardinia() {
                     pin={null}
                     pins={list.map((x) => x.slug)}
                     active={active.slug}
+                    showBase={false}
+                    highlightSulcis={false}
                     tone="dark"
                     className="mx-auto h-auto w-full max-w-[17rem]"
                     label={`${d.island.mapLabel}: ${active.name}`}
                   />
                   <p className="eyebrow mt-3 flex items-center gap-2 text-sand/70">
-                    <span className="inline-block h-2.5 w-2.5 rotate-45 bg-sand" aria-hidden />{d.island.base}
+                    <span className="inline-block h-2.5 w-2.5 rotate-45 bg-magenta" aria-hidden />{active.name}
                   </p>
                 </div>
                 <figure className="lg:mt-4">

@@ -91,7 +91,7 @@ export function Hero() {
     return () => kill();
   }, [animated, size.W, size.H]);
 
-  const fontSize = size.W * (size.W < 700 ? 0.3 : 0.27);
+  const fontSize = size.W * (size.W < 700 ? 0.2 : 0.19); // «SARDEGNA»: 8 lettere
   const ty = size.H * (size.W < 700 ? 0.42 : 0.5) + fontSize * 0.36;
   const margin = size.W * 0.03;
   const { cells, r } = grid(size.W, size.H, ty - fontSize * 0.36);
@@ -116,11 +116,11 @@ export function Hero() {
               )}
             </clipPath>
           </defs>
-          <text id="hero-title-ink" {...titleProps} fill="rgb(var(--trachite))">SULCIS</text>
+          <text id="hero-title-ink" {...titleProps} fill="rgb(var(--trachite))">{d.heroWord.toUpperCase()}</text>
           <g clipPath="url(#hero-rombi)">
             <image href="/images/placeholder/places/hero-costa-1920.webp" width={size.W} height={size.H} preserveAspectRatio="xMidYMid slice" />
             <rect width={size.W} height={size.H} fill="rgb(var(--trachite))" opacity=".18" />
-            <text {...titleProps} fill="rgb(var(--sand))">SULCIS</text>
+            <text {...titleProps} fill="rgb(var(--sand))">{d.heroWord.toUpperCase()}</text>
           </g>
         </svg>
 
@@ -132,7 +132,7 @@ export function Hero() {
               <span lang="sc">{d.greeting}</span> <span className="text-stone">· {d.greetingTr}</span>
             </p>
           </div>
-          <h1 id="hero-title" className="sr-only">Sulcis Rent – {lang === "it" ? "noleggio auto a San Giovanni Suergiu, Sulcis, Sud Sardegna" : "car rental in San Giovanni Suergiu, Sulcis, South Sardinia"}</h1>
+          <h1 id="hero-title" className="sr-only">Sulcis Rent – {lang === "it" ? "noleggio auto in Sardegna, sede a San Giovanni Suergiu" : "car rental in Sardinia, based in San Giovanni Suergiu"}</h1>
           <div className="wrap grid gap-5 md:grid-cols-12 md:items-end">
             <div className="md:col-span-7">
               <p className="display text-[clamp(2.25rem,7vw,6.5rem)] leading-[0.86] text-trachite [text-shadow:0_0_24px_rgb(var(--sand)/.6)]">

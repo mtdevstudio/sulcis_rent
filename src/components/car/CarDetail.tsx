@@ -125,7 +125,7 @@ export function CarDetail({ slug, car: carProp, preview = false, catalog }: { sl
         <p className="max-w-prose text-lead">{d.car.notFoundText}</p>
         <div className="flex flex-wrap gap-3">
           <Button variant="magenta" nodo onClick={() => open()}>{d.ajo}</Button>
-          <Link href={`${paths[lang].home}#flotta`} className="eyebrow inline-flex h-14 items-center border-filo border-trachite px-6">{d.car.back}</Link>
+          <Link href={paths[lang].fleet} className="eyebrow inline-flex h-14 items-center border-filo border-trachite px-6">{d.car.back}</Link>
         </div>
       </section>
     );
@@ -146,7 +146,7 @@ export function CarDetail({ slug, car: carProp, preview = false, catalog }: { sl
       {preview && <div className="sticky top-0 z-[55] bg-ochre px-4 py-2 text-center text-sm font-bold text-trachite">{d.car.preview}</div>}
       <header className="relative bg-sand pt-24 md:pt-28">
         <div className="wrap">
-          <Link href={`${paths[lang].home}#flotta`} className="eyebrow inline-flex items-center gap-2 hover:text-magenta-deep">
+          <Link href={paths[lang].fleet} className="eyebrow inline-flex items-center gap-2 hover:text-magenta-deep">
             <IconArrow className="h-4 w-4 rotate-180" />{d.car.back}
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-2">

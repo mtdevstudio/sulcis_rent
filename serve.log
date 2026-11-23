@@ -474,3 +474,5 @@
  HTTP  11/23/2026 11:43:31 AM 127.0.0.1 GET /images/placeholder/places/carloforte-1280.webp
  HTTP  11/23/2026 11:43:31 AM 127.0.0.1 Returned 200 in 1 ms
  HTTP  11/23/2026 11:43:31 AM 127.0.0.1 Returned 200 in 0 ms
+
+ INFO  Gracefully shutting down. Please wait...

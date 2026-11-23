@@ -10,7 +10,7 @@ foreach ([getenv('SR_PRIVATE_DIR') ?: null, dirname($root) . '/sulcis-private', 
 $site = rtrim($cfgSite ?: $site, '/');
 $fleet = json_decode((string) @file_get_contents("$root/data/fleet.json"), true) ?: ['cars' => []];
 $urls = [
-    ['/', '/en/', null, '1.0'], ['/privacy/', '/en/privacy/', null, '0.2'], ['/cookie/', '/en/cookie/', null, '0.2'],
+    ['/', '/en/', null, '1.0'], ['/flotta/', '/en/fleet/', null, '0.9'], ['/privacy/', '/en/privacy/', null, '0.2'], ['/cookie/', '/en/cookie/', null, '0.2'],
 ];
 foreach ($fleet['cars'] as $c) {
     if (!preg_match('/^[a-z0-9-]+$/', (string) ($c['slug'] ?? ''))) continue;

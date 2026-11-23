@@ -1,0 +1,19 @@
+{
+  "carloforte": { "q": "Carloforte" },
+  "sinis": { "q": "Is Arutas" },
+  "sant-antioco": { "q": "Sant'Antioco Sardegna" },
+  "punta-trettu": { "q": "Stagno Sardegna fenicotteri" },
+  "fiat-panda": { "q": "Fiat Panda 2012 front" },
+  "fiat-panda-2": { "q": "Fiat Panda 2012 front", "pick": 1 },
+  "fiat-panda-3": { "q": "Fiat Panda 2012 rear" },
+  "renault-clio": { "q": "Renault Clio V" },
+  "renault-clio-2": { "q": "Renault Clio V", "pick": 1 },
+  "jeep-renegade": { "q": "Jeep Renegade 2019" },
+  "jeep-renegade-2": { "q": "Jeep Renegade 2019", "pick": 1 },
+  "dacia-duster": { "q": "Dacia Duster II" },
+  "dacia-duster-2": { "q": "Dacia Duster II", "pick": 1 },
+  "ford-tourneo-custom": { "q": "Ford Tourneo Custom" },
+  "ford-tourneo-custom-2": { "q": "Ford Tourneo Custom", "pick": 1 },
+  "fiat-ducato": { "q": "Fiat Ducato 2014" },
+  "fiat-ducato-2": { "q": "Fiat Ducato 2014", "pick": 1 }
+}

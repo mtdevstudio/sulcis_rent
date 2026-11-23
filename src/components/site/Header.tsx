@@ -34,15 +34,17 @@ export function Header({ altHref }: { altHref?: string }) {
   useEffect(() => { lockScroll(menu); }, [menu]);
 
   const links = [
-    { href: "#flotta", label: d.nav.fleet },
+    { href: paths[lang].fleet, label: d.nav.fleet, page: true },
     { href: "#sardegna", label: d.nav.territory },
     { href: "#come-funziona", label: d.nav.how },
     { href: "#faq", label: d.nav.faq },
     { href: "#contatti", label: d.nav.contacts },
   ];
   const go = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    if (!hash.startsWith("#")) { setMenu(false); return; }
     if (location.pathname === home) { e.preventDefault(); setMenu(false); scrollToHash(hash); history.replaceState(null, "", hash); }
   };
+  const hrefOf = (l: { href: string }) => (l.href.startsWith("#") ? `${home}${l.href}` : l.href);
 
   return (
     <>
@@ -56,7 +58,7 @@ export function Header({ altHref }: { altHref?: string }) {
           <nav aria-label="Principale" className="hidden lg:block">
             <ul className="flex items-center gap-7">
               {links.map((l) => (
-                <li key={l.href}><a href={`${home}${l.href}`} onClick={(e) => go(e, l.href)} className="eyebrow py-2 hover:text-magenta-deep">{l.label}</a></li>
+                <li key={l.href}><a href={hrefOf(l)} onClick={(e) => go(e, l.href)} className="eyebrow py-2 hover:text-magenta-deep">{l.label}</a></li>
               ))}
             </ul>
           </nav>
@@ -91,7 +93,7 @@ export function Header({ altHref }: { altHref?: string }) {
             <ul className="divide-y divide-sand-300 border-y border-sand-300">
               {links.map((l, i) => (
                 <li key={l.href}>
-                  <a href={`${home}${l.href}`} onClick={(e) => go(e, l.href)} className="flex items-baseline justify-between py-4">
+                  <a href={hrefOf(l)} onClick={(e) => go(e, l.href)} className="flex items-baseline justify-between py-4">
                     <span className="display text-[clamp(2.5rem,12vw,4rem)] leading-none">{l.label}</span>
                     <span className="eyebrow text-magenta-deep">0{i + 1}</span>
                   </a>

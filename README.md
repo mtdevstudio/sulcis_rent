@@ -45,7 +45,7 @@ Mappa delle cartelle principali:
 
 | Cartella | Contenuto |
 |---|---|
-| `src/app/(it)`, `src/app/(en)/en` | pagine pubbliche IT/EN |
+| `src/app/(it)`, `src/app/(en)/en` | pagine pubbliche IT/EN: home, `/flotta/` (flotta completa), scheda auto, legali, crediti foto |
 | `src/app/(admin)/admin` | pannello admin |
 | `src/components/` | sezioni, card, modale contatti, trama (pattern sardi), motion |
 | `src/data/` | dati di partenza (`site.ts`, `fleet.ts`, `places.ts`, `faq.ts`, `reviews.ts`, `catalog.ts`) |
@@ -145,7 +145,7 @@ Le modifiche sono online subito. Guida per lo staff: [`docs/guida-admin.md`](doc
 | Mete della sezione «Sardegna» (Sulcis + resto dell'isola, testi) | `src/data/places.ts` (`places`, `islandPlaces`) |
 | Categorie / dotazioni / tag iniziali | `src/data/catalog.ts` → `npx tsx scripts/gen-seed-sql.ts` rigenera `database/migrations/002_seed.sql` |
 | Testi dell'interfaccia IT/EN | `src/lib/i18n.ts` |
-| Foto delle mete | sostituisci i file in `public/images/placeholder/places/` mantenendo i nomi: `{slug}-640.webp`, `-1280.webp`, `-1920.webp` |
+| Foto delle mete | oggi sono **foto di esempio con licenza libera** (Openverse/Wikimedia, crediti in `src/data/photo-credits.json` e nella pagina `/crediti-foto/`). Sostituiscile con le foto reali in `public/images/placeholder/places/` mantenendo i nomi: `{slug}-640.webp`, `-1280.webp`, `-1920.webp`. Script: `node scripts/fetch-sample-photos.mjs` |
 | Foto hero | `public/images/placeholder/places/hero-costa-1920.webp` |
 | Immagine Open Graph | `public/og.png` (1200×630) |
 | **Logo** | metti il file in `public/brand/` (es. `logo.svg`), poi in `src/data/site.ts` aggiorna `logo.src`, `width`, `height` e imposta `available: true`. Il componente `<Logo />` si aggiorna ovunque |
@@ -406,7 +406,7 @@ Dati mancanti, tutti segnati nel codice con `// TODO` (cerca `TODO` in `src/`):
 | `src/data/fleet.ts` | **flotta reale**: le 6 auto sono segnaposto. Meglio caricarle dal pannello |
 | `public/brand/` + `src/data/site.ts` (`logo.available`) | **logo** HD o SVG; poi ricampionare i colori in `src/app/globals.css` |
 | `public/icon.svg`, `public/apple-icon.png` | favicon dalla «S» del logo |
-| `public/images/placeholder/places/*` | **foto reali** di località e hero (stessi nomi file) |
+| `public/images/placeholder/places/*`, `public/images/placeholder/cars/*` | **foto reali** di mete, hero e auto: oggi sono foto di esempio con licenza libera (vedi `/crediti-foto/`). Quando arrivano le foto vere, togli anche la pagina `/crediti-foto/` e il link nel footer |
 | `public/og.png` | immagine Open Graph definitiva |
 | `src/data/site.ts` → `vat`, `email`, `google.reviewsUrl` | P.IVA, email (facoltativa), link alle recensioni Google (o da Impostazioni) |
 | `src/data/faq.ts` / admin → FAQ | risposte reali: documenti, età minima, cauzione, chilometraggio, consegna |

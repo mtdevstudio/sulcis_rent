@@ -102,18 +102,18 @@
     var base = SARD.points["san-giovanni-suergiu"];
     var ENT = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
     var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return ENT[c]; }); };
-    function items() { return SARD.dests.filter(function (d) { return zone === "tutte" ? d.zone !== "sulcis" : d.zone === zone; }); }
+    var HL = ["sant-antioco", "carloforte", "porto-pino", "masua"];
+    function items() { return SARD.dests.filter(function (d) { return zone === "tutte" ? (d.zone !== "sudovest" || HL.indexOf(d.slug) >= 0) : d.zone === zone; }); }
     function renderMap(its) {
       if (!mapSvg) return;
       var pins = its.map(function (d) {
         var p = SARD.points[d.slug]; if (!p) return "";
         var on = active && d.slug === active.slug, r = on ? 9 : 5;
-        return "<g>" + (on ? '<line x1="' + base[0] + '" y1="' + base[1] + '" x2="' + p[0] + '" y2="' + p[1] + '" stroke="rgb(var(--rent-magenta))" stroke-width="1.6" stroke-dasharray="4 4"/>' : "") +
+        return "<g>" + (on ? '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="18" fill="none" stroke="rgb(var(--rent-magenta))" stroke-width="1.5"/>' : "") +
           '<rect x="' + (p[0] - r) + '" y="' + (p[1] - r) + '" width="' + r * 2 + '" height="' + r * 2 + '" transform="rotate(45 ' + p[0] + " " + p[1] + ')" fill="' + (on ? "rgb(var(--rent-magenta))" : "rgb(var(--sand))") + '"/></g>';
       }).join("");
-      mapSvg.innerHTML = '<use href="#sr-sard-outline" fill="none" stroke="rgb(var(--sand))" stroke-width="2.2" stroke-linejoin="round"/>' +
-        '<use href="#sr-sard-sulcis" fill="rgb(var(--rent-magenta))" stroke="rgb(var(--rent-magenta))" stroke-width="0.8"/>' + pins +
-        '<rect x="' + (base[0] - 4) + '" y="' + (base[1] - 4) + '" width="8" height="8" transform="rotate(45 ' + base[0] + " " + base[1] + ')" fill="rgb(var(--sand))"/>';
+      mapSvg.innerHTML = '<use href="#sr-sard-outline" fill="none" stroke="rgb(var(--sand))" stroke-width="2.2" stroke-linejoin="round"/>' + pins;
+      var lbl = sec.querySelector('svg[role="img"] + p'); if (lbl && active) lbl.lastChild.textContent = active.name;
     }
     function renderFig() {
       if (!fig || !active) return;
@@ -145,7 +145,7 @@
     }
     list.addEventListener("click", function (e) { var b = e.target.closest("button[data-slug]"); if (b) pick(b.dataset.slug); });
     if (FINE) list.addEventListener("mouseover", function (e) { var b = e.target.closest("button[data-slug]"); if (b) pick(b.dataset.slug); });
-    var zones = ["tutte", "sud", "ovest", "nord", "est", "sulcis"];
+    var zones = ["tutte", "sud", "sudovest", "ovest", "nord", "est"];
     tabs.forEach(function (t, i) {
       t.addEventListener("click", function () {
         zone = zones[i]; active = null;
@@ -235,7 +235,9 @@
   });
 
   /* ---------- filtri flotta ---------- */
-  var chips = $$('#flotta [role="group"] button');
+  $$('[data-view] [role="group"][aria-label="Filtra per categoria"]').forEach(function (group) {
+  var scope = group.closest("section") || group.parentElement;
+  var chips = $$("button", group);
   chips.forEach(function (c) {
     c.addEventListener("click", function () {
       var label = (c.childNodes[0] && c.childNodes[0].textContent || "").trim();
@@ -244,11 +246,12 @@
         ["border-trachite", "bg-trachite", "text-sand"].forEach(function (k) { o.classList.toggle(k, on); });
         ["border-sand-300", "bg-transparent", "text-trachite"].forEach(function (k) { o.classList.toggle(k, !on); });
       });
-      $$("#flotta ul > li").forEach(function (li) {
-        var cat = li.querySelector("article a span.eyebrow"); var t = cat ? cat.textContent.trim() : "";
+      $$("ul > li", scope).forEach(function (li) {
+        var cat = li.querySelector("article a span.eyebrow"); if (!cat) return; var t = cat.textContent.trim();
         li.style.display = label === "Tutte" || t === label ? "" : "none";
       });
     });
+  });
   });
 
   /* ---------- galleria scheda auto ---------- */
@@ -265,7 +268,7 @@
     var m = $("#menu-mobile");
     if (m) { m.remove(); burger.setAttribute("aria-expanded", "false"); html.style.overflow = ""; return; }
     m = doc.createElement("div"); m.id = "menu-mobile"; m.className = "fixed inset-0 z-[49] flex flex-col bg-sand pt-20";
-    var links = [["#flotta", "Flotta"], ["#sardegna", "Sardegna"], ["#come-funziona", "Come funziona"], ["#faq", "FAQ"], ["#contatti", "Contatti"]];
+    var links = [["#flotta-completa", "Flotta"], ["#sardegna", "Sardegna"], ["#come-funziona", "Come funziona"], ["#faq", "FAQ"], ["#contatti", "Contatti"]];
     m.innerHTML = '<nav aria-label="Menu mobile" class="wrap flex-1 overflow-auto"><ul class="divide-y divide-sand-300 border-y border-sand-300">' + links.map(function (l, i) {
       return '<li><a href="' + l[0] + '" class="flex items-baseline justify-between py-4"><span class="display text-[clamp(2.5rem,12vw,4rem)] leading-none">' + l[1] + '</span><span class="eyebrow text-magenta-deep">0' + (i + 1) + "</span></a></li>";
     }).join("") + '</ul></nav><div class="wrap pb-8 pt-6"><button type="button" class="eyebrow flex h-16 w-full items-center justify-center gap-3 bg-magenta text-white">Ajò, si parte</button></div>';
@@ -297,7 +300,7 @@
     else if (h !== "home") { var el = doc.getElementById(h); if (el) setTimeout(function () { el.scrollIntoView({ behavior: RM ? "auto" : "smooth" }); }, 30); }
     else if (route.started) scrollTo(0, 0);
     route.started = true;
-    var titles = { home: "Sulcis Rent – Noleggio auto a San Giovanni Suergiu", privacy: "Privacy · Sulcis Rent", cookie: "Cookie · Sulcis Rent" };
+    var titles = { home: "Sulcis Rent – Noleggio auto in Sardegna", "flotta-completa": "La flotta · Sulcis Rent", privacy: "Privacy · Sulcis Rent", cookie: "Cookie · Sulcis Rent", "crediti-foto": "Crediti foto · Sulcis Rent" };
     var h1 = $('[data-view="' + view + '"] h1');
     doc.title = titles[view] || ((h1 ? (h1.innerText || h1.textContent).replace(/\s+/g, " ").trim() : "Auto") + " · Sulcis Rent");
     setTimeout(onScroll, 60);
@@ -305,5 +308,5 @@
   addEventListener("hashchange", route);
   addEventListener("resize", buildHero);
   buildHero(); setupSardinia(); route(); onScroll();
-  if (innerWidth < 768) setTimeout(function () { toast("Preview: foto e auto sono segnaposto"); }, 2200);
+  if (innerWidth < 768) setTimeout(function () { toast("Preview: le foto sono di esempio"); }, 2200);
 })();

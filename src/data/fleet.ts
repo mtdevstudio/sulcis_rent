@@ -25,7 +25,7 @@ const cars: PublicCar[] = [
     features: ["aria-condizionata", "bluetooth", "usb"],
     rental: {},
     content: {
-      short: { it: "Piccola fuori, comoda dentro: parcheggia ovunque, da Calasetta a Iglesias.", en: "Small outside, roomy inside: parks anywhere, from Calasetta to Iglesias." },
+      short: { it: "Piccola fuori, comoda dentro: parcheggia ovunque, dai centri storici alle spiagge.", en: "Small outside, roomy inside: parks anywhere, from old towns to beaches." },
       long: { it: "<p>La citycar per muoversi tra paesi, spiagge e centri storici senza pensieri.</p>", en: "<p>The city car for moving between villages, beaches and old towns without a worry.</p>" },
       highlights: [{ it: "Agile nei centri storici", en: "Nimble in old towns" }, { it: "Facile da parcheggiare", en: "Easy to park" }],
     },
@@ -38,7 +38,7 @@ const cars: PublicCar[] = [
     features: ["aria-condizionata", "bluetooth", "android-auto", "carplay", "sensori-parcheggio"],
     rental: {},
     content: {
-      short: { it: "L'utilitaria giusta per la costa: spazio per due valigie e la strada di Nebida.", en: "The right compact for the coast: room for two suitcases and the Nebida road." },
+      short: { it: "L'utilitaria giusta per la costa: spazio per due valigie e tutta la strada che vuoi.", en: "The right compact for the coast: room for two suitcases and all the road you want." },
       highlights: [{ it: "Smartphone sullo schermo", en: "Phone on the screen" }],
     },
     perfectFor: ["coppie", "famiglie"], featured: true, order: 2,
@@ -69,7 +69,7 @@ const cars: PublicCar[] = [
     specs: { fuel: "diesel", transmission: "manuale", seats: 9, doors: 4, luggageLarge: 4, luggageSmall: 4 },
     features: ["aria-condizionata", "bluetooth", "sensori-parcheggio", "isofix"],
     rental: {},
-    content: { short: { it: "Nove posti, un solo viaggio: la comitiva arriva insieme a Porto Pino.", en: "Nine seats, one trip: the whole group reaches Porto Pino together." } },
+    content: { short: { it: "Nove posti, un solo viaggio: la comitiva arriva insieme in spiaggia.", en: "Nine seats, one trip: the whole group reaches the beach together." } },
     perfectFor: ["gruppi", "famiglie"], featured: false, order: 5,
     images: img("ford-tourneo-custom", "Ford Tourneo Custom", 2),
   },

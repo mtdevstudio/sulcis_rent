@@ -5,7 +5,7 @@ import type { L10n } from "@/lib/types";
  * Foto: segnaposto in public/images/placeholder/places/{slug}.jpg — TODO cliente: sostituire con foto reali.
  * Nessun dato su distanze o tempi: // TODO se servono, chiederli al cliente.
  */
-export type Zone = "sud" | "ovest" | "nord" | "est" | "sulcis";
+export type Zone = "sud" | "sudovest" | "ovest" | "nord" | "est";
 export type Place = { slug: string; name: string; area: L10n; line: L10n; night?: boolean; zone?: Zone };
 
 export const places: Place[] = [

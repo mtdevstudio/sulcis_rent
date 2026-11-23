@@ -30,6 +30,7 @@ export function Footer() {
             <li><a href={c.tel} className="hover:text-magenta-deep">{c.phoneDisplay}</a></li>
             <li><Link href={paths[lang].privacy} className="hover:text-magenta-deep">{d.footer.privacy}</Link></li>
             <li><Link href={paths[lang].cookie} className="hover:text-magenta-deep">{d.footer.cookie}</Link></li>
+            <li><Link href={paths[lang].credits} className="hover:text-magenta-deep">{d.footer.credits}</Link></li>
           </ul>
         </nav>
         <div className="text-stone md:col-span-4 md:text-right">

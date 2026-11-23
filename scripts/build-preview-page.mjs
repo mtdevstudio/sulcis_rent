@@ -33,6 +33,8 @@ function transform(html) {
     .replace(/\s(?:srcset|srcSet)="[^"]*"/g, "")
     .replace(/(src|href)="(\/images\/[^"]+\.webp)"/g, (_, a, u) => `${a}="${dataImg(u)}"`)
     .replace(/href="\/flotta\/([a-z0-9-]+)\/"/g, 'href="#auto-$1"')
+    .replace(/href="\/flotta\/"/g, 'href="#flotta-completa"')
+    .replace(/href="\/crediti-foto\/"/g, 'href="#crediti-foto"')
     .replace(/href="\/#([a-z-]+)"/g, 'href="#$1"')
     .replace(/href="\/privacy\/"/g, 'href="#privacy"')
     .replace(/href="\/cookie\/"/g, 'href="#cookie"')
@@ -46,10 +48,11 @@ const mainOf = (html) => (html.match(/<main id="main">([\s\S]*?)<\/main>/) || []
 const home = read("index.html");
 const htmlTag = home.match(/<html[^>]*>/)[0].replace(/data-has-pl="[^"]*"/, 'data-has-pl=""');
 let body = home.match(/<body[^>]*>([\s\S]*)<\/body>/)[1];
-const slugs = fs.readdirSync(path.join(OUT, "flotta")).filter((s) => fs.existsSync(path.join(OUT, "flotta", s, "index.html")));
+const slugs = fs.readdirSync(path.join(OUT, "flotta")).filter((s) => s !== "index.html" && fs.existsSync(path.join(OUT, "flotta", s, "index.html")));
 const views = [`<div data-view="home">${mainOf(home)}</div>`];
 for (const s of slugs) views.push(`<div data-view="auto-${s}" hidden>${mainOf(read(`flotta/${s}/index.html`))}</div>`);
-for (const s of ["privacy", "cookie"]) views.push(`<div data-view="${s}" hidden>${mainOf(read(`${s}/index.html`))}</div>`);
+views.push(`<div data-view="flotta-completa" hidden>${mainOf(read("flotta/index.html"))}</div>`);
+for (const s of ["privacy", "cookie", "crediti-foto"]) views.push(`<div data-view="${s}" hidden>${mainOf(read(`${s}/index.html`))}</div>`);
 body = body.replace(/<main id="main">[\s\S]*?<\/main>/, `<main id="main">${views.join("")}</main>`);
 body = transform(body);
 
@@ -68,7 +71,8 @@ const extraCss = `
 const headScript = `(function(){var d=document.documentElement;var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(!rm)d.classList.add('motion');try{if(!rm&&!sessionStorage.getItem('sr_pl'))d.setAttribute('data-pl','on')}catch(e){}})();`;
 const heroImg = dataImg("/images/placeholder/places/hero-costa-1920.webp");
 // dati della sezione «Sardegna» (tabellone): mete, punti mappa, foto
-const dests = [...islandPlaces, ...places.map((p) => ({ ...p, zone: "sulcis" }))].map((p) => ({
+const ORDER = ["sud", "sudovest", "ovest", "nord", "est"];
+const dests = [...islandPlaces, ...places.map((p) => ({ ...p, zone: "sudovest" }))].sort((a, b) => ORDER.indexOf(a.zone) - ORDER.indexOf(b.zone)).map((p) => ({
   slug: p.slug, name: p.name, area: p.area.it, line: p.line.it, zone: p.zone, night: !!p.night,
   img: dataImg(`/images/placeholder/places/${p.slug}-1280.webp`),
 }));
@@ -86,7 +90,7 @@ ${htmlTag}
 <script>${headScript}</script>
 </head>
 <body>${body}
-<div class="pv-badge" aria-hidden="true">Preview · foto e auto segnaposto</div>
+<div class="pv-badge" aria-hidden="true">Preview · foto di esempio</div>
 <script>${js}</script>
 </body>
 </html>`;
