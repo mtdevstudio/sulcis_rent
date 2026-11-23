@@ -14,7 +14,7 @@ export function Faq() {
       <div className="wrap grid gap-10 md:grid-cols-12">
         <div className="md:col-span-4">
           <SectionHead index="07" label="FAQ" />
-          <h2 id="faq-title" className="display display-stretch mt-10 text-d-m">{d.faqTitle}</h2>
+          <h2 id="faq-title" className="display mt-10 text-d-m">{d.faqTitle}</h2>
         </div>
         <div className="divide-y-filo divide-trachite border-y-filo border-trachite md:col-span-8">
           {items.map((f, i) => (

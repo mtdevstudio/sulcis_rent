@@ -1,7 +1,6 @@
 "use client";
 import type { Lang } from "@/lib/types";
 import { useRouteSignal } from "@/lib/viewTransition";
-import { StretchAxes } from "@/components/motion/StretchAxes";
 import { ContactDock } from "./ContactDock";
 import { ContactModalProvider } from "./ContactModal";
 import { Cursor } from "./Cursor";
@@ -29,7 +28,6 @@ export function SiteShell({ lang, altHref, children, preloader = false }: { lang
         <ContactDock />
         <Cursor />
         <MotionDirector />
-        <StretchAxes />
         <RouteSignal />
       </ContactModalProvider>
     </LangProvider>

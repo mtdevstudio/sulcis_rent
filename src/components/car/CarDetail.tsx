@@ -154,7 +154,7 @@ export function CarDetail({ slug, car: carProp, preview = false, catalog }: { sl
             {car.badge && <span className="eyebrow bg-magenta px-2 py-1 text-white">{badgeLabel[car.badge]?.[lang]}</span>}
             {car.version && <span className="eyebrow text-stone">{car.version}</span>}
           </div>
-          <h1 className="display display-stretch mt-4 text-d-xl leading-[0.82]">
+          <h1 className="display mt-4 text-d-xl leading-[0.82]">
             <span className="block text-blue">{car.brand}</span>
             <span className="block">{car.model}</span>
           </h1>
@@ -241,7 +241,7 @@ export function CarDetail({ slug, car: carProp, preview = false, catalog }: { sl
       {!preview && others.length > 0 && (
         <section className="bg-sand-200 py-section" aria-labelledby="others-t">
           <div className="wrap">
-            <h2 id="others-t" className="display display-stretch text-d-m">{d.car.others}</h2>
+            <h2 id="others-t" className="display text-d-m">{d.car.others}</h2>
             <ul className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {others.map((c, i) => <li key={c.slug}><CarCard car={c} categories={cats} index={i} /></li>)}
             </ul>

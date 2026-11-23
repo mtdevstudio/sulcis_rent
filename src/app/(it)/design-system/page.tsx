@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { StretchAxes } from "@/components/motion/StretchAxes";
 import { Trama, TramaBand, type TramaColor } from "@/components/trama/Trama";
 import type { MotifName } from "@/components/trama/motifs";
 import { RevealFrame } from "@/components/trama/RevealFrame";
@@ -68,7 +67,6 @@ const motifBoard: { motif: MotifName; fg: TramaColor; bg: TramaColor; cell: numb
 export default function DesignSystemPage() {
   return (
     <main className="overflow-x-clip">
-      <StretchAxes />
 
       {/* COPERTINA */}
       <header className="relative bg-sand pt-10">
@@ -76,17 +74,17 @@ export default function DesignSystemPage() {
           <Logo className="text-xl" />
           <span className="eyebrow text-stone">Design system v0.1 · noindex</span>
         </div>
-        <h1 className="display display-stretch mt-10 select-none px-[1vw] text-d-xxl leading-[0.78] text-trachite">
+        <h1 className="display mt-10 select-none px-[1vw] text-d-xxl leading-[0.78] text-trachite">
           Trama<span className="text-magenta">.</span>
         </h1>
         <div className="wrap grid gap-6 pb-16 pt-6 md:grid-cols-12">
           <p className="text-lead md:col-span-6">
-            Il linguaggio visivo di Sulcis Rent. Tipografia gigante che respira con lo scroll, la tessitura sarda
+            Il linguaggio visivo di Sulcis Rent. Tipografia gigante e ferma, la tessitura sarda
             ridotta a pura geometria, due colori dal logo e la terra del Sulcis intorno.
           </p>
           <p className="text-sm text-stone md:col-span-4 md:col-start-9">
-            Scorri veloce e poi fermati: i titoli si stirano in velocità e si comprimono in frenata.
-            Con prefers-reduced-motion restano fermi.
+            I titoli usano assi fissi (larghezza 72, peso 850): nessuna deformazione legata allo scroll,
+            per non affaticare la vista né creare rischi per chi è sensibile al movimento.
           </p>
         </div>
         <TramaBand fg="rent-magenta" bg="sand" cell={8} />
@@ -96,7 +94,7 @@ export default function DesignSystemPage() {
       <section className="bg-sand py-section" aria-labelledby="ds-colori">
         <div className="wrap">
           <SectionHead index="01" label="Colore" />
-          <h2 id="ds-colori" className="display display-stretch mt-8 text-d-m">Mare, calcare, trachite</h2>
+          <h2 id="ds-colori" className="display mt-8 text-d-m">Mare, calcare, trachite</h2>
           <p className="mt-4 max-w-prose text-stone">
             Blu e magenta escono dal logo e restano i protagonisti. Il resto viene dal territorio. Turchese e ocra sono
             accenti rarissimi: il turchese mai su sabbia, l&apos;ocra solo nel momento «notte» delle miniere.
@@ -158,7 +156,7 @@ export default function DesignSystemPage() {
           <div className="mt-8 grid gap-10 md:grid-cols-12">
             <div className="md:col-span-7">
               <p className="eyebrow text-magenta">Display · Archivo variable</p>
-              <h2 id="ds-type" className="display display-stretch mt-3 text-d-l">Un font,<br />due assi</h2>
+              <h2 id="ds-type" className="display mt-3 text-d-l">Un font,<br />due assi</h2>
             </div>
             <div className="space-y-4 text-sand/80 md:col-span-5 md:pt-10">
               <p>
@@ -182,9 +180,9 @@ export default function DesignSystemPage() {
           {/* assi */}
           <div className="mt-16 grid gap-px border-filo border-sand/20 bg-sand/20 md:grid-cols-3">
             {[
-              { w: 110, g: 460, k: "In velocità", d: "wdth 110 · wght 460: si stira, si alleggerisce" },
-              { w: 72, g: 850, k: "Riposo", d: "wdth 72 · wght 850: lo stato di base" },
-              { w: 62, g: 900, k: "In frenata", d: "wdth 62 · wght 900: si comprime, diventa nero" },
+              { w: 110, g: 460, k: "Largo", d: "wdth 110 · wght 460: per sottotitoli e contrasti" },
+              { w: 72, g: 850, k: "Titoli", d: "wdth 72 · wght 850: tutti i titoli del sito" },
+              { w: 62, g: 900, k: "Compresso", d: "wdth 62 · wght 900: numeri e parole a tutta larghezza" },
             ].map((a) => (
               <div key={a.k} className="bg-trachite p-6">
                 <p className="eyebrow text-magenta">{a.k}</p>
@@ -223,7 +221,7 @@ export default function DesignSystemPage() {
                   <p className="font-mono text-xs text-stone">{t.spec}</p>
                   <p className="mt-1 text-xs text-stone">{t.use}</p>
                 </div>
-                <p className={`display display-stretch overflow-hidden whitespace-nowrap md:col-span-9 ${t.name === "d-xxl" ? "text-[clamp(3.5rem,14vw,18rem)] leading-[0.8]" : t.name === "d-xl" ? "text-[clamp(3rem,9vw,11rem)] leading-[0.82]" : t.cls}`}>
+                <p className={`display overflow-hidden whitespace-nowrap md:col-span-9 ${t.name === "d-xxl" ? "text-[clamp(3.5rem,14vw,18rem)] leading-[0.8]" : t.name === "d-xl" ? "text-[clamp(3rem,9vw,11rem)] leading-[0.82]" : t.cls}`}>
                   {t.sample}
                 </p>
               </div>
@@ -249,7 +247,7 @@ export default function DesignSystemPage() {
       <section className="bg-sand-200 py-section" aria-labelledby="ds-space">
         <div className="wrap">
           <SectionHead index="03" label="Spazio, forma, movimento" />
-          <h2 id="ds-space" className="display display-stretch mt-8 text-d-m">Netto. Tagliato. Al gradino.</h2>
+          <h2 id="ds-space" className="display mt-8 text-d-m">Netto. Tagliato. Al gradino.</h2>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             <div className="border-filo border-trachite bg-sand p-6">
               <p className="eyebrow text-magenta">Spaziatura</p>
@@ -296,7 +294,7 @@ export default function DesignSystemPage() {
       <section className="bg-sand py-section" aria-labelledby="ds-comp">
         <div className="wrap">
           <SectionHead index="04" label="Componenti base" />
-          <h2 id="ds-comp" className="display display-stretch mt-8 text-d-m">Pezzi del telaio</h2>
+          <h2 id="ds-comp" className="display mt-8 text-d-m">Pezzi del telaio</h2>
 
           <h3 className="eyebrow mt-12 text-stone">Bottoni · hover: la campitura scorre da sinistra, il nodo ruota</h3>
           <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -410,7 +408,7 @@ export default function DesignSystemPage() {
         <div className="wrap">
           <SectionHead index="05" label="Trama · il motivo sardo" tone="dark" />
           <div className="mt-8 grid gap-8 md:grid-cols-12">
-            <h2 id="ds-trama" className="display display-stretch text-d-l md:col-span-7">Il telaio,<br />non il souvenir</h2>
+            <h2 id="ds-trama" className="display text-d-l md:col-span-7">Il telaio,<br />non il souvenir</h2>
             <ul className="space-y-3 text-sand/80 md:col-span-5 md:pt-6">
               <li className="flex gap-3"><Nodo className="mt-1.5 h-2.5 w-2.5 shrink-0 text-magenta" /><span>Ogni motivo è una griglia di celle quadrate, come i punti di un telaio. Niente curve, niente ornamento.</span></li>
               <li className="flex gap-3"><Nodo className="mt-1.5 h-2.5 w-2.5 shrink-0 text-magenta" /><span><strong className="text-sand">Al massimo due colori per volta</strong>: il motivo e il fondo. L&apos;API del componente accetta solo fg + bg.</span></li>
@@ -470,7 +468,7 @@ export default function DesignSystemPage() {
       <section className="bg-sand py-section" aria-labelledby="ds-hero">
         <div className="wrap">
           <SectionHead index="06" label="Hero · reveal a rombi" />
-          <h2 id="ds-hero" className="display display-stretch mt-8 text-d-m">Il Sulcis si apre a rombi</h2>
+          <h2 id="ds-hero" className="display mt-8 text-d-m">Il Sulcis si apre a rombi</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[0.12, 0.5, 1].map((p) => (
               <figure key={p} className="border-filo border-trachite">
@@ -492,7 +490,7 @@ export default function DesignSystemPage() {
         <Trama motif="occhio" fg="ochre" cell={22} opacity={0.12} />
         <div className="wrap relative">
           <SectionHead index="07" label="L'unico momento notte · pannello Iglesiente" tone="dark" />
-          <p id="ds-notte" className="display display-stretch mt-10 text-d-xl text-ochre">Porto Flavia</p>
+          <p id="ds-notte" className="display mt-10 text-d-xl text-ochre">Porto Flavia</p>
           <p className="mt-6 max-w-prose text-lead text-sand/85">
             Nello scroll orizzontale del Territorio, un solo pannello si spegne: trachite, ocra e la geometria
             «occhio» a bassa intensità. Il resto del sito resta in pieno sole.

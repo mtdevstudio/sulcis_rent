@@ -135,7 +135,7 @@ export function Hero() {
           <h1 id="hero-title" className="sr-only">Sulcis Rent – {lang === "it" ? "noleggio auto a San Giovanni Suergiu, Sulcis, Sud Sardegna" : "car rental in San Giovanni Suergiu, Sulcis, South Sardinia"}</h1>
           <div className="wrap grid gap-5 md:grid-cols-12 md:items-end">
             <div className="md:col-span-7">
-              <p className="display display-stretch text-[clamp(2.25rem,7vw,6.5rem)] leading-[0.86] text-trachite [text-shadow:0_0_24px_rgb(var(--sand)/.6)]">
+              <p className="display text-[clamp(2.25rem,7vw,6.5rem)] leading-[0.86] text-trachite [text-shadow:0_0_24px_rgb(var(--sand)/.6)]">
                 <span className="bg-sand px-1">{d.heroLine2}</span>
               </p>
               <p className="mt-4 max-w-md bg-sand/90 p-2 text-lead font-semibold text-trachite">{d.payoff}</p>

@@ -11,7 +11,7 @@ export function HowItWorks({ lang }: { lang: Lang }) {
       <TramaBand fg="sulcis-blue" cell={8} />
       <div className="wrap pt-section">
         <SectionHead index="04" label={d.howTitle} />
-        <RevealText as="h2" lines={[d.howTitle]} className="display display-stretch mt-10 text-d-l" />
+        <RevealText as="h2" lines={[d.howTitle]} className="display mt-10 text-d-l" />
         <span id="how-title" className="sr-only">{d.howTitle}</span>
         <ol className="mt-14 grid gap-px border-filo border-trachite bg-trachite md:grid-cols-3">
           {d.howSteps.map((s, i) => (

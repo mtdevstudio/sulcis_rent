@@ -45,7 +45,7 @@ export function LegalPage({ kind, lang }: { kind: "privacy" | "cookie"; lang: La
   return (
     <SiteShell lang={lang} altHref={paths[other][kind]}>
       <article className="wrap max-w-4xl pb-section pt-32">
-        <h1 className="display display-stretch text-d-l">{c.title}</h1>
+        <h1 className="display text-d-l">{c.title}</h1>
         <p className="mt-4 bg-ochre/20 p-3 text-sm">{lang === "it" ? "Testo segnaposto, da completare con il cliente." : "Placeholder text, to be completed."}</p>
         <div data-hero-end />
         {c.sections.map(([h, p]) => (

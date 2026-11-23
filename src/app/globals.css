@@ -35,9 +35,6 @@
   --ease-trama: cubic-bezier(.77, 0, .18, 1);
   --ease-out: cubic-bezier(.16, 1, .3, 1);
 
-  /* Assi variabili del display — scritti da useStretchAxes() allo scroll */
-  --wdth: 72;
-  --wght: 850;
 }
 
 @layer base {
@@ -64,10 +61,6 @@
     text-transform: uppercase;
     font-kerning: normal;
   }
-  /* Titoli che respirano con la velocità di scroll */
-  .display-stretch {
-    font-variation-settings: "wdth" var(--wdth), "wght" var(--wght);
-  }
   .eyebrow {
     @apply font-sans text-eyebrow font-semibold uppercase;
   }
@@ -81,7 +74,6 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .display-stretch { font-variation-settings: "wdth" 72, "wght" 850; }
 }
 
 /* ---------- keyframes ---------- */

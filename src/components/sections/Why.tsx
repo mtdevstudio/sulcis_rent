@@ -11,7 +11,7 @@ export function Why({ lang }: { lang: Lang }) {
       <Trama motif="rombo" fg="sulcis-blue-deep" cell={20} opacity={0.55} />
       <div className="wrap relative">
         <SectionHead index="05" label={d.whyTitle} tone="dark" />
-        <RevealText as="h2" lines={[d.whyTitle]} className="display display-stretch mt-10 text-d-l" />
+        <RevealText as="h2" lines={[d.whyTitle]} className="display mt-10 text-d-l" />
         <span id="why-title" className="sr-only">{d.whyTitle}</span>
         <ul className="mt-14 grid gap-px bg-white/25 md:grid-cols-2 xl:grid-cols-4">
           {d.why.map((w, i) => (

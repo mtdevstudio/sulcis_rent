@@ -26,7 +26,7 @@ export function Fleet() {
       <div className="wrap">
         <SectionHead index="02" label={d.nav.fleet} />
         <div className="mt-10 grid gap-8 md:grid-cols-12 md:items-end">
-          <RevealText as="h2" lines={[d.fleetTitle]} className="display display-stretch text-d-l md:col-span-8" />
+          <RevealText as="h2" lines={[d.fleetTitle]} className="display text-d-l md:col-span-8" />
           <span id="flotta-title" className="sr-only">{d.fleetTitle}</span>
           <p className="fx-fade text-stone md:col-span-4">{d.fleetText}</p>
         </div>

@@ -19,7 +19,7 @@ export function Reviews() {
       <div className="wrap">
         <SectionHead index="06" label={d.reviewsTitle} />
         <div className="mt-10 grid gap-10 md:grid-cols-12 md:items-end">
-          <h2 id="reviews-title" className="display display-stretch text-d-l md:col-span-7">{d.reviewsTitle}</h2>
+          <h2 id="reviews-title" className="display text-d-l md:col-span-7">{d.reviewsTitle}</h2>
           <div className="md:col-span-5 md:text-right">
             <p className="flex items-end gap-4 md:justify-end">
               <span className="display text-[clamp(5rem,12vw,9rem)] leading-[0.8]" style={{ fontVariationSettings: '"wdth" 62, "wght" 900' }}>{site.google.ratingLabel}</span>

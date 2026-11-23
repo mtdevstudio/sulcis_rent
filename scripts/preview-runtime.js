@@ -1,5 +1,5 @@
 /* Runtime della PREVIEW navigabile (vanilla JS). Replica i comportamenti del sito Next:
-   preloader, hero a rombi, reveal, assi variabili allo scroll, marquee, territorio orizzontale,
+   preloader, hero a rombi, reveal, marquee, territorio orizzontale,
    header, contatti fissi, filtri flotta, modale «Prenota con noi», schede auto via #hash. */
 (function () {
   "use strict";
@@ -78,19 +78,6 @@
   $$(".rv").forEach(function (el) { $$(".rv-w>span", el).forEach(function (s, i) { s.style.transitionDelay = i * 45 + "ms"; }); io ? io.observe(el) : el.classList.add("rv-done"); });
   $$(".fx-fade").forEach(function (el) { io ? io.observe(el) : el.classList.add("fx-done"); });
 
-  /* ---------- assi variabili allo scroll ---------- */
-  var ax = { x: 0, vx: 0, speed: 0, pt: 0, lastY: scrollY, run: false, w: 72, g: 850 };
-  function axTick() {
-    var y = scrollY, raw = Math.abs(y - ax.lastY); ax.lastY = y;
-    ax.speed += (raw - ax.speed) * 0.18;
-    var target = Math.min(ax.speed / 45, 1);
-    ax.vx = (ax.vx + (target - ax.x) * 0.12) * 0.8; ax.vx -= Math.max(0, ax.pt - target) * 0.6; ax.pt = target; ax.x += ax.vx;
-    var w = Math.min(125, Math.max(62, 72 + ax.x * 38)), g = Math.min(900, Math.max(450, 850 - ax.x * 380));
-    if (Math.abs(w - ax.w) > 0.25 || Math.abs(g - ax.g) > 2) { ax.w = w; ax.g = g; html.style.setProperty("--wdth", w.toFixed(1)); html.style.setProperty("--wght", g.toFixed(0)); }
-    if (Math.abs(ax.x) < 0.002 && Math.abs(ax.vx) < 0.002 && ax.speed < 0.05) { ax.run = false; html.style.setProperty("--wdth", "72"); html.style.setProperty("--wght", "850"); return; }
-    requestAnimationFrame(axTick);
-  }
-
   /* ---------- marquee ---------- */
   var mq = $(".marquee-track"), mqX = 0, mqDir = 1, mqBoost = 0, lastSY = scrollY;
   function mqTick() {
@@ -140,7 +127,6 @@
     if (Math.abs(y - lastSY) > 0) { mqDir = y > lastSY ? 1 : -1; mqBoost = Math.min(6, mqBoost + Math.abs(y - lastSY) / 40); lastSY = y; }
     lastY = y;
     renderHero(); renderTerritory();
-    if (!RM && !ax.run) { ax.run = true; requestAnimationFrame(axTick); }
   }
   addEventListener("scroll", onScroll, { passive: true });
 

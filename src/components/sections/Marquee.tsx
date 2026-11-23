@@ -38,7 +38,7 @@ export function Marquee() {
           <div key={k} className="flex shrink-0 items-center">
             {row.map((n) => (
               <span key={n + k} className="flex items-center">
-                <span className="display display-stretch whitespace-nowrap px-6 text-[clamp(2.5rem,7vw,6rem)] leading-none">{n}</span>
+                <span className="display whitespace-nowrap px-6 text-[clamp(2.5rem,7vw,6rem)] leading-none">{n}</span>
                 <Nodo className="h-4 w-4 text-magenta" />
               </span>
             ))}

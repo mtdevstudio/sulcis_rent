@@ -20,7 +20,7 @@ export function Contacts() {
     <section id="contatti" className="scroll-mt-20 bg-trachite py-section text-sand" aria-labelledby="contatti-title">
       <div className="wrap">
         <SectionHead index="08" label={d.nav.contacts} tone="dark" />
-        <h2 id="contatti-title" className="display display-stretch mt-10 text-d-l">{d.contactsTitle}</h2>
+        <h2 id="contatti-title" className="display mt-10 text-d-l">{d.contactsTitle}</h2>
         <div className="mt-12 grid gap-10 lg:grid-cols-12">
           <div className="space-y-8 lg:col-span-5">
             <div>

@@ -68,7 +68,7 @@ export function Territory() {
       <div className="wrap pt-section">
         <SectionHead index="03" label={d.nav.territory} />
         <div className="mt-10 grid gap-8 md:grid-cols-12 md:items-end">
-          <RevealText as="h2" lines={[d.territoryTitle]} className="display display-stretch text-d-l md:col-span-8" />
+          <RevealText as="h2" lines={[d.territoryTitle]} className="display text-d-l md:col-span-8" />
           <span id="territorio-title" className="sr-only">{d.territoryTitle}</span>
           <p className="fx-fade text-stone md:col-span-4">{d.territoryText}</p>
         </div>
@@ -104,7 +104,7 @@ export function Territory() {
                   <p className={`eyebrow ${night ? "text-ochre" : "text-sand/90"}`}>
                     <span className={night ? "" : "text-magenta-light"}>{String(i + 1).padStart(2, "0")}</span> / {String(places.length).padStart(2, "0")} · {tr(p.area, lang)}
                   </p>
-                  <h3 className={`display display-stretch mt-3 whitespace-nowrap leading-[0.82] ${horizontal ? "text-[min(9.6vw,12rem)]" : "text-[12.5vw]"} ${night ? "text-ochre" : ""}`}>{p.name}</h3>
+                  <h3 className={`display mt-3 whitespace-nowrap leading-[0.82] ${horizontal ? "text-[min(9.6vw,12rem)]" : "text-[12.5vw]"} ${night ? "text-ochre" : ""}`}>{p.name}</h3>
                   <p className="mt-4 max-w-xl text-lead text-sand/90">{tr(p.line, lang)}</p>
                 </div>
                 {!horizontal && (
