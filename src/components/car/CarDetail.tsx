@@ -85,10 +85,11 @@ function Rows({ rows }: { rows: Row[] }) {
   );
 }
 
-export function CarDetail({ slug, car: carProp, preview = false }: { slug?: string; car?: PublicCar; preview?: boolean }) {
+export function CarDetail({ slug, car: carProp, preview = false, catalog }: { slug?: string; car?: PublicCar; preview?: boolean; catalog?: { categories: CatalogItem[]; features: CatalogItem[]; tags: CatalogItem[] } }) {
   const lang = useLang();
   const d = t(lang);
-  const fleet = useFleet();
+  const store = useFleet();
+  const fleet = catalog ? { ...store, ...catalog } : store;
   const [pathSlug, setPathSlug] = useState(slug);
   useEffect(() => {
     if (!slug && !carProp) {

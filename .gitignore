@@ -9,3 +9,5 @@ server/vendor/
 server/config.php
 public/_private/config.php
 .phpunit.cache
+test-results
+playwright-report
