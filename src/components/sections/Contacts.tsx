@@ -24,12 +24,12 @@ export function Contacts() {
         <div className="mt-12 grid gap-10 lg:grid-cols-12">
           <div className="space-y-8 lg:col-span-5">
             <div>
-              <h3 className="eyebrow text-magenta">{d.address}</h3>
+              <h3 className="eyebrow text-magenta-light">{d.address}</h3>
               <address className="mt-3 text-lead not-italic">{a.street}<br />{a.postalCode} {a.city} ({a.province}), {a.region}</address>
               <a href={`https://www.google.com/maps/dir/?api=1&destination=${query}`} target="_blank" rel="noopener noreferrer" className="eyebrow mt-3 inline-flex items-center gap-2 underline-offset-4 hover:underline">{d.directions}<IconArrow className="h-4 w-4" /></a>
             </div>
             <div>
-              <h3 className="eyebrow text-magenta">{d.phone}</h3>
+              <h3 className="eyebrow text-magenta-light">{d.phone}</h3>
               <a href={c.tel} onClick={() => trackContact("call")} className="display mt-2 block text-[clamp(2.25rem,6vw,3.5rem)] leading-none" style={{ fontVariationSettings: '"wdth" 75, "wght" 800' }} aria-label={`${d.call}: ${c.phoneDisplay}`}>{c.phoneDisplay}</a>
               <div className="mt-4 flex flex-wrap gap-3">
                 <a href={c.waLink(d.waGeneric)} target="_blank" rel="noopener noreferrer" onClick={() => trackContact("whatsapp")} aria-label={`${d.whatsapp} (si apre WhatsApp)`} className="eyebrow inline-flex h-14 items-center gap-2 bg-magenta px-6 text-white hover:bg-magenta-deep"><IconWhatsApp />WhatsApp</a>
@@ -38,11 +38,11 @@ export function Contacts() {
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <h3 className="eyebrow text-magenta">{d.hours}</h3>
+                <h3 className="eyebrow text-magenta-light">{d.hours}</h3>
                 <p className="mt-2 text-lead">{c.hours(lang) || d.hoursValue}</p>
               </div>
               <div>
-                <h3 className="eyebrow text-magenta">Social</h3>
+                <h3 className="eyebrow text-magenta-light">Social</h3>
                 <ul className="mt-2 space-y-1">
                   <li><a href={c.instagram} target="_blank" rel="noopener noreferrer" className="text-lead underline-offset-4 hover:underline">Instagram</a></li>
                   {c.facebook && <li><a href={c.facebook} target="_blank" rel="noopener noreferrer" className="text-lead underline-offset-4 hover:underline">Facebook</a></li>}

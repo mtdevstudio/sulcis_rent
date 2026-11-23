@@ -17,9 +17,20 @@ export const isSlowConnection = () => {
 
 type G = { gsap: typeof import("gsap").gsap; ScrollTrigger: typeof import("gsap/ScrollTrigger").ScrollTrigger };
 let gsapPromise: Promise<G> | null = null;
+/** Attende il primo momento libero (o la prima interazione): il main thread resta libero durante l'avvio. */
+function whenIdle(): Promise<void> {
+  return new Promise((resolve) => {
+    let done = false;
+    const go = () => { if (done) return; done = true; ["scroll", "pointerdown", "keydown", "touchstart", "wheel"].forEach((e) => removeEventListener(e, go)); resolve(); };
+    ["scroll", "pointerdown", "keydown", "touchstart", "wheel"].forEach((e) => addEventListener(e, go, { once: true, passive: true }));
+    const ric = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+    if (ric) ric(go, { timeout: 2500 }); else setTimeout(go, 1200);
+  });
+}
+
 export function loadGsap(): Promise<G> {
   if (!gsapPromise) {
-    gsapPromise = Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(([g, st]) => {
+    gsapPromise = whenIdle().then(() => Promise.all([import("gsap"), import("gsap/ScrollTrigger")])).then(([g, st]) => {
       g.gsap.registerPlugin(st.ScrollTrigger);
       return { gsap: g.gsap, ScrollTrigger: st.ScrollTrigger };
     });

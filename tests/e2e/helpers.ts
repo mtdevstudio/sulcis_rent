@@ -21,7 +21,7 @@ export async function login(page: Page) {
   const pad = page.getByRole("group", { name: "Tastierino numerico" });
   for (const d of OWNER.pin) await pad.getByRole("button", { name: d, exact: true }).click();
   await pad.getByRole("button", { name: "Entra" }).click();
-  await page.getByRole("heading", { name: /Ciao/ }).waitFor();
+  await page.getByRole("heading", { level: 1, name: /^Ciao / }).waitFor();
 }
 
 /** Scelta utente: aspetta che compaia l'elenco (o direttamente il tastierino se c'è un solo utente). */

@@ -94,7 +94,7 @@ final class DataSecurityTest extends ApiTestCase
     public function testManuallyPlacedPhpInMediaIsNotExecuted(): void
     {
         // simula un file PHP finito in /media (es. caricato via FTP per errore)
-        $dir = dirname(__DIR__, 2) . '/out/media/cars/0';
+        $dir = dirname(__DIR__, 2) . '/.local/media/cars/0';
         @mkdir($dir, 0777, true);
         @chmod(dirname($dir), 0777); @chmod($dir, 0777);
         file_put_contents("$dir/evil.php", '<?php echo "PWNED-" . (6*7);');

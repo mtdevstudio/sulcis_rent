@@ -19,8 +19,8 @@ import { useContact } from "@/lib/contact";
  * Fallback statico (reduced-motion / connessione lenta / no-JS): fotogramma finale, foto scoperta.
  */
 type Cell = { x: number; y: number; d: number };
-/** I rombi centrali partono socchiusi: si intravede il mare dentro le lettere e si capisce il gesto. */
-const startScale = (d: number) => (d < 0.16 ? 0.34 : 0);
+/** Partenza pulita: solo tipografia sulla sabbia. Al primo scroll i rombi si aprono dal centro del titolo. */
+const startScale = (_d: number) => 0;
 
 function grid(W: number, H: number, cy: number): { cells: Cell[]; r: number } {
   const cols = W < 700 ? 4 : 6;
@@ -48,7 +48,8 @@ export function Hero() {
   const open = useContactModal();
   const section = useRef<HTMLElement>(null);
   const svg = useRef<SVGSVGElement>(null);
-  const [size, setSize] = useState({ W: 1440, H: 900 });
+  // SSR con geometria mobile (la maggioranza delle visite): niente ri-render del titolo (LCP) sui telefoni
+  const [size, setSize] = useState({ W: 390, H: 844 });
   // SSR = stato animabile (rombi quasi chiusi). Reduced-motion / rete lenta → fotogramma finale statico.
   const [animated, setAnimated] = useState(true);
 
@@ -67,18 +68,25 @@ export function Hero() {
     if (!animated) return;
     let kill = () => {};
     (async () => {
-      const { gsap } = await loadGsap();
-      const diamonds = Array.from(svg.current!.querySelectorAll<SVGPathElement>("[data-d]"));
-      const ctx = gsap.context(() => {
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: section.current, start: "top top", end: "bottom bottom", scrub: 0.6 },
-        });
-        diamonds.forEach((p) => {
-          const dist = Number(p.dataset.d);
-          tl.fromTo(p, { scale: startScale(dist) }, { scale: 1, ease: "power2.inOut", duration: 0.5 }, dist * 0.5);
-        });
-      }, section);
-      kill = () => ctx.revert();
+      const { ScrollTrigger } = await loadGsap();
+      const diamonds = Array.from(svg.current!.querySelectorAll<SVGPathElement>("[data-d]")).map((el) => ({
+        el, d: Number(el.dataset.d), cx: Number(el.dataset.cx), cy: Number(el.dataset.cy), last: -1,
+      }));
+      const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2); // power2.inOut
+      const render = (progress: number) => {
+        const total = 1.05; // ultimo rombo (d ≈ 1.1) finisce a progress 1
+        for (const g of diamonds) {
+          const local = Math.min(1, Math.max(0, (progress * total - g.d * 0.5) / 0.5));
+          const sc = Math.round(ease(local) * 1000) / 1000;
+          if (sc === g.last) continue;
+          g.last = sc;
+          g.el.setAttribute("transform", `translate(${g.cx} ${g.cy}) scale(${sc}) translate(${-g.cx} ${-g.cy})`);
+        }
+      };
+      // Solo l'avanzamento dallo scroll (Lenis già ammorbidisce): attributi SVG scritti a mano, ≤ 40 elementi
+      const st = ScrollTrigger.create({ trigger: section.current, start: "top top", end: "bottom bottom", onUpdate: (self) => render(self.progress) });
+      render(st.progress);
+      kill = () => st.kill();
     })();
     return () => kill();
   }, [animated, size.W, size.H]);
@@ -100,8 +108,8 @@ export function Hero() {
             <clipPath id="hero-rombi">
               {animated ? (
                 cells.map((cl, k) => (
-                  <path key={k} data-d={cl.d.toFixed(3)} d={`M${cl.x} ${cl.y - r}L${cl.x + r} ${cl.y}L${cl.x} ${cl.y + r}L${cl.x - r} ${cl.y}Z`}
-                    style={{ transform: `scale(${startScale(cl.d)})`, transformBox: "fill-box", transformOrigin: "center" }} />
+                  <path key={k} data-d={cl.d.toFixed(3)} data-cx={cl.x.toFixed(1)} data-cy={cl.y.toFixed(1)} d={`M${cl.x} ${cl.y - r}L${cl.x + r} ${cl.y}L${cl.x} ${cl.y + r}L${cl.x - r} ${cl.y}Z`}
+                    transform={`translate(${cl.x} ${cl.y}) scale(${startScale(cl.d)}) translate(${-cl.x} ${-cl.y})`} />
                 ))
               ) : (
                 <rect width={size.W} height={size.H} />

@@ -1,0 +1,64 @@
+# Build statico + upload su hosting Aruba o Plesk (identico per entrambi).
+# Secrets richiesti (Settings → Secrets and variables → Actions):
+#   FTP_HOST, FTP_USER, FTP_PASSWORD, FTP_PATH            (es. /www.sulcisrent.it  oppure  /httpdocs)
+#   FTP_PROTOCOL       facoltativo: ftps (default) | ftp | sftp
+#   FTP_PRIVATE_PATH   facoltativo: cartella FUORI dalla document root per server/ e database/ (es. /sulcis-private)
+#                      se vuoto, vanno in <FTP_PATH>/_private (protetta da .htaccess)
+# Variables (facoltative): DATA_SNAPSHOT_URL = https://sulcisrent.it  → le pagine auto pre-renderizzate usano la flotta live
+#
+# ⚠️ Il deploy NON tocca mai media/ (foto caricate) e data/*.json (generati dall'admin) né config.php.
+name: Deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [rebuild]
+concurrency: { group: deploy, cancel-in-progress: false }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Build statico (Next export)
+        run: npm run build
+        env:
+          DATA_SNAPSHOT_URL: ${{ vars.DATA_SNAPSHOT_URL }}
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: "8.1", tools: composer:v2, extensions: mbstring, pdo_mysql, fileinfo, gd }
+      - name: Dipendenze PHP di produzione (PHPMailer)
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+      - name: Prepara pacchetti
+        run: |
+          set -e
+          mkdir -p dist/public dist/private
+          rsync -a --exclude 'data/*.json' --exclude 'media/cars/' --exclude '_private/config.php' out/ dist/public/
+          rsync -a --exclude 'config.php' --exclude 'logs/' --exclude 'tmp/' server dist/private/
+          rsync -a database dist/private/
+          # nessun segreto nel pacchetto
+          ! grep -rIl --include='*.js' --include='*.html' -E 'SETUP_TOKEN|ip_hash_salt|DB_PASS' dist/public
+      - name: Upload (lftp mirror, nessuna cancellazione fuori da _next)
+        env:
+          HOST: ${{ secrets.FTP_HOST }}
+          USER: ${{ secrets.FTP_USER }}
+          PASS: ${{ secrets.FTP_PASSWORD }}
+          ROOT: ${{ secrets.FTP_PATH }}
+          PRIV: ${{ secrets.FTP_PRIVATE_PATH }}
+          PROTO: ${{ secrets.FTP_PROTOCOL || 'ftps' }}
+        run: |
+          set -e
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          PRIV="${PRIV:-$ROOT/_private}"
+          URL="$PROTO://$HOST"
+          SETTINGS="set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate yes; set sftp:auto-confirm yes; set net:max-retries 3"
+          [ "$PROTO" = "ftp" ] && SETTINGS="set ftp:ssl-allow no; set net:max-retries 3"
+          lftp -u "$USER","$PASS" "$URL" -e "$SETTINGS;
+            mirror -R --only-newer --parallel=4 --no-perms --exclude-glob .git* --exclude-glob _next/ dist/public $ROOT;
+            mirror -R --delete --parallel=4 --no-perms dist/public/_next $ROOT/_next;
+            mirror -R --only-newer --parallel=2 --no-perms dist/private $PRIV;
+            mkdir -pf $ROOT/media/cars; mkdir -pf $ROOT/data;
+            bye"

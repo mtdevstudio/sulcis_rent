@@ -102,7 +102,7 @@ export function Territory() {
                 )}
                 <div className="relative px-gutter pb-10 md:pb-16">
                   <p className={`eyebrow ${night ? "text-ochre" : "text-sand/90"}`}>
-                    <span className={night ? "" : "text-magenta"}>{String(i + 1).padStart(2, "0")}</span> / {String(places.length).padStart(2, "0")} · {tr(p.area, lang)}
+                    <span className={night ? "" : "text-magenta-light"}>{String(i + 1).padStart(2, "0")}</span> / {String(places.length).padStart(2, "0")} · {tr(p.area, lang)}
                   </p>
                   <h3 className={`display display-stretch mt-3 whitespace-nowrap leading-[0.82] ${horizontal ? "text-[min(9.6vw,12rem)]" : "text-[12.5vw]"} ${night ? "text-ochre" : ""}`}>{p.name}</h3>
                   <p className="mt-4 max-w-xl text-lead text-sand/90">{tr(p.line, lang)}</p>

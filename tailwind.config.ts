@@ -16,7 +16,7 @@ const config: Config = {
       current: "currentColor",
       white: "#FFFFFF", // solo testo su campiture brand, mai come fondo pagina
       blue: { DEFAULT: v("sulcis-blue"), deep: v("sulcis-blue-deep") },
-      magenta: { DEFAULT: v("rent-magenta"), deep: v("rent-magenta-deep") },
+      magenta: { DEFAULT: v("rent-magenta"), deep: v("rent-magenta-deep"), light: v("rent-magenta-light") },
       sand: { DEFAULT: v("sand"), 200: v("sand-200"), 300: v("sand-300") },
       trachite: { DEFAULT: v("trachite"), 800: v("trachite-800"), 600: v("trachite-600") },
       stone: v("stone"), // testo secondario su sabbia

@@ -1,0 +1,28 @@
+# Test su ogni PR: build, ambiente Apache+PHP8.1+MariaDB in Docker, PHPUnit (sicurezza) e Playwright (E2E).
+name: CI
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run build
+      - uses: shivammathur/setup-php@v2
+        with: { php-version: "8.1", tools: composer:v2, extensions: mbstring, pdo_mysql, curl, exif }
+      - run: composer install --no-interaction
+      - name: Avvia Docker (Apache + PHP 8.1 + MariaDB)
+        run: |
+          mkdir -p .local/media .local/data && cp public/media/.htaccess .local/media/ && cp public/data/.htaccess .local/data/ && chmod -R a+rwX .local
+          docker compose up -d --build --wait
+      - name: Setup monouso (migrazioni + titolare)
+        run: |
+          curl -fsS -X POST -H "Origin: http://localhost:8080" --data-urlencode "token=local-setup-token-0123456789abcdef0123" \
+            --data-urlencode "name=Titolare" --data-urlencode "pin=48151623" --data-urlencode "pin2=48151623" http://localhost:8080/api/setup.php | grep -q "Fatto"
+      - run: server/vendor/bin/phpunit
+      - run: npx playwright install --with-deps chromium && npx playwright test --trace off

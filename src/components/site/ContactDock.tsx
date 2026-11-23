@@ -21,9 +21,13 @@ export function ContactDock() {
   useEffect(() => {
     const sentinel = document.querySelector("[data-hero-end]");
     if (!sentinel) { setVisible(true); return; }
-    const io = new IntersectionObserver(([e]) => setVisible(!e.isIntersecting && e.boundingClientRect.top < 0));
-    io.observe(sentinel);
-    return () => io.disconnect();
+    let raf = 0;
+    const check = () => { raf = 0; setVisible(sentinel.getBoundingClientRect().top < 0); };
+    const on = () => { if (!raf) raf = requestAnimationFrame(check); };
+    check();
+    addEventListener("scroll", on, { passive: true });
+    addEventListener("resize", on);
+    return () => { removeEventListener("scroll", on); removeEventListener("resize", on); cancelAnimationFrame(raf); };
   }, []);
 
   const wa = c.waLink(d.waGeneric);

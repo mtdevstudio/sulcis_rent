@@ -12,6 +12,7 @@
   --sulcis-blue-deep: 15 76 117;    /* #0F4C75  blu per testo piccolo su sabbia (7.8:1) */
   --rent-magenta: 209 31 110;       /* #D11F6E  accento · CTA */
   --rent-magenta-deep: 176 24 91;   /* #B0185B  hover CTA / magenta per testo piccolo su sabbia (5.8:1) */
+  --rent-magenta-light: 240 106 160; /* #F06AA0  magenta per testo piccolo su trachite (6.0:1) */
 
   /* Territorio */
   --sand: 243 237 226;              /* #F3EDE2  calcare · fondo principale */

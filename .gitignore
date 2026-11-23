@@ -11,3 +11,4 @@ public/_private/config.php
 .phpunit.cache
 test-results
 playwright-report
+.local/

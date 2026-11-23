@@ -45,7 +45,7 @@ export function MotionDirector() {
     fades.forEach((el) => io.observe(el));
 
     // Rete di sicurezza: se GSAP non arriva, mostra tutto
-    const safety = window.setTimeout(() => reveal.forEach((el) => el.classList.add("rv-done")), 4000);
+    const safety = window.setTimeout(() => reveal.forEach((el) => el.classList.add("rv-done")), 6000);
     let ctx: { revert: () => void } | null = null;
 
     (async () => {

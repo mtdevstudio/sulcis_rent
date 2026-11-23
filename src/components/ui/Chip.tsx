@@ -13,7 +13,7 @@ export function Chip({ active, children, onClick, count }: { active?: boolean; c
       ].join(" ")}
     >
       {children}
-      {typeof count === "number" && <span className={active ? "text-magenta" : "text-stone"}>{count}</span>}
+      {typeof count === "number" && <span className={active ? "text-magenta-light" : "text-stone"}>{count}</span>}
     </button>
   );
 }

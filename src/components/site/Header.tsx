@@ -49,7 +49,7 @@ export function Header({ altHref }: { altHref?: string }) {
       <header
         className={`fixed inset-x-0 top-0 z-nav transition-[transform,background-color,border-color] duration-base ease-trama ${
           hidden && !menu ? "-translate-y-full" : ""
-        } ${scrolled || menu ? "border-b-filo border-trachite bg-sand" : "border-b-filo border-transparent bg-transparent"}`}
+        } ${scrolled || menu ? "border-b-filo border-trachite bg-sand" : "border-b-filo border-transparent bg-sand/80 backdrop-blur-sm"}`}
       >
         <div className="wrap flex h-16 items-center justify-between gap-4 md:h-20">
           <Link href={home} aria-label="Sulcis Rent – home" className="shrink-0"><Logo className="text-[15px] md:text-lg" /></Link>
@@ -93,7 +93,7 @@ export function Header({ altHref }: { altHref?: string }) {
                 <li key={l.href}>
                   <a href={`${home}${l.href}`} onClick={(e) => go(e, l.href)} className="flex items-baseline justify-between py-4">
                     <span className="display text-[clamp(2.5rem,12vw,4rem)] leading-none">{l.label}</span>
-                    <span className="eyebrow text-magenta">0{i + 1}</span>
+                    <span className="eyebrow text-magenta-deep">0{i + 1}</span>
                   </a>
                 </li>
               ))}

@@ -32,7 +32,7 @@ export function Marquee() {
   }, []);
   const row = places.map((p) => p.name);
   return (
-    <div className="overflow-hidden border-y-filo border-trachite bg-blue py-5 text-sand motion-reduce:overflow-x-auto" aria-label="Sant'Antioco, Calasetta, Carloforte, Porto Pino, Masua, Porto Flavia, Nebida, Iglesias, Carbonia, Tratalias, Punta Trettu, Maladroxia">
+    <div role="marquee" className="overflow-hidden border-y-filo border-trachite bg-blue py-5 text-sand motion-reduce:overflow-x-auto" aria-label="Sant'Antioco, Calasetta, Carloforte, Porto Pino, Masua, Porto Flavia, Nebida, Iglesias, Carbonia, Tratalias, Punta Trettu, Maladroxia">
       <div ref={track} className="marquee-track" aria-hidden>
         {[0, 1].map((k) => (
           <div key={k} className="flex shrink-0 items-center">

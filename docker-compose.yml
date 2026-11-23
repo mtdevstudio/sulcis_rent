@@ -25,6 +25,9 @@ services:
       SR_PRIVATE_DIR: /var/www/sulcis-private
     volumes:
       - ./out:/var/www/html
+      # foto e JSON pubblici fuori da out/: sopravvivono alle build (come in produzione, dove il deploy non li tocca)
+      - ./.local/media:/var/www/html/media
+      - ./.local/data:/var/www/html/data
       - ./server:/var/www/sulcis-private/server:ro
       - ./database:/var/www/sulcis-private/database:ro
       - ./docker/config.local.php:/var/www/sulcis-private/config.php:ro

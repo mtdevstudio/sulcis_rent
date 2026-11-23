@@ -29,7 +29,7 @@ export async function api<T = unknown>(method: string, path: string, body?: unkn
   }
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    if (res.status === 401 && !path.startsWith("auth/login")) listeners.forEach((l) => l());
+    if (res.status === 401 && !path.startsWith("auth/login") && !path.startsWith("auth/me")) listeners.forEach((l) => l());
     throw new ApiError(res.status, data.error || "Errore imprevisto", data.fields || {});
   }
   return data as T;

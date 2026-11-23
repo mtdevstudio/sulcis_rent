@@ -9,8 +9,9 @@ export const fontDisplay = Archivo({
   subsets: ["latin"],
   axes: ["wdth"],
   variable: "--font-display",
-  // block: il display è preloadato da next/font; evita il flash del fallback sui titoli giganti
-  display: "block",
+  // swap + fallback con metriche corrette (adjustFontFallback): il titolo LCP si dipinge subito,
+  // il font è preloadato quindi lo scambio avviene quasi sempre prima del primo frame utile
+  display: "swap",
   adjustFontFallback: true,
 });
 
@@ -19,4 +20,7 @@ export const fontText = Hanken_Grotesk({
   subsets: ["latin"],
   variable: "--font-text",
   display: "swap",
+  // niente preload: il titolo LCP usa Archivo; il testo arriva subito dopo con metriche di fallback corrette (zero CLS)
+  preload: false,
+  adjustFontFallback: true,
 });

@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   // Con l'export statico l'ottimizzatore runtime non esiste:
   // le immagini vengono pre-generate in AVIF/WebP da scripts/images.mjs (fase build sezioni).
   images: { unoptimized: true },
+  experimental: { globalNotFound: true },
 };
 
 export default nextConfig;
