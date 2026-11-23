@@ -83,10 +83,11 @@ final class Publisher
         }
         if ($show('insurance') && !empty($r['insurance'])) $rental['insurance'] = $r['insurance'];
 
+        $ci = (array) $c['content'];
         $content = array_filter([
-            'short' => $c['content']['short'] ?? null,
-            'long' => $c['content']['long'] ?? null,
-            'highlights' => !empty($c['content']['highlights']) ? array_values($c['content']['highlights']) : null,
+            'short' => $ci['short'] ?? null,
+            'long' => $ci['long'] ?? null,
+            'highlights' => !empty($ci['highlights']) ? array_values($ci['highlights']) : null,
         ]);
         $name = trim($c['brand'] . ' ' . $c['model']);
         $images = [];

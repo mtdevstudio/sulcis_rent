@@ -17,7 +17,7 @@ final class Db
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_STRINGIFY_FETCHES => false,
         ]);
-        self::$pdo->exec("SET time_zone = '+00:00'");
+        self::$pdo->exec("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci, time_zone = '+00:00'");
         return self::$pdo;
     }
 

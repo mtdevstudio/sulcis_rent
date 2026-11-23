@@ -5,6 +5,7 @@ import { badgeLabel, driveLabel, fuelLabel, transmissionLabel } from "@/data/cat
 import { carName, euro } from "@/lib/car";
 import { useFleet } from "@/lib/data";
 import { paths, t, tr } from "@/lib/i18n";
+import { carMeta, absolute } from "@/lib/seo";
 import type { CatalogItem, Lang, PublicCar } from "@/lib/types";
 import { useContactModal } from "@/components/site/ContactModal";
 import { useLang } from "@/components/site/LangContext";
@@ -98,6 +99,22 @@ export function CarDetail({ slug, car: carProp, preview = false }: { slug?: stri
   const car = carProp ?? fleet.cars.find((c) => c.slug === pathSlug);
   const open = useContactModal(car?.slug);
   const [idx, setIdx] = useState(0);
+
+  // Allinea title/description/canonical ai dati freschi (stesse regole di car.php), anche dopo l'idratazione.
+  useEffect(() => {
+    if (!car || preview) return;
+    const m = carMeta(car, lang, fleet.categories);
+    document.title = m.title;
+    const set = (sel: string, make: () => HTMLElement, attr: string, val: string) => {
+      const els = document.head.querySelectorAll<HTMLElement>(sel);
+      els.forEach((el, i) => { if (i > 0) el.remove(); });
+      const el = els[0] ?? document.head.appendChild(make());
+      el.setAttribute(attr, val);
+    };
+    set('meta[name="description"]', () => Object.assign(document.createElement("meta"), { name: "description" }), "content", m.description);
+    set('link[rel="canonical"]', () => Object.assign(document.createElement("link"), { rel: "canonical" }), "href", absolute(paths[lang].car(car.slug)));
+    document.head.querySelectorAll('meta[name="robots"]').forEach((el) => el.remove());
+  }, [car, lang, fleet.categories, preview]);
 
   if (!car) {
     if (!pathSlug) return <div className="min-h-[60vh]" />;

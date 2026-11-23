@@ -8,3 +8,4 @@ src/data/snapshot.generated.ts
 server/vendor/
 server/config.php
 public/_private/config.php
+.phpunit.cache

@@ -16,7 +16,16 @@
   "config": {
     "vendor-dir": "server/vendor",
     "sort-packages": true,
-    "platform": { "php": "8.1.0" }
+    "platform": {
+      "php": "8.1.0"
+    }
   },
-  "autoload-dev": { "psr-4": { "Tests\\": "tests/php/" } }
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/php/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  }
 }

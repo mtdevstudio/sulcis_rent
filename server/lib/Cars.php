@@ -180,6 +180,7 @@ final class Cars
         $in = Validator::check($in, self::schema());
         self::checkCatalogRefs($in);
         $merged = array_merge($old, $in);
+        foreach (['specs', 'rental', 'content'] as $k) $merged[$k] = (array) $merged[$k];
         $slug = isset($in['slug']) && $in['slug'] !== $old['slug'] ? self::uniqueSlug($in['slug'], $id) : $old['slug'];
         if (($merged['status'] ?? 'draft') === 'published') {
             $errs = self::publishErrors($merged);

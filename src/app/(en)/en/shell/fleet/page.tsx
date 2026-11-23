@@ -1,9 +1,10 @@
 import { CarPage } from "@/components/pages/CarPage";
-import { pageMetadata } from "@/lib/metadata";
 
 /**
  * Shell per le auto aggiunte DOPO il build: api/car.php serve questo HTML su /en/fleet/{slug}/
- * iniettando title, meta, Open Graph e JSON-LD dell'auto (e togliendo il noindex qui sotto).
+ * iniettando title, meta, Open Graph e JSON-LD dell'auto.
  */
-export const metadata = pageMetadata({ lang: "en", title: "Sulcis Rent", description: "", path: "/en/fleet/", noindex: true });
+// Nessun noindex/canonical qui: finirebbero nel payload React e verrebbero reinseriti dopo l'idratazione.
+// La shell diretta (/shell/...) è esclusa con X-Robots-Tag (.htaccess) e robots.txt; car.php inietta i meta dell'auto.
+export const metadata = { title: "Sulcis Rent – Autonoleggio" };
 export default function Page() { return <CarPage lang="en" />; }
