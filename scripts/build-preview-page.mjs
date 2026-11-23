@@ -1,9 +1,11 @@
 // Genera una PREVIEW NAVIGABILE del sito pubblico in un unico file HTML autosufficiente
 // (CSS, font e immagini inline, link interni a hash, JS vanilla per animazioni e modale).
 // Serve solo per mostrare il sito senza hosting: il sito vero è l'export Next + API PHP.
-// Uso: npm run build && node scripts/build-preview-page.mjs  → docs/preview/sito-navigabile.html
+// Uso: npm run build && npx tsx scripts/build-preview-page.mjs  → docs/preview/sito-navigabile.html
 import fs from "node:fs";
 import path from "node:path";
+import { islandPlaces, places } from "../src/data/places.ts";
+import { sardiniaMap } from "../src/data/sardinia-map.ts";
 
 const OUT = "out";
 const read = (p) => fs.readFileSync(path.join(OUT, p), "utf8");
@@ -65,7 +67,13 @@ const extraCss = `
 
 const headScript = `(function(){var d=document.documentElement;var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(!rm)d.classList.add('motion');try{if(!rm&&!sessionStorage.getItem('sr_pl'))d.setAttribute('data-pl','on')}catch(e){}})();`;
 const heroImg = dataImg("/images/placeholder/places/hero-costa-1920.webp");
-const js = fs.readFileSync("scripts/preview-runtime.js", "utf8").replace("__HERO_IMG__", heroImg);
+// dati della sezione «Sardegna» (tabellone): mete, punti mappa, foto
+const dests = [...islandPlaces, ...places.map((p) => ({ ...p, zone: "sulcis" }))].map((p) => ({
+  slug: p.slug, name: p.name, area: p.area.it, line: p.line.it, zone: p.zone, night: !!p.night,
+  img: dataImg(`/images/placeholder/places/${p.slug}-1280.webp`),
+}));
+const sardData = { dests, points: sardiniaMap.points };
+const js = fs.readFileSync("scripts/preview-runtime.js", "utf8").replace("__HERO_IMG__", heroImg).replace("__SARD_DATA__", JSON.stringify(sardData));
 
 const page = `<!DOCTYPE html>
 ${htmlTag}

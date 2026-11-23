@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { places } from "@/data/places";
+import { islandPlaces, places } from "@/data/places";
 import { loadGsap, prefersReducedMotion } from "@/lib/motion";
 import { Nodo } from "@/components/ui/icons";
 
@@ -30,9 +30,10 @@ export function Marquee() {
     })();
     return () => kill();
   }, []);
-  const row = places.map((p) => p.name);
+  // alternanza Sulcis / resto dell'isola
+  const row = places.slice(0, 6).flatMap((p, i) => [p.name, islandPlaces[i * 2]?.name, islandPlaces[i * 2 + 1]?.name]).filter(Boolean) as string[];
   return (
-    <div role="marquee" className="overflow-hidden border-y-filo border-trachite bg-blue py-5 text-sand motion-reduce:overflow-x-auto" aria-label="Sant'Antioco, Calasetta, Carloforte, Porto Pino, Masua, Porto Flavia, Nebida, Iglesias, Carbonia, Tratalias, Punta Trettu, Maladroxia">
+    <div role="marquee" className="overflow-hidden border-y-filo border-trachite bg-blue py-5 text-sand motion-reduce:overflow-x-auto" aria-label={row.join(", ")}>
       <div ref={track} className="marquee-track" aria-hidden>
         {[0, 1].map((k) => (
           <div key={k} className="flex shrink-0 items-center">

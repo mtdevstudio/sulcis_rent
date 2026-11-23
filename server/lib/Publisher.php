@@ -34,6 +34,7 @@ final class Publisher
             'whatsappMessage' => $c['whatsappMessage'] ?? null, 'address' => $c['address'] ?? null, 'hours' => $c['hours'] ?? null,
             'instagram' => $c['instagram'] ?? null, 'facebook' => $c['facebook'] ?? null, 'googleReviewsUrl' => $c['googleReviewsUrl'] ?? null,
             'vat' => $c['vat'] ?? null, 'email' => $c['email'] ?? null,
+            'deliveryAreas' => !empty($c['deliveryAreas']) ? array_values($c['deliveryAreas']) : null,
         ], static fn($x) => $x !== null && $x !== '' && $x !== []);
 
         $flags = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR;

@@ -142,10 +142,10 @@ Le modifiche sono online subito. Guida per lo staff: [`docs/guida-admin.md`](doc
 |---|---|
 | Telefono, WhatsApp, indirizzo, orari, social (fallback) | `src/data/site.ts`: unica fonte di verità nel codice |
 | Flotta di partenza (segnaposto) | `src/data/fleet.ts` |
-| Località del Territorio (testi) | `src/data/places.ts` |
+| Mete della sezione «Sardegna» (Sulcis + resto dell'isola, testi) | `src/data/places.ts` (`places`, `islandPlaces`) |
 | Categorie / dotazioni / tag iniziali | `src/data/catalog.ts` → `npx tsx scripts/gen-seed-sql.ts` rigenera `database/migrations/002_seed.sql` |
 | Testi dell'interfaccia IT/EN | `src/lib/i18n.ts` |
-| Foto delle località | sostituisci i file in `public/images/placeholder/places/` mantenendo i nomi: `{slug}-640.webp`, `-1280.webp`, `-1920.webp` |
+| Foto delle mete | sostituisci i file in `public/images/placeholder/places/` mantenendo i nomi: `{slug}-640.webp`, `-1280.webp`, `-1920.webp` |
 | Foto hero | `public/images/placeholder/places/hero-costa-1920.webp` |
 | Immagine Open Graph | `public/og.png` (1200×630) |
 | **Logo** | metti il file in `public/brand/` (es. `logo.svg`), poi in `src/data/site.ts` aggiorna `logo.src`, `width`, `height` e imposta `available: true`. Il componente `<Logo />` si aggiorna ovunque |
@@ -415,6 +415,7 @@ Dati mancanti, tutti segnati nel codice con `// TODO` (cerca `TODO` in `src/`):
 | `src/lib/i18n.ts` | revisione madrelingua dei testi inglesi |
 | `src/components/pages/LegalPage.tsx` | testi di privacy e cookie validati da un consulente |
 | `src/data/places.ts` | distanze e tempi di percorrenza: non inseriti, servono dati del cliente |
+| admin → Impostazioni → «Zone di consegna» | **confermare se consegnate fuori sede** (es. aeroporti di Cagliari, Olbia, Alghero). Finché il campo è vuoto il sito invita solo a scrivere, senza promettere consegne |
 | `server/config.php` → `notify` | credenziali Telegram o SMTP per le notifiche di sicurezza |
 | `src/lib/track.ts` | GA4 / Meta Pixel: l'helper `trackContact` è pronto, gli script non sono caricati |
 

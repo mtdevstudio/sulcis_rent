@@ -35,7 +35,7 @@ export function Header({ altHref }: { altHref?: string }) {
 
   const links = [
     { href: "#flotta", label: d.nav.fleet },
-    { href: "#territorio", label: d.nav.territory },
+    { href: "#sardegna", label: d.nav.territory },
     { href: "#come-funziona", label: d.nav.how },
     { href: "#faq", label: d.nav.faq },
     { href: "#contatti", label: d.nav.contacts },

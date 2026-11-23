@@ -1,5 +1,5 @@
 /* Runtime della PREVIEW navigabile (vanilla JS). Replica i comportamenti del sito Next:
-   preloader, hero a rombi, reveal, marquee, territorio orizzontale,
+   preloader, hero a rombi, reveal, marquee, tabellone Sardegna,
    header, contatti fissi, filtri flotta, modale «Prenota con noi», schede auto via #hash. */
 (function () {
   "use strict";
@@ -90,24 +90,74 @@
   }
   if (!RM && mq) requestAnimationFrame(mqTick);
 
-  /* ---------- territorio orizzontale (desktop) ---------- */
-  var terr = $("#territorio .relative.mt-16"), track = terr && terr.firstElementChild, horiz = false;
-  function setupTerritory() {
-    if (!terr || !track) return;
-    horiz = W.innerWidth >= 1024 && !RM;
-    var arts = $$("article", track);
-    if (horiz) {
-      track.style.cssText = "position:sticky;top:0;height:100vh;display:flex;flex-direction:row;width:max-content;will-change:transform";
-      arts.forEach(function (a) { a.style.width = W.innerWidth >= 1280 ? "78vw" : "88vw"; a.style.minHeight = "0"; a.style.height = "100vh"; var h3 = a.querySelector("h3"); if (h3) h3.style.fontSize = "min(9.6vw,12rem)"; });
-      terr.style.height = (track.scrollWidth - W.innerWidth + W.innerHeight) + "px";
-    } else { track.style.cssText = ""; terr.style.height = ""; arts.forEach(function (a) { a.style.cssText = ""; var h3 = a.querySelector("h3"); if (h3) h3.style.fontSize = ""; }); }
-    renderTerritory();
-  }
-  function renderTerritory() {
-    if (!horiz || terr.offsetParent === null) return;
-    var r = terr.getBoundingClientRect(), total = terr.offsetHeight - innerHeight;
-    var p = Math.min(1, Math.max(0, -r.top / total));
-    track.style.transform = "translate3d(" + (-p * (track.scrollWidth - innerWidth)) + "px,0,0)";
+
+  /* ---------- sezione «Sardegna»: tabellone delle mete ---------- */
+  var SARD = __SARD_DATA__;
+  function setupSardinia() {
+    var sec = $("#sardegna"); if (!sec) return;
+    var list = sec.querySelector("ol"), count = sec.querySelector("p.mb-3 span:last-child");
+    var mapSvg = sec.querySelector('svg[role="img"]'), fig = sec.querySelector("figure");
+    var tabs = $$('[role="group"] button', sec);
+    var zone = "tutte", active = null;
+    var base = SARD.points["san-giovanni-suergiu"];
+    var ENT = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
+    var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return ENT[c]; }); };
+    function items() { return SARD.dests.filter(function (d) { return zone === "tutte" ? d.zone !== "sulcis" : d.zone === zone; }); }
+    function renderMap(its) {
+      if (!mapSvg) return;
+      var pins = its.map(function (d) {
+        var p = SARD.points[d.slug]; if (!p) return "";
+        var on = active && d.slug === active.slug, r = on ? 9 : 5;
+        return "<g>" + (on ? '<line x1="' + base[0] + '" y1="' + base[1] + '" x2="' + p[0] + '" y2="' + p[1] + '" stroke="rgb(var(--rent-magenta))" stroke-width="1.6" stroke-dasharray="4 4"/>' : "") +
+          '<rect x="' + (p[0] - r) + '" y="' + (p[1] - r) + '" width="' + r * 2 + '" height="' + r * 2 + '" transform="rotate(45 ' + p[0] + " " + p[1] + ')" fill="' + (on ? "rgb(var(--rent-magenta))" : "rgb(var(--sand))") + '"/></g>';
+      }).join("");
+      mapSvg.innerHTML = '<use href="#sr-sard-outline" fill="none" stroke="rgb(var(--sand))" stroke-width="2.2" stroke-linejoin="round"/>' +
+        '<use href="#sr-sard-sulcis" fill="rgb(var(--rent-magenta))" stroke="rgb(var(--rent-magenta))" stroke-width="0.8"/>' + pins +
+        '<rect x="' + (base[0] - 4) + '" y="' + (base[1] - 4) + '" width="8" height="8" transform="rotate(45 ' + base[0] + " " + base[1] + ')" fill="rgb(var(--sand))"/>';
+    }
+    function renderFig() {
+      if (!fig || !active) return;
+      var im = fig.querySelector("img"), tag = fig.querySelector("span.eyebrow"), cap = fig.querySelectorAll("figcaption span");
+      if (im) { im.removeAttribute("srcset"); im.src = active.img; im.alt = active.name + " – foto segnaposto"; }
+      if (tag) { tag.textContent = active.area; tag.className = "eyebrow absolute left-2 top-2 px-2 py-1 " + (active.night ? "bg-ochre text-trachite" : "bg-sand text-trachite"); }
+      if (cap[0]) { cap[0].textContent = active.name; cap[0].className = "display block text-d-s" + (active.night ? " text-ochre" : ""); }
+      if (cap[1]) cap[1].textContent = active.line;
+    }
+    function renderList() {
+      var its = items(); if (!active || its.indexOf(active) < 0) active = its[0];
+      list.innerHTML = its.map(function (d, i) {
+        var on = d === active, acc = d.night ? "text-ochre" : "text-magenta-light";
+        return '<li><button type="button" data-slug="' + d.slug + '" aria-pressed="' + on + '" class="group grid w-full grid-cols-[2.5rem_1fr_auto] items-baseline gap-3 py-4 text-left md:grid-cols-[3.5rem_1fr_auto] md:py-5">' +
+          '<span class="eyebrow ' + (on ? acc : "text-sand/50") + '">' + ("0" + (i + 1)).slice(-2) + "</span>" +
+          '<span class="display text-[clamp(2rem,5.4vw,4.75rem)] leading-[0.88] transition-colors ' + (on ? (d.night ? "text-ochre" : "text-sand") : "text-sand/45 group-hover:text-sand/80") + '">' + esc(d.name) + "</span>" +
+          '<span class="eyebrow hidden text-right sm:block ' + (on ? "text-sand" : "text-sand/50") + '">' + esc(d.area) + "</span></button>" +
+          '<p class="pb-4 pl-[2.5rem] pr-2 text-sand/80 lg:hidden' + (on ? "" : " hidden") + '">' + esc(d.line) + "</p></li>";
+      }).join("");
+      if (count) count.textContent = its.length + " mete";
+      renderMap(its); renderFig();
+    }
+    function pick(slug) {
+      var d = SARD.dests.filter(function (x) { return x.slug === slug; })[0];
+      if (!d || d === active) return;
+      var hadFocus = doc.activeElement && doc.activeElement.closest && doc.activeElement.closest("#sardegna ol");
+      active = d; renderList();
+      if (hadFocus) { var b = list.querySelector('[data-slug="' + slug + '"]'); if (b) b.focus(); }
+    }
+    list.addEventListener("click", function (e) { var b = e.target.closest("button[data-slug]"); if (b) pick(b.dataset.slug); });
+    if (FINE) list.addEventListener("mouseover", function (e) { var b = e.target.closest("button[data-slug]"); if (b) pick(b.dataset.slug); });
+    var zones = ["tutte", "sud", "ovest", "nord", "est", "sulcis"];
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () {
+        zone = zones[i]; active = null;
+        tabs.forEach(function (o, j) {
+          var on = j === i; o.setAttribute("aria-pressed", on);
+          ["border-magenta", "bg-magenta", "text-white"].forEach(function (k) { o.classList.toggle(k, on); });
+          ["border-sand/30", "text-sand", "hover:border-sand"].forEach(function (k) { o.classList.toggle(k, !on); });
+        });
+        renderList();
+      });
+    });
+    renderList();
   }
 
   /* ---------- header + contatti fissi ---------- */
@@ -126,7 +176,7 @@
     if (dockFab) { ["pointer-events-none", "translate-y-4", "opacity-0"].forEach(function (c) { dockFab.classList.toggle(c, !vis); }); dockFab.classList.toggle("opacity-100", vis); }
     if (Math.abs(y - lastSY) > 0) { mqDir = y > lastSY ? 1 : -1; mqBoost = Math.min(6, mqBoost + Math.abs(y - lastSY) / 40); lastSY = y; }
     lastY = y;
-    renderHero(); renderTerritory();
+    renderHero();
   }
   addEventListener("scroll", onScroll, { passive: true });
 
@@ -215,7 +265,7 @@
     var m = $("#menu-mobile");
     if (m) { m.remove(); burger.setAttribute("aria-expanded", "false"); html.style.overflow = ""; return; }
     m = doc.createElement("div"); m.id = "menu-mobile"; m.className = "fixed inset-0 z-[49] flex flex-col bg-sand pt-20";
-    var links = [["#flotta", "Flotta"], ["#territorio", "Territorio"], ["#come-funziona", "Come funziona"], ["#faq", "FAQ"], ["#contatti", "Contatti"]];
+    var links = [["#flotta", "Flotta"], ["#sardegna", "Sardegna"], ["#come-funziona", "Come funziona"], ["#faq", "FAQ"], ["#contatti", "Contatti"]];
     m.innerHTML = '<nav aria-label="Menu mobile" class="wrap flex-1 overflow-auto"><ul class="divide-y divide-sand-300 border-y border-sand-300">' + links.map(function (l, i) {
       return '<li><a href="' + l[0] + '" class="flex items-baseline justify-between py-4"><span class="display text-[clamp(2.5rem,12vw,4rem)] leading-none">' + l[1] + '</span><span class="eyebrow text-magenta-deep">0' + (i + 1) + "</span></a></li>";
     }).join("") + '</ul></nav><div class="wrap pb-8 pt-6"><button type="button" class="eyebrow flex h-16 w-full items-center justify-center gap-3 bg-magenta text-white">Ajò, si parte</button></div>';
@@ -250,10 +300,10 @@
     var titles = { home: "Sulcis Rent – Noleggio auto a San Giovanni Suergiu", privacy: "Privacy · Sulcis Rent", cookie: "Cookie · Sulcis Rent" };
     var h1 = $('[data-view="' + view + '"] h1');
     doc.title = titles[view] || ((h1 ? (h1.innerText || h1.textContent).replace(/\s+/g, " ").trim() : "Auto") + " · Sulcis Rent");
-    setTimeout(function () { setupTerritory(); onScroll(); }, 60);
+    setTimeout(onScroll, 60);
   }
   addEventListener("hashchange", route);
-  addEventListener("resize", function () { buildHero(); setupTerritory(); });
-  buildHero(); route(); setupTerritory(); onScroll();
+  addEventListener("resize", buildHero);
+  buildHero(); setupSardinia(); route(); onScroll();
   if (innerWidth < 768) setTimeout(function () { toast("Preview: foto e auto sono segnaposto"); }, 2200);
 })();

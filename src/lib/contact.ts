@@ -22,5 +22,6 @@ export function useContact() {
     vat: s.vat || site.vat,
     email: s.email || site.email,
     hours: (lang: Lang) => tr(s.hours, lang),
+    deliveryAreas: (lang: Lang) => (s.deliveryAreas ?? []).map((a) => tr(a, lang)).filter(Boolean),
   };
 }

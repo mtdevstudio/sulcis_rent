@@ -66,6 +66,8 @@ final class Catalog
             'googleReviewsUrl' => ['type' => 'url', 'max' => 500],
             'vat' => ['type' => 'string', 'max' => 20, 'pattern' => '/^[A-Z0-9 ]+$/i'],
             'email' => ['type' => 'string', 'max' => 120, 'pattern' => '/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i'],
+            // zone di consegna confermate (es. «Aeroporto di Olbia»): se vuoto il sito non promette consegne
+            'deliveryAreas' => ['type' => 'array', 'items' => ['type' => 'l10n', 'max' => 60], 'maxItems' => 20],
         ];
     }
 }

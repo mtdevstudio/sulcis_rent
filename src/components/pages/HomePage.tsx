@@ -6,7 +6,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { Marquee } from "@/components/sections/Marquee";
 import { Fleet } from "@/components/sections/Fleet";
-import { Territory } from "@/components/sections/Territory";
+import { Sardinia } from "@/components/sections/Sardinia";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Why } from "@/components/sections/Why";
 import { Reviews } from "@/components/sections/Reviews";
@@ -21,7 +21,7 @@ export function HomePage({ lang }: { lang: Lang }) {
       <Manifesto lang={lang} />
       <Marquee />
       <Fleet />
-      <Territory />
+      <Sardinia />
       <HowItWorks lang={lang} />
       <Why lang={lang} />
       <Reviews />

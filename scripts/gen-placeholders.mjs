@@ -13,6 +13,10 @@ const places = {
   nebida: [C.blue, C.deep, C.sand], iglesias: [C.sand2, C.ochre, C.tra], carbonia: [C.sand2, "#B9A98F", C.tra],
   tratalias: [C.sand2, C.ochre, C.blue], "punta-trettu": [C.tur, C.blue, C.mag], maladroxia: [C.blue, C.tur, C.sand],
   "hero-costa": [C.deep, C.tur, C.sand],
+  cagliari: [C.sand2, C.ochre, C.blue], chia: [C.tur, C.blue, C.sand], villasimius: [C.tur, C.deep, C.sand],
+  "costa-verde": [C.blue, C.ochre, C.sand2], sinis: [C.blue, C.tur, C.sand2], bosa: [C.mag, C.ochre, C.blue],
+  alghero: [C.deep, C.blue, C.ochre], stintino: [C.tur, C.tur, C.sand], olbia: [C.blue, C.deep, C.sand],
+  "cala-gonone": [C.deep, C.tur, C.sand2], orgosolo: [C.sand2, "#9C8F7A", C.tra], "costa-rei": [C.tur, C.blue, C.sand],
 };
 const label = (t, x, y, col) => `<text x="${x}" y="${y}" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="3" fill="${col}" opacity=".75">${t}</text>`;
 

@@ -35,7 +35,7 @@ export function localBusinessJsonLd(lang: Lang) {
     openingHours: site.hours.schema,
     openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "00:00", closes: "23:59" }],
     sameAs: [site.social.instagram],
-    areaServed: [{ "@type": "Place", name: "Sulcis Iglesiente" }, { "@type": "AdministrativeArea", name: "Sud Sardegna" }],
+    areaServed: [{ "@type": "Place", name: "Sulcis Iglesiente" }, { "@type": "AdministrativeArea", name: "Sardegna" }],
     aggregateRating: { "@type": "AggregateRating", ratingValue: site.google.rating, reviewCount: site.google.reviewCount, bestRating: 5 },
   };
 }

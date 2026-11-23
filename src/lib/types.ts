@@ -107,4 +107,6 @@ export type SettingsData = {
   googleReviewsUrl?: string;
   vat?: string;
   email?: string;
+  /** Zone di consegna confermate dal titolare (admin → Impostazioni). Vuoto = nessuna promessa di consegna. */
+  deliveryAreas?: L10n[];
 };

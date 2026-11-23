@@ -45,6 +45,11 @@ const points = {
   "porto-pino": pt(8.5950, 38.9650), masua: pt(8.4170, 39.3330), "porto-flavia": pt(8.3990, 39.3360),
   nebida: pt(8.4290, 39.3050), iglesias: pt(8.5370, 39.3110), carbonia: pt(8.5220, 39.1670),
   tratalias: pt(8.5780, 39.1030), "punta-trettu": pt(8.5080, 39.0560), maladroxia: pt(8.4380, 39.0110),
+  // resto della Sardegna (sezione «Tutta l'isola»)
+  cagliari: pt(9.1100, 39.2230), chia: pt(8.8850, 38.8950), villasimius: pt(9.5200, 39.1420),
+  "costa-verde": pt(8.4500, 39.5600), sinis: pt(8.4400, 39.9100), bosa: pt(8.4980, 40.2980),
+  alghero: pt(8.3190, 40.5590), stintino: pt(8.2250, 40.9400), olbia: pt(9.5000, 40.9230),
+  "costa-smeralda": pt(9.5450, 41.1000), "cala-gonone": pt(9.6290, 40.2810), orgosolo: pt(9.3540, 40.2050), "costa-rei": pt(9.5700, 39.2550),
 };
 const out = `// GENERATO da scripts/build-map.mjs — non modificare a mano.
 // Confini: ISTAT via openpolis/geojson-italy (CC BY 4.0). Proiezione equirettangolare semplificata.

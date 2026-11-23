@@ -7,7 +7,7 @@ import { invalidateCatalog } from "../useCatalog";
 import { Btn, Field, Input, L10nInput, PageHeader, Section, Spinner } from "../ui";
 
 type Contact = { phoneDisplay: string; phoneE164: string; whatsappNumber: string; whatsappMessage?: { it?: string; en?: string } | null; address: { street: string; postalCode: string; city: string; province: string; region: string };
-  hours?: { it?: string; en?: string } | null; instagram?: string; facebook?: string; googleReviewsUrl?: string; vat?: string; email?: string };
+  hours?: { it?: string; en?: string } | null; deliveryAreas?: { it?: string; en?: string }[]; instagram?: string; facebook?: string; googleReviewsUrl?: string; vat?: string; email?: string };
 
 function CatalogList({ title, items, onChange }: { title: string; items: CatalogItem[]; onChange: (x: CatalogItem[]) => void }) {
   const slug = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
@@ -48,7 +48,8 @@ export function Settings() {
   if (!c || !cat) return <Spinner />;
   const set = (k: keyof Contact, v: unknown) => setC({ ...c, [k]: v });
   const saveContact = async () => {
-    try { const r = await api<{ contact: Contact }>("PUT", "admin/settings.php", c); setC(r.contact); setErrors({}); toast.success("Contatti aggiornati sul sito"); }
+    const body = { ...c, deliveryAreas: (c.deliveryAreas ?? []).filter((a) => (a.it ?? "").trim()).map((a) => ({ it: a.it!.trim(), ...(a.en?.trim() ? { en: a.en.trim() } : {}) })) };
+    try { const r = await api<{ contact: Contact }>("PUT", "admin/settings.php", body); setC(r.contact); setErrors({}); toast.success("Contatti aggiornati sul sito"); }
     catch (e) { setErrors((e as ApiError).fields); toast.error((e as Error).message); }
   };
   const saveCatalog = async () => {
@@ -74,6 +75,16 @@ export function Settings() {
             ))}
           </div>
           <L10nInput label="Orari" max={120} value={c.hours ?? null} onChange={(v) => set("hours", v)} />
+          <div className="grid gap-4 md:grid-cols-2">
+            <Field label="Zone di consegna confermate (una per riga, italiano)" hint="Es. Aeroporto di Olbia. Lascia vuoto se non consegnate fuori sede: il sito non prometterà consegne." error={errors.deliveryAreas}>
+              {(id) => <textarea id={id} className="block min-h-[7rem] w-full border-filo border-trachite bg-white p-3" value={(c.deliveryAreas ?? []).map((a) => a.it ?? "").join("\n")}
+                onChange={(e) => { const it = e.target.value.split("\n"); set("deliveryAreas", it.map((x, i) => ({ it: x, en: c.deliveryAreas?.[i]?.en ?? "" }))); }} />}
+            </Field>
+            <Field label="Le stesse zone in inglese (una per riga, facoltativo)">
+              {(id) => <textarea id={id} className="block min-h-[7rem] w-full border-filo border-trachite bg-white p-3" value={(c.deliveryAreas ?? []).map((a) => a.en ?? "").join("\n")}
+                onChange={(e) => { const en = e.target.value.split("\n"); set("deliveryAreas", (c.deliveryAreas ?? []).map((a, i) => ({ ...a, en: en[i] ?? "" }))); }} />}
+            </Field>
+          </div>
           <div className="grid gap-4 md:grid-cols-2">
             <Field label="Instagram" error={errors.instagram}>{(id) => <Input id={id} type="url" value={c.instagram ?? ""} onChange={(e) => set("instagram", e.target.value)} />}</Field>
             <Field label="Facebook" error={errors.facebook}>{(id) => <Input id={id} type="url" value={c.facebook ?? ""} onChange={(e) => set("facebook", e.target.value)} />}</Field>
