@@ -11,14 +11,15 @@ const OUT = "out";
 const read = (p) => fs.readFileSync(path.join(OUT, p), "utf8");
 const b64 = (file, mime) => `data:${mime};base64,${fs.readFileSync(file).toString("base64")}`;
 
-// ---------- immagini → data URI (variante 1280 per contenere il peso) ----------
+// ---------- immagini → data URI (varianti piccole per contenere il peso) ----------
 const imgCache = new Map();
 function dataImg(url) {
   if (imgCache.has(url)) return imgCache.get(url);
   let rel = url.replace(/^\//, "");
   const m = rel.match(/^(.*)-(\d+)\.webp$/);
   if (m) {
-    const cand = `${m[1]}-1280.webp`;
+    // preview leggera: 640 px ovunque, 1280 solo per l'hero
+    const cand = `${m[1]}-${/hero-costa/.test(m[1]) ? 1280 : 640}.webp`;
     if (fs.existsSync(path.join("public", cand))) rel = cand;
   }
   const file = path.join("public", rel);
@@ -27,10 +28,20 @@ function dataImg(url) {
   return uri;
 }
 
+// ogni immagine incorporata UNA volta: le <img> puntano a una chiave, il JS assegna il src
+const pool = [];
+const poolIdx = new Map();
+function imgKey(url) {
+  const uri = dataImg(url);
+  if (!poolIdx.has(uri)) { poolIdx.set(uri, pool.length); pool.push(uri); }
+  return poolIdx.get(uri);
+}
+
 function transform(html) {
   return html
     .replace(/<script(?![^>]*application\/ld\+json)[^>]*>[\s\S]*?<\/script>/g, "")
     .replace(/\s(?:srcset|srcSet)="[^"]*"/g, "")
+    .replace(/<img([^>]*?)\ssrc="(\/images\/[^"]+\.webp)"/g, (_, pre, u) => `<img${pre} src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-pv="${imgKey(u)}"`)
     .replace(/(src|href)="(\/images\/[^"]+\.webp)"/g, (_, a, u) => `${a}="${dataImg(u)}"`)
     .replace(/href="\/flotta\/([a-z0-9-]+)\/"/g, 'href="#auto-$1"')
     .replace(/href="\/flotta\/"/g, 'href="#flotta-completa"')
@@ -91,6 +102,7 @@ ${htmlTag}
 </head>
 <body>${body}
 <div class="pv-badge" aria-hidden="true">Preview · foto di esempio</div>
+<script>window.__PV_IMG=${JSON.stringify(pool)};document.querySelectorAll("img[data-pv]").forEach(function(i){i.src=window.__PV_IMG[+i.dataset.pv]});</script>
 <script>${js}</script>
 </body>
 </html>`;

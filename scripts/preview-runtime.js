@@ -41,7 +41,7 @@
     if (!heroSvg) return;
     var r0 = heroSvg.getBoundingClientRect(); var w = Math.round(r0.width), h = Math.round(r0.height);
     var mobile = w < 700, cols = mobile ? 4 : 6, cw = w / cols, rows = Math.max(3, Math.round(h / cw)), ch = h / rows, r = Math.max(cw, ch) * 0.75;
-    var fs = w * (mobile ? 0.3 : 0.27), ty = h * (mobile ? 0.42 : 0.5) + fs * 0.36, m = w * 0.03, cy = ty - fs * 0.36;
+    var fs = w * (mobile ? 0.2 : 0.19), ty = h * (mobile ? 0.42 : 0.5) + fs * 0.36, m = w * 0.03, cy = ty - fs * 0.36;
     var cells = [];
     for (var j = 0; j <= rows * 2; j++) {
       var y = (j / 2) * ch, off = j % 2 ? cw / 2 : 0;
@@ -51,7 +51,7 @@
     var clip = static_ ? '<rect width="' + w + '" height="' + h + '"/>' : cells.map(function (c) {
       return '<path data-d="' + c.d.toFixed(3) + '" data-cx="' + c.x.toFixed(1) + '" data-cy="' + c.y.toFixed(1) + '" d="M' + c.x + " " + (c.y - r) + "L" + (c.x + r) + " " + c.y + "L" + c.x + " " + (c.y + r) + "L" + (c.x - r) + " " + c.y + 'Z" transform="translate(' + c.x + " " + c.y + ") scale(0) translate(" + -c.x + " " + -c.y + ')"/>';
     }).join("");
-    var t = function (fill) { return '<text x="' + m + '" y="' + ty + '" textLength="' + (w - m * 2) + '" lengthAdjust="spacingAndGlyphs" font-size="' + fs + '" class="display" style="font-variation-settings:&quot;wdth&quot; 72, &quot;wght&quot; 900" fill="' + fill + '">SULCIS</text>'; };
+    var t = function (fill) { return '<text x="' + m + '" y="' + ty + '" textLength="' + (w - m * 2) + '" lengthAdjust="spacingAndGlyphs" font-size="' + fs + '" class="display" style="font-variation-settings:&quot;wdth&quot; 72, &quot;wght&quot; 900" fill="' + fill + '">SARDEGNA</text>'; };
     heroSvg.setAttribute("viewBox", "0 0 " + w + " " + h);
     heroSvg.innerHTML = '<defs><clipPath id="hero-rombi">' + clip + "</clipPath></defs>" + t("rgb(var(--trachite))") +
       '<g clip-path="url(#hero-rombi)"><image href="__HERO_IMG__" width="' + w + '" height="' + h + '" preserveAspectRatio="xMidYMid slice"/><rect width="' + w + '" height="' + h + '" fill="rgb(var(--trachite))" opacity=".18"/>' + t("rgb(var(--sand))") + "</g>";
