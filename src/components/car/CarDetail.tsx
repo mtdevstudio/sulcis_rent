@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
+import { ui } from "@/lib/i18n-ui";
 import { useEffect, useState } from "react";
-import { badgeLabel, driveLabel, fuelLabel, transmissionLabel } from "@/data/catalog";
+import { badgeLabel, catLabel, driveLabel, fuelLabel, transmissionLabel } from "@/data/catalog";
 import { carName, euro } from "@/lib/car";
 import { useFleet } from "@/lib/data";
 import { paths, t, tr } from "@/lib/i18n";
@@ -23,8 +24,8 @@ function specRows(c: PublicCar, lang: Lang): Row[] {
   const s = c.specs;
   const r: Row[] = [];
   const push = (k: string, v: unknown, fmt?: (x: never) => string) => { if (v !== undefined && v !== null && v !== "") r.push({ k, v: fmt ? fmt(v as never) : String(v) }); };
-  push(d.fuel, s.fuel, (x: string) => fuelLabel[x]?.[lang] ?? x);
-  push(d.transmission, s.transmission, (x: string) => transmissionLabel[x]?.[lang] ?? x);
+  push(d.fuel, s.fuel, (x: string) => tr(fuelLabel[x], lang) ?? x);
+  push(d.transmission, s.transmission, (x: string) => tr(transmissionLabel[x], lang) ?? x);
   push(d.seats, s.seats);
   push(d.doors, s.doors);
   const lug = [s.luggageLarge ? `${s.luggageLarge} ${d.big}` : "", s.luggageSmall ? `${s.luggageSmall} ${d.small}` : "", s.luggageLiters ? `${s.luggageLiters} l` : ""].filter(Boolean).join(" · ");
@@ -32,7 +33,7 @@ function specRows(c: PublicCar, lang: Lang): Row[] {
   push(d.engineCc, s.engineCc, (x: number) => `${x} cc`);
   const pw = [s.powerCv ? `${s.powerCv} CV` : "", s.powerKw ? `${s.powerKw} kW` : ""].filter(Boolean).join(" / ");
   push(d.power, pw || undefined);
-  push(d.drive, s.drive, (x: string) => driveLabel[x]?.[lang] ?? x);
+  push(d.drive, s.drive, (x: string) => tr(driveLabel[x], lang) ?? x);
   push(d.consumption, s.consumption);
   push(d.euro, s.euro);
   push(d.rangeKm, s.rangeKm, (x: number) => `${x} km`);
@@ -150,8 +151,8 @@ export function CarDetail({ slug, car: carProp, preview = false, catalog }: { sl
             <IconArrow className="h-4 w-4 rotate-180" />{d.car.back}
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-2">
-            {cat && <span className="eyebrow bg-trachite px-2 py-1 text-sand">{tr(cat.label, lang)}</span>}
-            {car.badge && <span className="eyebrow bg-magenta px-2 py-1 text-white">{badgeLabel[car.badge]?.[lang]}</span>}
+            {cat && <span className="eyebrow bg-trachite px-2 py-1 text-sand">{catLabel(cat, lang)}</span>}
+            {car.badge && <span className="eyebrow bg-magenta px-2 py-1 text-white">{tr(badgeLabel[car.badge], lang)}</span>}
             {car.version && <span className="eyebrow text-stone">{car.version}</span>}
           </div>
           <h1 className="display mt-4 text-d-xl leading-[0.82]">
@@ -201,7 +202,7 @@ export function CarDetail({ slug, car: carProp, preview = false, catalog }: { sl
         <div className="space-y-12 lg:col-span-7">
           {long && (
             <section aria-labelledby="desc-t">
-              <h2 id="desc-t" className="sr-only">{lang === "it" ? "Descrizione" : "Description"}</h2>
+              <h2 id="desc-t" className="sr-only">{ui[lang].description}</h2>
               <div className="prose-car text-lead" dangerouslySetInnerHTML={{ __html: long }} />
             </section>
           )}
@@ -223,7 +224,7 @@ export function CarDetail({ slug, car: carProp, preview = false, catalog }: { sl
             <section aria-labelledby="perf-t">
               <h2 id="perf-t" className="display text-d-s">{d.car.perfect}</h2>
               <ul className="mt-5 flex flex-wrap gap-2">
-                {tags.map((x) => <li key={x.key} className="border-filo border-trachite px-3 py-2 text-sm font-semibold">{tr(x.label, lang)}</li>)}
+                {tags.map((x) => <li key={x.key} className="border-filo border-trachite px-3 py-2 text-sm font-semibold">{catLabel(x, lang)}</li>)}
               </ul>
             </section>
           )}
@@ -231,7 +232,7 @@ export function CarDetail({ slug, car: carProp, preview = false, catalog }: { sl
             <section aria-labelledby="feat-t">
               <h2 id="feat-t" className="display text-d-s">{d.car.features}</h2>
               <ul className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
-                {feats.map((f) => <li key={f.key} className="flex items-center gap-3 bg-sand-200 px-3 py-2.5 text-sm"><Nodo className="h-2.5 w-2.5 shrink-0 text-blue" />{tr(f.label, lang)}</li>)}
+                {feats.map((f) => <li key={f.key} className="flex items-center gap-3 bg-sand-200 px-3 py-2.5 text-sm"><Nodo className="h-2.5 w-2.5 shrink-0 text-blue" />{catLabel(f, lang)}</li>)}
               </ul>
             </section>
           )}

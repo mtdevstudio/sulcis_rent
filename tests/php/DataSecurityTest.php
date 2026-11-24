@@ -192,7 +192,7 @@ final class DataSecurityTest extends ApiTestCase
         $car = $this->publishedCar($s, ['brand' => 'Dacia', 'model' => 'Sandero Nuova', 'category' => 'utilitaria', 'content' => ['short' => ['it' => 'Comoda e parca nei consumi.', 'en' => 'Comfortable and thrifty.']]]);
         $r = $this->http('GET', "/flotta/{$car['slug']}/", null, ['origin' => null]);
         $this->assertSame(200, $r['status']);
-        $this->assertStringContainsString('<title>Noleggio Dacia Sandero Nuova · Utilitaria a San Giovanni Suergiu</title>', $r['body']);
+        $this->assertStringContainsString('<title>Noleggio Dacia Sandero Nuova · Utilitaria in Sardegna</title>', $r['body']);
         $this->assertStringContainsString('<meta name="description" content="Comoda e parca nei consumi.">', $r['body']);
         $this->assertStringContainsString('"@type":["Product","Car"]', $r['body']);
         $this->assertStringNotContainsString('"offers"', $r['body'], 'niente offers senza prezzo visibile');

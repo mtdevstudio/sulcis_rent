@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { ui } from "@/lib/i18n-ui";
 import { t } from "@/lib/i18n";
 import { Trama } from "@/components/trama/Trama";
 import { useLang } from "./LangContext";
@@ -50,7 +51,7 @@ export function Preloader() {
         </p>
         <p className="eyebrow mt-3 text-stone">{d.greetingTr}</p>
       </div>
-      <span className="eyebrow absolute bottom-20 text-stone">{lang === "it" ? "Tocca per saltare" : "Tap to skip"}</span>
+      <span className="eyebrow absolute bottom-20 text-stone">{ui[lang].tapSkip}</span>
     </div>
   );
 }

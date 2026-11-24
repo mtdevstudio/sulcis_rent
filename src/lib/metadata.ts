@@ -2,17 +2,22 @@ import type { Metadata } from "next";
 import { site } from "@/data/site";
 import type { Lang } from "./types";
 
-export function pageMetadata({ lang, title, description, path, altPath, noindex }: { lang: Lang; title: string; description: string; path: string; altPath?: string; noindex?: boolean }): Metadata {
+export const OG_LOCALE: Record<Lang, string> = { it: "it_IT", en: "en_GB", fr: "fr_FR", es: "es_ES", pt: "pt_PT", pl: "pl_PL" };
+
+/** Metadata di pagina con hreflang per tutte le lingue (x-default = italiano). */
+export function pageMetadata({ lang, title, description, path, alternates, noindex }: {
+  lang: Lang; title: string; description: string; path: string; alternates?: Partial<Record<Lang, string>>; noindex?: boolean;
+}): Metadata {
   return {
     metadataBase: new URL(site.domain),
     title,
     description,
     alternates: {
       canonical: path,
-      languages: altPath ? (lang === "it" ? { it: path, en: altPath, "x-default": path } : { en: path, it: altPath, "x-default": altPath }) : undefined,
+      languages: alternates ? { ...alternates, "x-default": alternates.it ?? path } : undefined,
     },
     openGraph: {
-      type: "website", url: path, title, description, siteName: site.legalName, locale: lang === "it" ? "it_IT" : "en_GB",
+      type: "website", url: path, title, description, siteName: site.legalName, locale: OG_LOCALE[lang],
       images: [{ url: "/og.png", width: 1200, height: 630, alt: site.legalName }],
     },
     twitter: { card: "summary_large_image", title, description, images: ["/og.png"] },

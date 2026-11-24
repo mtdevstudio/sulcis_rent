@@ -4,6 +4,10 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /shell/
 Disallow: /en/shell/
+Disallow: /fr/shell/
+Disallow: /es/shell/
+Disallow: /pt/shell/
+Disallow: /pl/shell/
 Disallow: /design-system/
 
 Sitemap: https://sulcisrent.it/sitemap.xml

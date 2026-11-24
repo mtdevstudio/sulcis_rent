@@ -30,12 +30,12 @@ const HIGHLIGHT_SW = ["sant-antioco", "carloforte", "porto-pino", "masua"];
 const inAll = (x: Dest) => x.zone !== "sudovest" || HIGHLIGHT_SW.includes(x.slug);
 
 const zoneLabel: Record<"tutte" | Zone, L10n> = {
-  tutte: { it: "Tutta l'isola", en: "Whole island" },
-  sud: { it: "Sud", en: "South" },
-  sudovest: { it: "Sud-ovest e isole", en: "South-west & islands" },
-  ovest: { it: "Ovest", en: "West" },
-  nord: { it: "Nord", en: "North" },
-  est: { it: "Est e Barbagia", en: "East & Barbagia" },
+  tutte: { it: "Tutta l'isola", en: "Whole island", fr: "Toute l'île", es: "Toda la isla", pt: "A ilha inteira", pl: "Cała wyspa" },
+  sud: { it: "Sud", en: "South", fr: "Sud", es: "Sur", pt: "Sul", pl: "Południe" },
+  sudovest: { it: "Sud-ovest e isole", en: "South-west & islands", fr: "Sud-ouest et îles", es: "Suroeste e islas", pt: "Sudoeste e ilhas", pl: "Południowy zachód i wyspy" },
+  ovest: { it: "Ovest", en: "West", fr: "Ouest", es: "Oeste", pt: "Oeste", pl: "Zachód" },
+  nord: { it: "Nord", en: "North", fr: "Nord", es: "Norte", pt: "Norte", pl: "Północ" },
+  est: { it: "Est e Barbagia", en: "East & Barbagia", fr: "Est et Barbagia", es: "Este y Barbagia", pt: "Leste e Barbagia", pl: "Wschód i Barbagia" },
 };
 
 const img = (slug: string) => ({
@@ -107,7 +107,7 @@ export function Sardinia() {
                   <div className="relative aspect-[4/3] overflow-hidden border-filo border-sand/20">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img key={active.slug} src={img(active.slug).src} srcSet={img(active.slug).srcSet} sizes="(min-width:1024px) 38vw, 50vw"
-                      alt={`${active.name} – foto segnaposto`} loading="lazy" className="h-full w-full object-cover motion-safe:animate-[fadeIn_.5s_ease-out]" />
+                      alt={active.name} loading="lazy" className="h-full w-full object-cover motion-safe:animate-[fadeIn_.5s_ease-out]" />
                     <span className={`eyebrow absolute left-2 top-2 px-2 py-1 ${night ? "bg-ochre text-trachite" : "bg-sand text-trachite"}`}>{tr(active.area, lang)}</span>
                   </div>
                   <figcaption className="mt-3">

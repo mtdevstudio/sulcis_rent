@@ -1,5 +1,6 @@
 "use client";
 import { site } from "@/data/site";
+import { ui } from "@/lib/i18n-ui";
 import { useContact } from "@/lib/contact";
 import { useReviews } from "@/lib/data";
 import { t } from "@/lib/i18n";
@@ -25,7 +26,7 @@ export function Reviews() {
               <span className="display text-[clamp(5rem,12vw,9rem)] leading-[0.8]" style={{ fontVariationSettings: '"wdth" 62, "wght" 900' }}>{site.google.ratingLabel}</span>
               <span className="pb-2">
                 <span className="flex text-magenta" aria-hidden>{Array.from({ length: 5 }).map((_, i) => <IconStar key={i} className="h-6 w-6" />)}</span>
-                <span className="eyebrow mt-2 block">Google · {site.google.reviewCount} {lang === "it" ? "recensioni" : "reviews"}</span>
+                <span className="eyebrow mt-2 block">Google · {site.google.reviewCount} {ui[lang].reviews}</span>
               </span>
             </p>
             <a href={gUrl} target="_blank" rel="noopener noreferrer" className="eyebrow mt-4 inline-flex h-12 items-center gap-2 border-filo border-trachite px-5 hover:bg-trachite hover:text-sand">
@@ -41,7 +42,7 @@ export function Reviews() {
                 <blockquote className="mt-4 text-lead">“{r.text}”</blockquote>
                 <p className="mt-5 font-semibold">{r.author}</p>
                 <p className="text-xs text-stone">
-                  {new Date(r.date).toLocaleDateString(lang === "it" ? "it-IT" : "en-GB", { month: "long", year: "numeric" })} · {r.url ? <a href={r.url} target="_blank" rel="noopener noreferrer" className="underline">{r.source}</a> : r.source}
+                  {new Date(r.date).toLocaleDateString(ui[lang].locale, { month: "long", year: "numeric" })} · {r.url ? <a href={r.url} target="_blank" rel="noopener noreferrer" className="underline">{r.source}</a> : r.source}
                 </p>
               </li>
             ))}

@@ -1,4 +1,4 @@
-import { paths, t } from "@/lib/i18n";
+import { alternatesOf, t } from "@/lib/i18n";
 import type { Lang } from "@/lib/types";
 import { FleetGrid } from "@/components/car/FleetGrid";
 import { SiteShell } from "@/components/site/SiteShell";
@@ -7,9 +7,8 @@ import { TramaBand } from "@/components/trama/Trama";
 /** Pagina «Flotta»: tutte le auto pubblicate, filtri per categoria. Si aggiorna da /data/fleet.json. */
 export function FleetPage({ lang }: { lang: Lang }) {
   const d = t(lang);
-  const other = lang === "it" ? "en" : "it";
   return (
-    <SiteShell lang={lang} altHref={paths[other].fleet}>
+    <SiteShell lang={lang} alternates={alternatesOf((p) => p.fleet)}>
       <section className="bg-sand pb-12 pt-28 md:pt-36" aria-labelledby="fleet-h1">
         <div className="wrap">
           <p className="eyebrow text-magenta-deep">{d.fleetPage.eyebrow}</p>
@@ -25,7 +24,7 @@ export function FleetPage({ lang }: { lang: Lang }) {
       </section>
       <TramaBand fg="sulcis-blue" cell={8} />
       <section className="bg-sand-200 py-14 md:py-20" aria-label={d.fleetPage.title}>
-        <div className="wrap"><FleetGrid /></div>
+        <div className="wrap"><h2 className="sr-only">{d.fleetPage.title}</h2><FleetGrid eager={3} /></div>
       </section>
     </SiteShell>
   );

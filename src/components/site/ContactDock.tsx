@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { ui } from "@/lib/i18n-ui";
 import { useContact } from "@/lib/contact";
 import { t } from "@/lib/i18n";
 import { trackContact } from "@/lib/track";
@@ -39,17 +40,17 @@ export function ContactDock() {
         aria-hidden={!visible}
       >
         <a href={wa} target="_blank" rel="noopener noreferrer" tabIndex={visible ? 0 : -1} onClick={() => trackContact("whatsapp")}
-          aria-label={`${d.whatsapp} (si apre WhatsApp)`} className="flex h-16 items-center justify-center gap-2 bg-magenta font-bold uppercase tracking-wider text-white">
+          aria-label={`${d.whatsapp}`} className="flex h-16 items-center justify-center gap-2 bg-magenta font-bold uppercase tracking-wider text-white">
           <IconWhatsApp className="h-6 w-6" />WhatsApp
         </a>
         <a href={c.tel} tabIndex={visible ? 0 : -1} onClick={() => trackContact("call")} aria-label={`${d.call}: ${c.phoneDisplay}`}
           className="flex h-16 items-center justify-center gap-2 bg-trachite font-bold uppercase tracking-wider text-sand">
-          <IconPhone className="h-6 w-6" />{lang === "it" ? "Chiama" : "Call"}
+          <IconPhone className="h-6 w-6" />{ui[lang].callShort}
         </a>
       </div>
       <a
         href={wa} target="_blank" rel="noopener noreferrer" onClick={() => trackContact("whatsapp")}
-        aria-label={`${d.whatsapp} (si apre WhatsApp)`}
+        aria-label={`${d.whatsapp}`}
         className={`group fixed bottom-6 right-6 z-sticky hidden h-14 items-center gap-0 overflow-hidden rounded-full bg-magenta text-white shadow-[0_0_0_4px_rgb(var(--sand))] transition-all duration-base ease-trama hover:bg-magenta-deep md:flex ${visible ? "opacity-100" : "pointer-events-none translate-y-4 opacity-0"}`}
       >
         <span className="grid h-14 w-14 place-items-center"><IconWhatsApp className="h-7 w-7" /></span>

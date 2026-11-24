@@ -85,7 +85,9 @@ final class Validator
                 if (!is_string($val) || !in_array($val, $r['values'], true)) return $this->err($p, 'valore non ammesso');
                 return $val;
             case 'l10n':
-                $sub = ['it' => ['type' => 'string', 'max' => $r['max'] ?? 1000, 'html' => $r['html'] ?? false], 'en' => ['type' => 'string', 'max' => $r['max'] ?? 1000, 'html' => $r['html'] ?? false]];
+                // lingue del sito: it (base), en, fr, es, pt, pl
+                $one = ['type' => 'string', 'max' => $r['max'] ?? 1000, 'html' => $r['html'] ?? false];
+                $sub = ['it' => $one, 'en' => $one, 'fr' => $one, 'es' => $one, 'pt' => $one, 'pl' => $one];
                 $o = $this->object($val, $sub, $p . '.');
                 $o = array_filter($o, static fn($x) => $x !== null && $x !== '');
                 return $o ?: null;

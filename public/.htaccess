@@ -23,9 +23,43 @@ ErrorDocument 404 /404.html
   RewriteRule \.(?i:sql|log|md|lock|bak|dist|sh|ini|env|yml|yaml)$ - [F,L]
   RewriteRule (^|/)(composer\.(json|lock)|package(-lock)?\.json|config(\.example)?\.php)$ - [F,L]
 
+  # --- Lingua del visitatore: alla prima visita della home "/" si va alla lingua del browser ---
+  # (solo se non ha già scelto una lingua: cookie sr_lang; mai per i bot dei motori di ricerca;
+  #  solo per la navigazione vera, non per i prefetch di Next.js)
+  RewriteCond %{HTTP_COOKIE} !(^|;\s*)sr_lang= [NC]
+  RewriteCond %{HTTP_USER_AGENT} !(bot|crawl|spider|slurp|lighthouse|facebookexternalhit|whatsapp) [NC]
+  RewriteCond %{HTTP:Sec-Fetch-Dest} ^(document)?$ [NC]
+  RewriteCond %{QUERY_STRING} !_rsc=
+  RewriteCond %{HTTP:Accept-Language} ^en [NC]
+  RewriteRule ^$ /en/ [R=302,L]
+  RewriteCond %{HTTP_COOKIE} !(^|;\s*)sr_lang= [NC]
+  RewriteCond %{HTTP_USER_AGENT} !(bot|crawl|spider|slurp|lighthouse|facebookexternalhit|whatsapp) [NC]
+  RewriteCond %{HTTP:Sec-Fetch-Dest} ^(document)?$ [NC]
+  RewriteCond %{QUERY_STRING} !_rsc=
+  RewriteCond %{HTTP:Accept-Language} ^fr [NC]
+  RewriteRule ^$ /fr/ [R=302,L]
+  RewriteCond %{HTTP_COOKIE} !(^|;\s*)sr_lang= [NC]
+  RewriteCond %{HTTP_USER_AGENT} !(bot|crawl|spider|slurp|lighthouse|facebookexternalhit|whatsapp) [NC]
+  RewriteCond %{HTTP:Sec-Fetch-Dest} ^(document)?$ [NC]
+  RewriteCond %{QUERY_STRING} !_rsc=
+  RewriteCond %{HTTP:Accept-Language} ^es [NC]
+  RewriteRule ^$ /es/ [R=302,L]
+  RewriteCond %{HTTP_COOKIE} !(^|;\s*)sr_lang= [NC]
+  RewriteCond %{HTTP_USER_AGENT} !(bot|crawl|spider|slurp|lighthouse|facebookexternalhit|whatsapp) [NC]
+  RewriteCond %{HTTP:Sec-Fetch-Dest} ^(document)?$ [NC]
+  RewriteCond %{QUERY_STRING} !_rsc=
+  RewriteCond %{HTTP:Accept-Language} ^pt [NC]
+  RewriteRule ^$ /pt/ [R=302,L]
+  RewriteCond %{HTTP_COOKIE} !(^|;\s*)sr_lang= [NC]
+  RewriteCond %{HTTP_USER_AGENT} !(bot|crawl|spider|slurp|lighthouse|facebookexternalhit|whatsapp) [NC]
+  RewriteCond %{HTTP:Sec-Fetch-Dest} ^(document)?$ [NC]
+  RewriteCond %{QUERY_STRING} !_rsc=
+  RewriteCond %{HTTP:Accept-Language} ^pl [NC]
+  RewriteRule ^$ /pl/ [R=302,L]
+
   # --- Scheda auto: meta SEO iniettati da car.php (anche per auto aggiunte dopo il build) ---
   RewriteRule ^flotta/([a-z0-9]+(?:-[a-z0-9]+)*)/?$ car.php?slug=$1&lang=it [L,QSA]
-  RewriteRule ^en/fleet/([a-z0-9]+(?:-[a-z0-9]+)*)/?$ car.php?slug=$1&lang=en [L,QSA]
+  RewriteRule ^(en|fr|es|pt|pl)/fleet/([a-z0-9]+(?:-[a-z0-9]+)*)/?$ car.php?slug=$2&lang=$1 [L,QSA]
 
   # --- Sitemap dinamica ---
   RewriteRule ^sitemap\.xml$ sitemap.php [L]
@@ -52,7 +86,10 @@ ErrorDocument 404 /404.html
   Header always unset X-Powered-By
 
   # --- Area riservata e shell: mai indicizzate ---
-  <If "%{REQUEST_URI} =~ m#^/(admin|api|shell|en/shell|design-system)(/|$)#">
+  <If "%{REQUEST_URI} == '/'">
+    Header append Vary "Accept-Language, Cookie"
+  </If>
+  <If "%{REQUEST_URI} =~ m#^/(admin|api|shell|(en|fr|es|pt|pl)/shell|design-system|crediti-foto)(/|$)#">
     Header always set X-Robots-Tag "noindex, nofollow"
     Header always set Cache-Control "no-store"
   </If>

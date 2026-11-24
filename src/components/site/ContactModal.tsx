@@ -106,7 +106,7 @@ function Dialog({ carSlug, carOverride, onClose }: { carSlug?: string; carOverri
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackContact("whatsapp", car?.slug)}
-              aria-label={`${d.whatsapp}${carName ? ` – ${carName}` : ""} (si apre WhatsApp)`}
+              aria-label={`${d.whatsapp}${carName ? ` – ${carName}` : ""}`}
               className="group relative flex h-16 items-center justify-center gap-3 overflow-hidden bg-magenta px-6 font-bold uppercase tracking-[0.08em] text-white transition-colors before:absolute before:inset-0 before:-z-0 before:origin-left before:scale-x-0 before:bg-magenta-deep before:transition-transform before:duration-base before:ease-trama hover:before:scale-x-100 md:h-[4.5rem]"
             >
               <IconWhatsApp className="relative h-6 w-6" /><span className="relative">WhatsApp</span>

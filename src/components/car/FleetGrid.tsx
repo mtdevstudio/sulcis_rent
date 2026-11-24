@@ -1,7 +1,9 @@
 "use client";
 import { useMemo, useState } from "react";
+import { ui } from "@/lib/i18n-ui";
 import { useFleet } from "@/lib/data";
-import { t, tr } from "@/lib/i18n";
+import { t } from "@/lib/i18n";
+import { catLabel } from "@/data/catalog";
 import { CarCard } from "@/components/car/CarCard";
 import { useContactModal } from "@/components/site/ContactModal";
 import { useLang } from "@/components/site/LangContext";
@@ -12,7 +14,7 @@ import { Chip } from "@/components/ui/Chip";
  * Griglia della flotta con filtri per categoria (solo categorie con almeno un'auto pubblicata).
  * `limit`: in home mostra prima le auto «in evidenza», fino a N; la pagina /flotta/ le mostra tutte.
  */
-export function FleetGrid({ limit, filters = true }: { limit?: number; filters?: boolean }) {
+export function FleetGrid({ limit, filters = true, eager = 0 }: { limit?: number; filters?: boolean; eager?: number }) {
   const lang = useLang();
   const d = t(lang);
   const fleet = useFleet();
@@ -29,16 +31,16 @@ export function FleetGrid({ limit, filters = true }: { limit?: number; filters?:
   return (
     <>
       {filters && cats.length > 1 && (
-        <div className="flex flex-wrap gap-2" role="group" aria-label={lang === "it" ? "Filtra per categoria" : "Filter by category"}>
+        <div className="flex flex-wrap gap-2" role="group" aria-label={ui[lang].filterCat}>
           <Chip active={cat === "all"} onClick={() => setCat("all")} count={cars.length}>{d.all}</Chip>
           {cats.map((c) => (
-            <Chip key={c.key} active={cat === c.key} onClick={() => setCat(c.key)} count={cars.filter((x) => x.category === c.key).length}>{tr(c.label, lang)}</Chip>
+            <Chip key={c.key} active={cat === c.key} onClick={() => setCat(c.key)} count={cars.filter((x) => x.category === c.key).length}>{catLabel(c, lang)}</Chip>
           ))}
         </div>
       )}
       {shown.length ? (
         <ul className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3" aria-live="polite">
-          {shown.map((car, i) => <li key={car.slug} className="flex"><div className="w-full"><CarCard car={car} categories={fleet.categories} index={i} /></div></li>)}
+          {shown.map((car, i) => <li key={car.slug} className="flex"><div className="w-full"><CarCard car={car} categories={fleet.categories} index={i} priority={i < eager} /></div></li>)}
         </ul>
       ) : (
         <div className="mt-10 flex flex-col items-start gap-4 border-filo border-trachite bg-sand p-8">

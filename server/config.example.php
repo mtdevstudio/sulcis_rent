@@ -44,6 +44,12 @@ return [
 
     // --- Notifiche (blocco globale dei login, login da nuovo dispositivo). Compila uno dei due. ---
     'notify' => [
+        // Email via Resend (consigliato): crea la chiave su resend.com → API Keys (permesso «Sending access»),
+        // verifica il dominio sulcisrent.it (record DNS da aggiungere in Plesk → DNS) e usa un mittente su quel dominio.
+        'resend_api_key' => '',            // re_xxx — SOLO qui, mai nel repository
+        'mail_from' => 'Sulcis Rent <avvisi@sulcisrent.it>', // // TODO cliente: indirizzo mittente
+        'mail_to' => '',                   // destinatari separati da virgola, es. titolare@...
+        // Alternative (usate solo se resend_api_key è vuota): SMTP dell'hosting o Telegram
         'telegram_bot_token' => '',
         'telegram_chat_id' => '',
         // SMTP dell'hosting (usa PHPMailer se presente in server/vendor; altrimenti mail())
@@ -52,7 +58,5 @@ return [
         'smtp_user' => '',
         'smtp_pass' => '',
         'smtp_secure' => 'tls',
-        'mail_from' => '',
-        'mail_to' => '',
     ],
 ];

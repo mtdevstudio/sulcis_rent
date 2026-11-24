@@ -1,6 +1,8 @@
 import { site } from "@/data/site";
 import { carName, priceFrom } from "./car";
 import { paths, tr } from "./i18n";
+import { ui } from "./i18n-ui";
+import { catLabel } from "@/data/catalog";
 import type { CatalogItem, Lang, PublicCar } from "./types";
 
 /**
@@ -10,12 +12,11 @@ import type { CatalogItem, Lang, PublicCar } from "./types";
 export const absolute = (p: string) => `${site.domain}${p}`;
 
 export function carMeta(car: PublicCar, lang: Lang, cats: CatalogItem[]) {
-  const cat = tr(cats.find((c) => c.key === car.category)?.label, lang);
+  const cat = catLabel(cats.find((c) => c.key === car.category), lang);
   const name = carName(car);
-  const title = tr(car.seo?.title, lang) || (lang === "it" ? `Noleggio ${name}${cat ? ` · ${cat}` : ""} a San Giovanni Suergiu` : `Rent a ${name}${cat ? ` · ${cat}` : ""} in South Sardinia`);
+  const title = tr(car.seo?.title, lang) || ui[lang].seoTitle(name, cat);
   const description =
-    tr(car.seo?.description, lang) || tr(car.content.short, lang) ||
-    (lang === "it" ? `${name} a noleggio nel Sulcis Iglesiente. Scrivici su WhatsApp per disponibilità e prezzo: siamo aperti h24.` : `${name} for rent in Sulcis Iglesiente, South Sardinia. Message us on WhatsApp for availability and price: open 24/7.`);
+    tr(car.seo?.description, lang) || tr(car.content.short, lang) || ui[lang].seoDesc(name);
   return { title, description: description.slice(0, 160) };
 }
 
@@ -52,7 +53,7 @@ export function carJsonLd(car: PublicCar, lang: Lang, cats: CatalogItem[]) {
     description,
     url: absolute(paths[lang].car(car.slug)),
     image: car.images.map((i) => absolute(`${i.base}-${Math.max(...i.widths)}.webp`)),
-    category: tr(cats.find((c) => c.key === car.category)?.label, lang) || car.category,
+    category: catLabel(cats.find((c) => c.key === car.category), lang) || car.category,
   };
   if (car.specs.seats) json.seatingCapacity = car.specs.seats;
   if (car.specs.doors) json.numberOfDoors = car.specs.doors;

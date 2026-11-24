@@ -4,25 +4,40 @@ declare(strict_types=1);
 /** Stesse regole di src/lib/seo.ts, per le pagine auto servite da car.php. */
 final class Seo
 {
+    public const LANGS = ['it', 'en', 'fr', 'es', 'pt', 'pl'];
+    public const OG_LOCALE = ['it' => 'it_IT', 'en' => 'en_GB', 'fr' => 'fr_FR', 'es' => 'es_ES', 'pt' => 'pt_PT', 'pl' => 'pl_PL'];
+
+    /** Testo localizzato: lingua → inglese → italiano (come tr() in src/lib/i18n.ts). */
     public static function tr($v, string $lang): string
     {
         if (!is_array($v)) return '';
-        return (string) ($lang === 'en' && !empty($v['en']) ? $v['en'] : ($v['it'] ?? ''));
+        return (string) (($v[$lang] ?? '') ?: ($lang !== 'it' ? ($v['en'] ?? '') : '') ?: ($v['it'] ?? ''));
     }
 
-    public static function carPath(string $slug, string $lang): string { return $lang === 'en' ? "/en/fleet/$slug/" : "/flotta/$slug/"; }
+    public static function carPath(string $slug, string $lang): string { return $lang === 'it' ? "/flotta/$slug/" : "/$lang/fleet/$slug/"; }
+
+    /** Stesse frasi di ui[lang].seoTitle / seoDesc in src/lib/i18n-ui.ts. */
+    private static function defaults(string $lang, string $name, string $cat): array
+    {
+        $c = $cat !== '' ? " · $cat" : '';
+        return match ($lang) {
+            'en' => ["Rent a $name$c in Sardinia", "$name for rent in Sardinia. Message us on WhatsApp for availability and price: open 24/7."],
+            'fr' => ["Location $name$c en Sardaigne", "$name à louer en Sardaigne. Écris-nous sur WhatsApp pour la disponibilité et le prix : ouvert 24 h/24."],
+            'es' => ["Alquiler $name$c en Cerdeña", "$name de alquiler en Cerdeña. Escríbenos por WhatsApp para disponibilidad y precio: abiertos 24 h."],
+            'pt' => ["Aluguer $name$c na Sardenha", "$name para alugar na Sardenha. Escreve-nos no WhatsApp para disponibilidade e preço: abertos 24h."],
+            'pl' => ["Wynajem $name$c na Sardynii", "$name do wynajęcia na Sardynii. Napisz do nas na WhatsApp w sprawie dostępności i ceny: czynne 24/7."],
+            default => ["Noleggio $name$c in Sardegna", "$name a noleggio in Sardegna. Scrivici su WhatsApp per disponibilità e prezzo: siamo aperti h24."],
+        };
+    }
 
     public static function meta(array $car, string $lang, array $cats): array
     {
         $cat = '';
         foreach ($cats as $c) if (($c['key'] ?? '') === ($car['category'] ?? '')) $cat = self::tr($c['label'] ?? null, $lang);
         $name = trim($car['brand'] . ' ' . $car['model']);
-        $title = self::tr($car['seo']['title'] ?? null, $lang) ?: ($lang === 'it'
-            ? "Noleggio $name" . ($cat ? " · $cat" : '') . ' a San Giovanni Suergiu'
-            : "Rent a $name" . ($cat ? " · $cat" : '') . ' in South Sardinia');
-        $desc = self::tr($car['seo']['description'] ?? null, $lang) ?: self::tr($car['content']['short'] ?? null, $lang) ?: ($lang === 'it'
-            ? "$name a noleggio nel Sulcis Iglesiente. Scrivici su WhatsApp per disponibilità e prezzo: siamo aperti h24."
-            : "$name for rent in Sulcis Iglesiente, South Sardinia. Message us on WhatsApp for availability and price: open 24/7.");
+        [$dt, $dd] = self::defaults($lang, $name, $cat);
+        $title = self::tr($car['seo']['title'] ?? null, $lang) ?: $dt;
+        $desc = self::tr($car['seo']['description'] ?? null, $lang) ?: self::tr($car['content']['short'] ?? null, $lang) ?: $dd;
         return ['title' => $title, 'description' => mb_substr($desc, 0, 160)];
     }
 

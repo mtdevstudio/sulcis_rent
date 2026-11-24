@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { ui } from "@/lib/i18n-ui";
 import { t } from "@/lib/i18n";
 import { isSlowConnection, loadGsap, prefersReducedMotion } from "@/lib/motion";
 import { useContactModal } from "@/components/site/ContactModal";
@@ -94,6 +95,8 @@ export function Hero() {
   const fontSize = size.W * (size.W < 700 ? 0.2 : 0.19); // «SARDEGNA»: 8 lettere
   const ty = size.H * (size.W < 700 ? 0.42 : 0.5) + fontSize * 0.36;
   const margin = size.W * 0.03;
+  // foto dell'hero adatta allo schermo (l'SVG <image> non ha srcset): 1280 fino a 1440 px di larghezza, poi 1920
+  const heroW = size.W > 1440 ? 1920 : 1280;
   const { cells, r } = grid(size.W, size.H, ty - fontSize * 0.36);
   const titleProps = {
     x: margin, y: ty, textLength: size.W - margin * 2, lengthAdjust: "spacingAndGlyphs" as const,
@@ -118,7 +121,7 @@ export function Hero() {
           </defs>
           <text id="hero-title-ink" {...titleProps} fill="rgb(var(--trachite))">{d.heroWord.toUpperCase()}</text>
           <g clipPath="url(#hero-rombi)">
-            <image href="/images/placeholder/places/hero-costa-1920.webp" width={size.W} height={size.H} preserveAspectRatio="xMidYMid slice" />
+            <image href={`/images/placeholder/places/hero-costa-${heroW}.webp`} width={size.W} height={size.H} preserveAspectRatio="xMidYMid slice" />
             <rect width={size.W} height={size.H} fill="rgb(var(--trachite))" opacity=".18" />
             <text {...titleProps} fill="rgb(var(--sand))">{d.heroWord.toUpperCase()}</text>
           </g>
@@ -132,16 +135,16 @@ export function Hero() {
               <span lang="sc">{d.greeting}</span> <span className="text-stone">· {d.greetingTr}</span>
             </p>
           </div>
-          <h1 id="hero-title" className="sr-only">Sulcis Rent – {lang === "it" ? "noleggio auto in Sardegna, sede a San Giovanni Suergiu" : "car rental in Sardinia, based in San Giovanni Suergiu"}</h1>
+          <h1 id="hero-title" className="sr-only">Sulcis Rent – {ui[lang].heroH1}</h1>
           <div className="wrap grid gap-5 md:grid-cols-12 md:items-end">
             <div className="md:col-span-7">
-              <p className="display text-[clamp(2.25rem,7vw,6.5rem)] leading-[0.86] text-trachite [text-shadow:0_0_24px_rgb(var(--sand)/.6)]">
+              <p className="display max-w-[16ch] text-[clamp(2rem,5.2vw,5rem)] leading-[0.88] text-trachite [text-shadow:0_0_24px_rgb(var(--sand)/.6)]">
                 <span className="bg-sand px-1">{d.heroLine2}</span>
               </p>
               <p className="mt-4 max-w-md bg-sand/90 p-2 text-lead font-semibold text-trachite">{d.payoff}</p>
             </div>
             <div className="flex flex-col gap-3 md:col-span-5 md:items-end">
-              <div className="flex flex-wrap gap-2"><BadgeOpen /><BadgeGoogle href={c.googleReviewsUrl || undefined} /></div>
+              <div className="flex flex-wrap gap-2"><BadgeOpen label={d.open24} /><BadgeGoogle href={c.googleReviewsUrl || undefined} /></div>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><Button variant="magenta" size="xl" nodo onClick={() => open()} data-cursor={d.bookCursor} title={d.ajoTr}>{d.ajo}</Button></Magnetic>
                 <a href="#flotta" onClick={(e) => { e.preventDefault(); scrollToHash("#flotta"); }}

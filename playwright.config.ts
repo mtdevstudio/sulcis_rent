@@ -7,7 +7,7 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   reporter: [["list"]],
-  use: { baseURL: process.env.E2E_BASE ?? "http://localhost:8080", trace: "off", screenshot: "only-on-failure" },
+  use: { baseURL: process.env.E2E_BASE ?? "http://localhost:8080", trace: "off", screenshot: "only-on-failure", locale: "it-IT" },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1280, height: 900 } } },
     { name: "mobile", use: { ...devices["Pixel 7"] }, grep: /@mobile/ },

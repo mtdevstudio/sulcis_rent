@@ -1,6 +1,6 @@
 import type { Lang } from "@/lib/types";
 import { localBusinessJsonLd } from "@/lib/seo";
-import { paths } from "@/lib/i18n";
+import { alternatesOf } from "@/lib/i18n";
 import { SiteShell } from "@/components/site/SiteShell";
 import { Hero } from "@/components/sections/Hero";
 import { Manifesto } from "@/components/sections/Manifesto";
@@ -15,7 +15,7 @@ import { Contacts } from "@/components/sections/Contacts";
 
 export function HomePage({ lang }: { lang: Lang }) {
   return (
-    <SiteShell lang={lang} altHref={paths[lang === "it" ? "en" : "it"].home} preloader>
+    <SiteShell lang={lang} alternates={alternatesOf((p) => p.home)} preloader>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd(lang)) }} />
       <Hero />
       <Manifesto lang={lang} />

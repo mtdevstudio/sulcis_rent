@@ -2,8 +2,9 @@
  * Contratto dei dati PUBBLICI (identico a /data/*.json generati dall'API PHP).
  * Vedi docs/api.md. Nessun campo interno (targa, note, stato) esiste in questi tipi.
  */
-export type Lang = "it" | "en";
-export type L10n = { it: string; en?: string };
+export type Lang = "it" | "en" | "pl" | "pt" | "fr" | "es";
+/** Testo localizzato: l'italiano è obbligatorio, le altre lingue cadono su inglese e poi italiano. */
+export type L10n = { it: string; en?: string; pl?: string; pt?: string; fr?: string; es?: string };
 
 export type CarImageData = {
   /** percorso senza suffisso: le varianti sono `${base}-${w}.webp` */

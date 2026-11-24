@@ -1,4 +1,5 @@
 import { t } from "@/lib/i18n";
+import { ui } from "@/lib/i18n-ui";
 import type { Lang } from "@/lib/types";
 import { RevealText } from "@/components/site/RevealText";
 import { SectionHead } from "@/components/ui/SectionHead";
@@ -8,7 +9,7 @@ export function Manifesto({ lang }: { lang: Lang }) {
   return (
     <section className="relative bg-sand py-section" aria-labelledby="manifesto-title">
       <div className="wrap">
-        <SectionHead index="01" label={lang === "it" ? "Manifesto" : "Manifesto"} />
+        <SectionHead index="01" label={ui[lang].manifesto} />
         <RevealText as="h2" lines={d.manifesto} accent={[3]} className="display mt-10 text-d-l" />
         <span id="manifesto-title" className="sr-only">{d.manifesto.join(" ")}</span>
         <div className="mt-12 grid md:grid-cols-12">

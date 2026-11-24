@@ -1,6 +1,6 @@
 # Sulcis Rent – Autonoleggio · sito + pannello admin
 
-Sito di **Sulcis Rent** (San Giovanni Suergiu, Sud Sardegna) con un pannello su `/admin` dove lo staff gestisce da solo la flotta. Il sito **mostra** le auto, ma **non** permette di prenotare e non mostra disponibilità: ogni «Prenota» apre un modale con WhatsApp e chiamata.
+Sito di **Sulcis Rent** (San Giovanni Suergiu, Sud Sardegna — noleggio per girare **tutta la Sardegna**) in **6 lingue** (italiano di base + inglese, francese, spagnolo, portoghese, polacco) con un pannello su `/admin` dove lo staff gestisce da solo la flotta. Il sito **mostra** le auto, ma **non** permette di prenotare e non mostra disponibilità: ogni «Prenota» apre un modale con WhatsApp e chiamata.
 
 ## Indice
 
@@ -18,6 +18,11 @@ Sito di **Sulcis Rent** (San Giovanni Suergiu, Sud Sardegna) con un pannello su 
 12. [Passare a Next.js server](#12-passare-a-nextjs-server-plesk-con-nodejs)
 13. [Elenco dei TODO cliente](#13-elenco-dei-todo-cliente)
 14. [Crediti](#14-crediti)
+15. [Lingue e apertura automatica](#15-lingue-e-apertura-automatica)
+16. [Notifiche email con Resend](#16-notifiche-email-con-resend)
+17. [GA4 e Meta Pixel: cosa sono](#17-ga4-e-meta-pixel-cosa-sono)
+
+> **Hosting scelto: Plesk.** Le istruzioni Aruba restano solo come alternativa.
 
 ---
 
@@ -154,7 +159,7 @@ Le modifiche sono online subito. Guida per lo staff: [`docs/guida-admin.md`](doc
 
 ## 5. Deploy
 
-### 5.1 GitHub Actions (consigliato, identico per Aruba e Plesk)
+### 5.1 GitHub Actions (consigliato)
 
 A ogni push su `main`, `.github/workflows/deploy.yml` esegue:
 
@@ -170,7 +175,7 @@ Secrets (Settings → Secrets and variables → Actions):
 |---|---|
 | `FTP_HOST` | `ftp.sulcisrent.it` |
 | `FTP_USER` / `FTP_PASSWORD` | credenziali FTP |
-| `FTP_PATH` | Aruba: `/www.sulcisrent.it` · Plesk: `/httpdocs` |
+| `FTP_PATH` | Plesk: `/httpdocs` (Aruba: `/www.sulcisrent.it`) |
 | `FTP_PRIVATE_PATH` *(facoltativo)* | `/sulcis-private` (fuori dalla document root). Se vuoto: `<FTP_PATH>/_private` |
 | `FTP_PROTOCOL` *(facoltativo)* | `ftps` (default), `sftp` o `ftp` |
 
@@ -178,7 +183,36 @@ Variabile facoltativa `DATA_SNAPSHOT_URL=https://sulcisrent.it`: con questa, le 
 
 Il workflow `ci.yml` esegue build, PHPUnit e Playwright su ogni pull request.
 
-### 5.2 Aruba (hosting Linux condiviso) passo passo
+### 5.2 Plesk passo passo (hosting scelto)
+
+1. **Domini → sulcisrent.it → PHP**: versione 8.1+ in modalità FPM servito da Apache, così il `.htaccess` funziona. Imposta `upload_max_filesize=16M` e `post_max_size=20M`.
+2. **Database → Aggiungi database**: crea il DB e un utente dedicato. Permessi: `SELECT, INSERT, UPDATE, DELETE` più `CREATE, ALTER, INDEX, REFERENCES, DROP` (servono solo per le migrazioni; dopo il setup si possono togliere `CREATE/ALTER/DROP`).
+3. **SSL/TLS → Let's Encrypt**, e attiva «Reindirizza da HTTP a HTTPS».
+4. **File manager**: crea `/sulcis-private/` (fuori da `httpdocs`, allo stesso livello) e mettici `config.php`, copiato da `server/config.example.php` e compilato:
+   - DB (host di solito `localhost`), nome, utente, password;
+   - `ip_hash_salt` e `setup_token`: valori casuali lunghi (`openssl rand -hex 32`);
+   - `allowed_origins`: `https://sulcisrent.it` e `https://www.sulcisrent.it`; `site_url`;
+   - `notify`: chiave **Resend** e destinatari ([§16](#16-notifiche-email-con-resend)).
+
+   In **Hosting e DNS → Impostazioni di hosting** lascia la document root su `httpdocs`.
+5. Deploy (§5.1 con `FTP_PATH=/httpdocs` e `FTP_PRIVATE_PATH=/sulcis-private`).
+6. Setup: `https://sulcisrent.it/api/setup.php`, oppure via SSH:
+
+   ```bash
+   php /var/www/vhosts/sulcisrent.it/sulcis-private/server/cli/create-owner.php "Nome"
+   ```
+
+7. **Operazioni pianificate (cron)**:
+
+   ```bash
+   php /var/www/vhosts/sulcisrent.it/sulcis-private/server/cli/purge.php
+   ```
+
+   una volta al giorno: **Strumenti e impostazioni → Operazioni pianificate** (o, nel dominio, **Operazioni pianificate → Aggiungi operazione → Esegui un comando**), cron `0 4 * * *`.
+8. **DNS per Resend**: in **Hosting e DNS → DNS** aggiungi i record TXT/MX che Resend mostra quando verifichi il dominio ([§16](#16-notifiche-email-con-resend)).
+9. **Facoltativo**: in **Apache & nginx** lascia «Servizio proxy» attivo ma **non** spuntare «Serve static files directly by nginx» per `.json`: i file `data/*.json` devono rispettare gli header `no-store` del `.htaccess`.
+
+### 5.3 Alternativa: Aruba (hosting Linux condiviso)
 
 1. **Pannello Aruba → Hosting Linux → PHP**: scegli PHP 8.1 o superiore. Nelle impostazioni PHP alza `upload_max_filesize` a 16M e `post_max_size` a 20M, se disponibili.
 2. **Database → MySQL**: crea il database. Annota host, nome, utente e password; su Aruba l'utente ha già solo i permessi sul suo DB.
@@ -193,27 +227,6 @@ Il workflow `ci.yml` esegue build, PHPUnit e Playwright su ogni pull request.
 6. Esegui il deploy (§5.1, oppure caricamento manuale come al §5.4).
 7. Apri `https://sulcisrent.it/api/setup.php`, inserisci il token e crea il titolare ([§6](#6-primo-avvio-setup-monouso-e-primo-titolare)).
 8. **Cron** *(se il piano lo offre)*, Pannello → Cron: `https://sulcisrent.it/api/cron.php?token=<cron_token>` una volta al giorno. Altrimenti niente: la pulizia avviene al login ([§8](#8-pulizia-automatica-cron)).
-
-### 5.3 Plesk passo passo
-
-1. **Domini → sulcisrent.it → PHP**: versione 8.1+ in modalità FPM servito da Apache, così il `.htaccess` funziona. Imposta `upload_max_filesize=16M` e `post_max_size=20M`.
-2. **Database → Aggiungi database**: crea il DB e un utente dedicato. Permessi: `SELECT, INSERT, UPDATE, DELETE` più `CREATE, ALTER, INDEX, REFERENCES, DROP` (servono solo per le migrazioni; dopo il setup si possono togliere `CREATE/ALTER/DROP`).
-3. **SSL/TLS → Let's Encrypt**, e attiva «Reindirizza da HTTP a HTTPS».
-4. **File manager**: crea `/sulcis-private/` (fuori da `httpdocs`) e mettici `config.php` compilato come al §5.2.
-5. Deploy (§5.1 con `FTP_PATH=/httpdocs` e `FTP_PRIVATE_PATH=/sulcis-private`).
-6. Setup: `https://sulcisrent.it/api/setup.php`, oppure via SSH:
-
-   ```bash
-   php /var/www/vhosts/sulcisrent.it/sulcis-private/server/cli/create-owner.php "Nome"
-   ```
-
-7. **Operazioni pianificate (cron)**:
-
-   ```bash
-   php /var/www/vhosts/sulcisrent.it/sulcis-private/server/cli/purge.php
-   ```
-
-   una volta al giorno.
 
 ### 5.4 Caricamento manuale via FTP (senza GitHub)
 
@@ -275,7 +288,7 @@ Il workflow `ci.yml` esegue build, PHPUnit e Playwright su ogni pull request.
     ```
 
   - senza SSH: phpMyAdmin → svuota la tabella `auth_locks`.
-- **Blocco globale** (oltre 20 errori in un'ora da qualsiasi IP): login chiuso per un'ora per tutti, con notifica Telegram/email. È voluto: un PIN numerico ha poche combinazioni, quindi un attacco distribuito va fermato.
+- **Blocco globale** (oltre 20 errori in un'ora da qualsiasi IP): login chiuso per un'ora per tutti, con notifica email (Resend). È voluto: un PIN numerico ha poche combinazioni, quindi un attacco distribuito va fermato.
 
 ## 8. Pulizia automatica (cron)
 
@@ -337,7 +350,7 @@ Le regole SEO sono identiche in `src/lib/seo.ts` e `server/lib/Seo.php`: se ne c
 | ✅ | Globale: oltre 20 errori in un'ora → login bloccato un'ora per tutti + notifica | test `testGlobalLockAfterMoreThan20FailuresInAnHour` |
 | ✅ | IP salvati come HMAC-SHA256 con sale segreto. `X-Forwarded-For` letto solo da proxy in `trusted_proxies` | test `testIpIsStoredHashedNotInClear` |
 | ✅ | Messaggio generico «PIN non valido» e ritardo uniforme di circa 500 ms anche in caso di successo e di utente inesistente | test `testWrongPinGenericMessageAndUniformDelay` |
-| ⚠️ | Notifiche Telegram/SMTP per blocco globale e nuovo dispositivo: helper pronto, **credenziali da inserire** in `config.php` | `Notify.php` |
+| ⚠️ | Notifica email via **Resend** per il blocco globale: pronta, **chiave e destinatari da inserire** in `config.php` | `Notify.php` |
 
 **Sessione**
 
@@ -412,15 +425,59 @@ Dati mancanti, tutti segnati nel codice con `// TODO` (cerca `TODO` in `src/`):
 | `src/data/faq.ts` / admin → FAQ | risposte reali: documenti, età minima, cauzione, chilometraggio, consegna |
 | admin → Recensioni | recensioni **reali** copiate da Google (oggi c'è solo il badge 5,0 ★) |
 | `src/lib/i18n.ts` | grafia sarda da verificare: «Beni benìu» (benvenuto) e «Ajò» (dai, andiamo) |
-| `src/lib/i18n.ts` | revisione madrelingua dei testi inglesi |
+| `src/lib/i18n.ts`, `src/lib/i18n-more.ts`, `src/lib/i18n-ui.ts`, `src/data/places-i18n.ts` | revisione madrelingua dei testi EN, FR, ES, PT, PL |
 | `src/components/pages/LegalPage.tsx` | testi di privacy e cookie validati da un consulente |
 | `src/data/places.ts` | distanze e tempi di percorrenza: non inseriti, servono dati del cliente |
 | admin → Impostazioni → «Zone di consegna» | **confermare se consegnate fuori sede** (es. aeroporti di Cagliari, Olbia, Alghero). Finché il campo è vuoto il sito invita solo a scrivere, senza promettere consegne |
-| `server/config.php` → `notify` | credenziali Telegram o SMTP per le notifiche di sicurezza |
-| `src/lib/track.ts` | GA4 / Meta Pixel: l'helper `trackContact` è pronto, gli script non sono caricati |
+| `server/config.php` → `notify` | chiave Resend, mittente su dominio verificato, destinatari |
+| `src/lib/track.ts` | GA4 / Meta Pixel: decidere se attivarli ([§17](#17-ga4-e-meta-pixel-cosa-sono)); oggi nessuno script |
 
 ## 14. Crediti
 
 - Confini della Sardegna e dei comuni del Sulcis Iglesiente: ISTAT via [openpolis/geojson-italy](https://github.com/openpolis/geojson-italy), licenza **CC BY 4.0** (`scripts/build-map.mjs`).
 - Font: Archivo e Hanken Grotesk (SIL Open Font License), self-hosted da `next/font`.
 - Sito realizzato da [MTDEVSTUDIO](https://mtdevstudio.it).
+
+## 15. Lingue e apertura automatica
+
+| Lingua | Indirizzo | Note |
+|---|---|---|
+| Italiano (base) | `/`, `/flotta/`, `/flotta/<auto>/` | lingua predefinita e `x-default` |
+| English | `/en/`, `/en/fleet/…` | |
+| Français | `/fr/`, `/fr/fleet/…` | |
+| Español | `/es/`, `/es/fleet/…` | |
+| Português | `/pt/`, `/pt/fleet/…` | |
+| Polski | `/pl/`, `/pl/fleet/…` | |
+
+**Come si apre nella lingua del visitatore.** Chi arriva su `https://sulcisrent.it/` viene mandato (redirect 302) alla versione nella lingua del suo browser (`Accept-Language`) se è una delle 5 straniere; tutte le altre lingue (tedesco, ecc.) restano sull'italiano. Lo fa il `.htaccess`, con un ripiego JavaScript nell'`<head>` se l'hosting non applicasse la regola.
+
+- Solo la **home** viene reindirizzata: un link diretto (es. `/flotta/fiat-panda/` condiviso su WhatsApp) si apre sempre com'è.
+- La **scelta manuale vince**: il selettore lingua nell'header salva il cookie tecnico `sr_lang` per un anno, e da lì in poi niente più redirect.
+- I **motori di ricerca** e le anteprime social (Googlebot, WhatsApp, Facebook…) non vengono reindirizzati; ogni pagina dichiara le 6 lingue con `hreflang` e la sitemap le elenca tutte.
+
+**Testi.** Dizionari in `src/lib/i18n.ts` (IT/EN), `src/lib/i18n-more.ts` (FR/ES/PT/PL), `src/lib/i18n-ui.ts`, mete in `src/data/places-i18n.ts`. Le schede auto si scrivono dal pannello in IT ed EN: nelle altre lingue si usa l'inglese per i testi liberi, mentre categorie, dotazioni, carburante e cambio sono tradotti in automatico. Tutte le traduzioni sono da far rivedere a un madrelingua prima del lancio.
+
+## 16. Notifiche email con Resend
+
+Quando qualcuno sbaglia il PIN troppe volte (oltre 20 tentativi in un'ora da qualunque IP) il login si blocca per un'ora e parte un'email al titolare.
+
+1. Crea un account su resend.com e **verifica il dominio** `sulcisrent.it` (Domains → Add domain). Resend mostra 2–3 record DNS (TXT per SPF/DKIM, MX per il ritorno): aggiungili in **Plesk → Hosting e DNS → DNS** e premi «Verify».
+2. **API Keys → Create**, permesso *Sending access*, limitato al dominio.
+3. In `sulcis-private/config.php`:
+
+   ```php
+   'notify' => [
+       'resend_api_key' => 're_…',
+       'mail_from' => 'Sulcis Rent <avvisi@sulcisrent.it>',
+       'mail_to' => 'titolare@esempio.it',   // più indirizzi separati da virgola
+   ],
+   ```
+
+La chiave sta **solo** in `config.php` (fuori dalla document root, mai nel repository e mai nel JavaScript). Se Resend non risponde l'errore finisce nel log PHP e il login continua a funzionare. Se la chiave è vuota si usa l'SMTP dell'hosting (o Telegram), come prima.
+
+## 17. GA4 e Meta Pixel: cosa sono
+
+- **GA4 (Google Analytics 4)**: statistiche delle visite — quante persone arrivano, da dove (Google, Instagram…), da quale paese e lingua, quali auto guardano, quanti premono WhatsApp o «Chiama».
+- **Meta Pixel**: lo stesso, ma per Facebook/Instagram: serve se fate **pubblicità a pagamento** su Meta, per misurare quanti contatti porta una campagna e mostrare annunci a chi ha già visitato il sito.
+
+Oggi **nessuno dei due è attivo**: il sito non carica script di terzi. Ogni clic su WhatsApp/Chiama passa già da `trackContact()` (`src/lib/track.ts`), quindi attivarli è un lavoro piccolo. Però entrambi usano cookie di profilazione: per legge serve un **banner cookie con consenso preventivo** e l'aggiornamento di privacy e cookie policy. Senza pubblicità su Meta, il consiglio è: niente Pixel; eventualmente GA4 (o un'alternativa senza cookie come Plausible/Matomo, che evita il banner).

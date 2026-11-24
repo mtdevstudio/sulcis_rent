@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRef } from "react";
-import { badgeLabel, categories as baseCats } from "@/data/catalog";
+import { badgeLabel, catLabel, categories as baseCats } from "@/data/catalog";
 import { carName, euro, keySpecs, priceFrom } from "@/lib/car";
 import { paths, t, tr } from "@/lib/i18n";
 import type { CatalogItem, PublicCar } from "@/lib/types";
@@ -14,7 +14,7 @@ import { CarImage } from "./CarImage";
 
 const icons = { seats: IconSeats, gear: IconGear, fuel: IconFuel };
 
-export function CarCard({ car, categories = baseCats, index = 0, preview = false }: { car: PublicCar; categories?: CatalogItem[]; index?: number; preview?: boolean }) {
+export function CarCard({ car, categories = baseCats, index = 0, preview = false, priority = false }: { car: PublicCar; categories?: CatalogItem[]; index?: number; preview?: boolean; priority?: boolean }) {
   const lang = useLang();
   const d = t(lang);
   const open = useContactModal(car.slug);
@@ -38,13 +38,13 @@ export function CarCard({ car, categories = baseCats, index = 0, preview = false
 
   return (
     <article className="group relative flex flex-col border-filo border-trachite bg-sand">
-      <Link href={href} onClick={go} data-cursor={d.look} className="relative block aspect-[4/3] overflow-hidden" aria-label={`${carName(car)} – ${tr(cat?.label, lang)}`} tabIndex={preview ? -1 : 0}>
+      <Link href={href} onClick={go} data-cursor={d.look} className="relative block aspect-[4/3] overflow-hidden" aria-label={`${carName(car)} – ${catLabel(cat, lang)}`} tabIndex={preview ? -1 : 0}>
         <div ref={imgRef} className={`absolute inset-0 ${tone}`}>
           <Trama motif="pibiones" fg="sand" cell={12} opacity={0.3} className="transition-transform duration-slow ease-trama group-hover:scale-110" />
-          <CarImage image={car.images[0]} lang={lang} className="relative h-full w-full object-cover transition-transform duration-slow ease-trama group-hover:scale-[1.04]" />
+          <CarImage image={car.images[0]} lang={lang} priority={priority} className="relative h-full w-full object-cover transition-transform duration-slow ease-trama group-hover:scale-[1.04]" />
         </div>
-        <span className="eyebrow absolute left-3 top-3 bg-sand px-2 py-1">{tr(cat?.label, lang) || car.category}</span>
-        {car.badge && <span className="eyebrow absolute right-3 top-3 bg-trachite px-2 py-1 text-sand">{badgeLabel[car.badge]?.[lang]}</span>}
+        <span className="eyebrow absolute left-3 top-3 bg-sand px-2 py-1">{catLabel(cat, lang) || car.category}</span>
+        {car.badge && <span className="eyebrow absolute right-3 top-3 bg-trachite px-2 py-1 text-sand">{tr(badgeLabel[car.badge], lang)}</span>}
       </Link>
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-4">

@@ -43,7 +43,7 @@ test("login → crea auto con 3 foto → pubblica → visibile sul sito con meta
 
   // --- scheda: meta e JSON-LD dal server (car.php) ---
   const html = await (await request.get("/flotta/citroen-c3-prova-e2e/")).text();
-  expect(html).toContain("<title>Noleggio Citroën C3 Prova E2E · Utilitaria a San Giovanni Suergiu</title>");
+  expect(html).toContain("<title>Noleggio Citroën C3 Prova E2E · Utilitaria in Sardegna</title>");
   expect(html).toContain('"@type":["Product","Car"]');
   expect(html).toContain('"seatingCapacity":5');
   expect(html).not.toContain("EE123EE");

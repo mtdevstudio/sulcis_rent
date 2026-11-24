@@ -39,14 +39,14 @@ export function RevealFrame({ progress, cols = 6, rows = 4, word = "SULCIS" }: {
         </clipPath>
       </defs>
       <rect width={W} height={H} fill="rgb(var(--sand))" />
-      <text x={W / 2} y={H / 2 + 62} textAnchor="middle" className="display" fontSize="190" fill="rgb(var(--trachite))"
+      <text x={W / 2} y={H / 2 + 62} textAnchor="middle" className="display" fontSize={word.length > 6 ? 130 : 190} textLength={W * 0.92} lengthAdjust="spacingAndGlyphs" fill="rgb(var(--trachite))"
         style={{ fontVariationSettings: '"wdth" 66, "wght" 900' }}>{word}</text>
       <g clipPath={`url(#clip${id})`}>
         <rect width={W} height={H} fill={`url(#sea${id})`} />
         {/* segnaposto «strada costiera»: due nastri */}
         <path d={`M-20 ${H * 0.8} C ${W * 0.3} ${H * 0.55}, ${W * 0.6} ${H * 1.0}, ${W + 20} ${H * 0.62}`} stroke="rgb(var(--sand))" strokeWidth="14" fill="none" opacity=".9" />
         <path d={`M-20 ${H * 0.9} C ${W * 0.35} ${H * 0.68}, ${W * 0.62} ${H * 1.08}, ${W + 20} ${H * 0.74}`} stroke="rgb(var(--rent-magenta))" strokeWidth="10" fill="none" />
-        <text x={W / 2} y={H / 2 + 62} textAnchor="middle" className="display" fontSize="190" fill="rgb(var(--sand))"
+        <text x={W / 2} y={H / 2 + 62} textAnchor="middle" className="display" fontSize={word.length > 6 ? 130 : 190} textLength={W * 0.92} lengthAdjust="spacingAndGlyphs" fill="rgb(var(--sand))"
           style={{ fontVariationSettings: '"wdth" 66, "wght" 900' }}>{word}</text>
       </g>
     </svg>

@@ -68,3 +68,14 @@ export const islandPlaces: IslandPlace[] = [
   { slug: "costa-rei", zone: "est", name: "Costa Rei", area: { it: "Sud-est", en: "South-east" },
     line: { it: "Chilometri di sabbia chiara sul mare aperto.", en: "Miles of pale sand on the open sea." } },
 ];
+
+// ---- traduzioni FR / ES / PT / PL (src/data/places-i18n.ts) ----
+import { placesI18n } from "./places-i18n";
+for (const p of [...places, ...islandPlaces]) {
+  const t = placesI18n[p.slug];
+  if (!t) continue;
+  const [fr, es, pt, pl] = t.area;
+  Object.assign(p.area, { fr, es, pt, pl });
+  const [lfr, les, lpt, lpl] = t.line;
+  Object.assign(p.line, { fr: lfr, es: les, pt: lpt, pl: lpl });
+}

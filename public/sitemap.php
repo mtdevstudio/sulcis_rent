@@ -9,25 +9,30 @@ foreach ([getenv('SR_PRIVATE_DIR') ?: null, dirname($root) . '/sulcis-private', 
 }
 $site = rtrim($cfgSite ?: $site, '/');
 $fleet = json_decode((string) @file_get_contents("$root/data/fleet.json"), true) ?: ['cars' => []];
-$urls = [
-    ['/', '/en/', null, '1.0'], ['/flotta/', '/en/fleet/', null, '0.9'], ['/privacy/', '/en/privacy/', null, '0.2'], ['/cookie/', '/en/cookie/', null, '0.2'],
-];
+$langs = ['it', 'en', 'fr', 'es', 'pt', 'pl'];
+$p = static fn(string $l, string $it, string $other) => $l === 'it' ? $it : "/$l$other";
+// ogni voce: [percorsi per lingua, lastmod, priorità]
+$urls = [];
+foreach ([['/', '/', '1.0'], ['/flotta/', '/fleet/', '0.9'], ['/privacy/', '/privacy/', '0.2'], ['/cookie/', '/cookie/', '0.2']] as [$it, $other, $prio]) {
+    $urls[] = [array_combine($langs, array_map(static fn($l) => $p($l, $it, $other), $langs)), null, $prio];
+}
 foreach ($fleet['cars'] as $c) {
-    if (!preg_match('/^[a-z0-9-]+$/', (string) ($c['slug'] ?? ''))) continue;
-    $urls[] = ["/flotta/{$c['slug']}/", "/en/fleet/{$c['slug']}/", $c['updatedAt'] ?? null, '0.8'];
+    $s = (string) ($c['slug'] ?? '');
+    if (!preg_match('/^[a-z0-9-]+$/', $s)) continue;
+    $urls[] = [array_combine($langs, array_map(static fn($l) => $p($l, "/flotta/$s/", "/fleet/$s/"), $langs)), $c['updatedAt'] ?? null, '0.8'];
 }
 header('Content-Type: application/xml; charset=utf-8');
 header('Cache-Control: public, max-age=3600');
 $e = static fn($s) => htmlspecialchars((string) $s, ENT_XML1 | ENT_QUOTES, 'UTF-8');
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
-foreach ($urls as [$it, $en, $mod, $prio]) {
-    foreach ([[$it, 'it'], [$en, 'en']] as [$path, $lang]) {
+foreach ($urls as [$byLang, $mod, $prio]) {
+    foreach ($byLang as $lang => $path) {
         echo '<url><loc>' . $e($site . $path) . '</loc>';
         if ($mod) echo '<lastmod>' . $e(substr((string) $mod, 0, 10)) . '</lastmod>';
         echo '<priority>' . $prio . '</priority>';
-        echo '<xhtml:link rel="alternate" hreflang="it" href="' . $e($site . $it) . '"/>';
-        echo '<xhtml:link rel="alternate" hreflang="en" href="' . $e($site . $en) . '"/>';
+        foreach ($byLang as $l => $alt) echo '<xhtml:link rel="alternate" hreflang="' . $l . '" href="' . $e($site . $alt) . '"/>';
+        echo '<xhtml:link rel="alternate" hreflang="x-default" href="' . $e($site . $byLang['it']) . '"/>';
         echo "</url>\n";
     }
 }

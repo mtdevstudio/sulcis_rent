@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { ui } from "@/lib/i18n-ui";
 import { useContact } from "@/lib/contact";
 import { t } from "@/lib/i18n";
 import { trackContact } from "@/lib/track";
@@ -32,7 +33,7 @@ export function Contacts() {
               <h3 className="eyebrow text-magenta-light">{d.phone}</h3>
               <a href={c.tel} onClick={() => trackContact("call")} className="display mt-2 block text-[clamp(2.25rem,6vw,3.5rem)] leading-none" style={{ fontVariationSettings: '"wdth" 75, "wght" 800' }} aria-label={`${d.call}: ${c.phoneDisplay}`}>{c.phoneDisplay}</a>
               <div className="mt-4 flex flex-wrap gap-3">
-                <a href={c.waLink(d.waGeneric)} target="_blank" rel="noopener noreferrer" onClick={() => trackContact("whatsapp")} aria-label={`${d.whatsapp} (si apre WhatsApp)`} className="eyebrow inline-flex h-14 items-center gap-2 bg-magenta px-6 text-white hover:bg-magenta-deep"><IconWhatsApp />WhatsApp</a>
+                <a href={c.waLink(d.waGeneric)} target="_blank" rel="noopener noreferrer" onClick={() => trackContact("whatsapp")} aria-label={`${d.whatsapp}`} className="eyebrow inline-flex h-14 items-center gap-2 bg-magenta px-6 text-white hover:bg-magenta-deep"><IconWhatsApp />WhatsApp</a>
                 <a href={c.tel} onClick={() => trackContact("call")} aria-label={`${d.call}: ${c.phoneDisplay}`} className="eyebrow inline-flex h-14 items-center gap-2 border-filo border-sand px-6 hover:bg-sand hover:text-trachite"><IconPhone />{d.call}</a>
               </div>
             </div>
@@ -54,7 +55,7 @@ export function Contacts() {
             <div className="relative aspect-[4/3] overflow-hidden border-filo border-sand/30 bg-trachite-800 md:aspect-[16/10]">
               {map ? (
                 <iframe
-                  title={lang === "it" ? "Mappa: Sulcis Rent a San Giovanni Suergiu" : "Map: Sulcis Rent in San Giovanni Suergiu"}
+                  title={ui[lang].mapTitle}
                   src={`https://www.google.com/maps?q=${query}&output=embed`}
                   className="absolute inset-0 h-full w-full border-0"
                   loading="lazy"

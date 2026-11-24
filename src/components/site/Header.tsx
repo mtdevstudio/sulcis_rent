@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { paths, t } from "@/lib/i18n";
+import { LANGS, paths, t } from "@/lib/i18n";
+import type { Lang } from "@/lib/types";
 import { lockScroll, scrollToHash } from "@/lib/motion";
 import { Logo } from "@/components/ui/Logo";
 import { Nodo } from "@/components/ui/icons";
@@ -9,13 +10,14 @@ import { useContactModal } from "./ContactModal";
 import { useLang } from "./LangContext";
 
 /** Header fisso: trasparente sull'hero, sabbia dopo; si nasconde scendendo e ricompare risalendo. */
-export function Header({ altHref }: { altHref?: string }) {
+export function Header({ alternates }: { alternates?: Partial<Record<Lang, string>> }) {
   const lang = useLang();
   const d = t(lang);
   const openModal = useContactModal();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const home = paths[lang].home;
 
   useEffect(() => {
@@ -63,10 +65,31 @@ export function Header({ altHref }: { altHref?: string }) {
             </ul>
           </nav>
           <div className="flex items-center gap-2">
-            {altHref && (
-              <a href={altHref} hrefLang={lang === "it" ? "en" : "it"} className="eyebrow grid h-11 min-w-11 place-items-center border-filo border-trachite px-2 hover:bg-trachite hover:text-sand" aria-label={d.langSwitch}>
-                {lang === "it" ? "EN" : "IT"}
-              </a>
+            {alternates && (
+              <div className="relative" onKeyDown={(e) => { if (e.key === "Escape") setLangOpen(false); }}>
+                <button type="button" onClick={() => setLangOpen((o) => !o)} aria-expanded={langOpen} aria-haspopup="true" aria-label={`${d.langSwitch}: ${LANGS.find((l) => l.code === lang)?.name}`}
+                  className="eyebrow flex h-11 min-w-11 items-center gap-1 border-filo border-trachite px-2 hover:bg-trachite hover:text-sand">
+                  {lang.toUpperCase()}<span aria-hidden className="text-[9px]">▾</span>
+                </button>
+                {langOpen && (
+                  <ul className="absolute right-0 top-12 z-[60] min-w-[10rem] border-filo border-trachite bg-sand py-1 shadow-lg">
+                    {LANGS.map((l) => (
+                      <li key={l.code}>
+                        <a
+                          href={alternates[l.code] ?? paths[l.code].home}
+                          hrefLang={l.code}
+                          lang={l.code}
+                          aria-current={l.code === lang ? "true" : undefined}
+                          onClick={() => { document.cookie = `sr_lang=${l.code}; path=/; max-age=31536000; samesite=lax`; }}
+                          className={`flex items-center justify-between gap-4 px-3 py-2.5 text-sm hover:bg-sand-200 ${l.code === lang ? "font-bold" : ""}`}
+                        >
+                          {l.name}<span className="eyebrow text-stone">{l.code.toUpperCase()}</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             )}
             <button type="button" onClick={() => openModal()} data-cursor={d.bookCursor} className="eyebrow hidden h-11 items-center gap-2 bg-magenta px-5 text-white hover:bg-magenta-deep sm:flex">
               <Nodo className="h-2 w-2" />{d.nav.book}

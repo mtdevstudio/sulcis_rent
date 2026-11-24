@@ -1,12 +1,26 @@
 import type { L10n, Lang } from "./types";
+import { es, fr, pl, pt } from "./i18n-more";
 
-/** Testo localizzato con fallback all'italiano. */
-export const tr = (v: L10n | undefined, lang: Lang): string => (v ? (lang === "en" && v.en ? v.en : v.it) : "");
+/** Lingue del sito. L'italiano è la base; le altre vivono sotto /{lang}/. */
+export const LANGS: { code: Lang; name: string }[] = [
+  { code: "it", name: "Italiano" }, { code: "en", name: "English" }, { code: "fr", name: "Français" },
+  { code: "es", name: "Español" }, { code: "pt", name: "Português" }, { code: "pl", name: "Polski" },
+];
+export const FOREIGN: Exclude<Lang, "it">[] = ["en", "pl", "pt", "fr", "es"];
+export const isLang = (x: string): x is Lang => LANGS.some((l) => l.code === x);
 
-export const paths = {
-  it: { home: "/", fleet: "/flotta/", car: (s: string) => `/flotta/${s}/`, privacy: "/privacy/", cookie: "/cookie/", credits: "/crediti-foto/" },
-  en: { home: "/en/", fleet: "/en/fleet/", car: (s: string) => `/en/fleet/${s}/`, privacy: "/en/privacy/", cookie: "/en/cookie/", credits: "/crediti-foto/" },
-} as const;
+/** Testo localizzato: lingua richiesta → inglese → italiano. */
+export const tr = (v: L10n | undefined | null, lang: Lang): string => (v ? v[lang] || (lang !== "it" ? v.en : "") || v.it || "" : "");
+
+type Paths = { home: string; fleet: string; car: (s: string) => string; privacy: string; cookie: string; credits: string };
+const pathsFor = (lang: Lang): Paths =>
+  lang === "it"
+    ? { home: "/", fleet: "/flotta/", car: (s) => `/flotta/${s}/`, privacy: "/privacy/", cookie: "/cookie/", credits: "/crediti-foto/" }
+    : { home: `/${lang}/`, fleet: `/${lang}/fleet/`, car: (s) => `/${lang}/fleet/${s}/`, privacy: `/${lang}/privacy/`, cookie: `/${lang}/cookie/`, credits: "/crediti-foto/" };
+export const paths = Object.fromEntries(LANGS.map((l) => [l.code, pathsFor(l.code)])) as Record<Lang, Paths>;
+
+/** Percorsi equivalenti in tutte le lingue (per hreflang e selettore lingua). */
+export const alternatesOf = (pick: (p: Paths) => string) => Object.fromEntries(LANGS.map((l) => [l.code, pick(paths[l.code])])) as Record<Lang, string>;
 
 /**
  * Dizionario UI. EN = prima traduzione da rivedere (// TODO revisione madrelingua).
@@ -114,7 +128,7 @@ export const dict = {
       delivery: "Consegna", home: "a domicilio", airport: "in aeroporto", port: "al porto", insurance: "Assicurazione",
     },
     footer: { rights: "Tutti i diritti riservati", vat: "P.IVA", made: "Sito realizzato da", privacy: "Privacy", cookie: "Cookie", credits: "Crediti foto" },
-    langSwitch: "English",
+    langSwitch: "Lingua",
   },
   en: {
     nav: { fleet: "Fleet", territory: "Sardinia", how: "How it works", faq: "FAQ", contacts: "Contact", book: "Book" },
@@ -215,8 +229,9 @@ export const dict = {
       delivery: "Delivery", home: "to your address", airport: "to the airport", port: "to the port", insurance: "Insurance",
     },
     footer: { rights: "All rights reserved", vat: "VAT", made: "Website by", privacy: "Privacy", cookie: "Cookies", credits: "Photo credits" },
-    langSwitch: "Italiano",
+    langSwitch: "Language",
   },
+  pl, pt, fr, es,
 };
 export type Dict = (typeof dict)["it"];
 export const t = (lang: Lang): Dict => dict[lang] as Dict;

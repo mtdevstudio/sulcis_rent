@@ -38,7 +38,7 @@ const palette: { group: string; items: Swatch[] }[] = [
     group: "Accenti rari",
     items: [
       { name: "Turchese", token: "turquoise", hex: "#3FB8AF", role: "Acqua bassa · solo su trachite", text: "dark", checks: ["Su trachite 7.2 AAA", "Mai su sabbia"] },
-      { name: "Ocra miniera", token: "ochre", hex: "#C9772F", role: "Solo pannello notte", text: "dark", checks: ["Su trachite 5.1 AA"] },
+      { name: "Ocra miniera", token: "ochre", hex: "#C9772F", role: "Accento della meta «miniera» nel tabellone", text: "dark", checks: ["Su trachite 5.1 AA"] },
       { name: "Ocra profonda", token: "ochre-deep", hex: "#8E4A1C", role: "Ocra come testo su sabbia", text: "light", checks: ["Su sabbia 5.7 AA"] },
     ],
   },
@@ -47,7 +47,7 @@ const palette: { group: string; items: Swatch[] }[] = [
 const typeScale = [
   { cls: "text-d-xxl", name: "d-xxl", spec: "clamp(4.5rem, 25.5vw, 34rem) · lh .80", use: "Hero, footer: una parola a tutta larghezza", sample: "Sulcis" },
   { cls: "text-d-xl", name: "d-xl", spec: "clamp(3.75rem, 15vw, 18rem) · lh .82", use: "Pannelli località (qui ridotto)", sample: "Carloforte" },
-  { cls: "text-d-l", name: "d-l", spec: "clamp(2.75rem, 8.5vw, 9.5rem) · lh .86", use: "Manifesto, step", sample: "Ti diamo il Sulcis" },
+  { cls: "text-d-l", name: "d-l", spec: "clamp(2.75rem, 8.5vw, 9.5rem) · lh .86", use: "Manifesto, step", sample: "Ti diamo la Sardegna" },
   { cls: "text-d-m", name: "d-m", spec: "clamp(2.25rem, 5.2vw, 5.5rem) · lh .90", use: "Titoli di sezione", sample: "La flotta" },
   { cls: "text-d-s", name: "d-s", spec: "clamp(1.625rem, 2.6vw, 2.5rem) · lh .95", use: "Nomi auto, FAQ", sample: "Citycar" },
 ];
@@ -56,7 +56,7 @@ const motifBoard: { motif: MotifName; fg: TramaColor; bg: TramaColor; cell: numb
   { motif: "rombo", fg: "rent-magenta", bg: "sand", cell: 14, label: "Rombo · magenta / sabbia" },
   { motif: "rombo", fg: "sand", bg: "sulcis-blue", cell: 14, label: "Rombo · sabbia / blu" },
   { motif: "occhio", fg: "sulcis-blue", bg: "sand-200", cell: 16, label: "Occhio · blu / sabbia 200" },
-  { motif: "occhio", fg: "ochre", bg: "trachite", cell: 16, label: "Occhio · ocra / trachite (notte)" },
+  { motif: "occhio", fg: "ochre", bg: "trachite", cell: 16, label: "Occhio · ocra / trachite" },
   { motif: "pibiones", fg: "trachite", bg: "sand", cell: 14, label: "Pibiones · trachite / sabbia" },
   { motif: "pibiones", fg: "rent-magenta", bg: "trachite", cell: 14, label: "Pibiones · magenta / trachite" },
   { motif: "scala", fg: "sand", bg: "rent-magenta", cell: 12, label: "Scala · sabbia / magenta" },
@@ -80,7 +80,7 @@ export default function DesignSystemPage() {
         <div className="wrap grid gap-6 pb-16 pt-6 md:grid-cols-12">
           <p className="text-lead md:col-span-6">
             Il linguaggio visivo di Sulcis Rent. Tipografia gigante e ferma, la tessitura sarda
-            ridotta a pura geometria, due colori dal logo e la terra del Sulcis intorno.
+            ridotta a pura geometria, due colori dal logo e la terra sarda intorno.
           </p>
           <p className="text-sm text-stone md:col-span-4 md:col-start-9">
             I titoli usano assi fissi (larghezza 72, peso 850): nessuna deformazione legata allo scroll,
@@ -97,7 +97,7 @@ export default function DesignSystemPage() {
           <h2 id="ds-colori" className="display mt-8 text-d-m">Mare, calcare, trachite</h2>
           <p className="mt-4 max-w-prose text-stone">
             Blu e magenta escono dal logo e restano i protagonisti. Il resto viene dal territorio. Turchese e ocra sono
-            accenti rarissimi: il turchese mai su sabbia, l&apos;ocra solo nel momento «notte» delle miniere.
+            accenti rarissimi: il turchese mai su sabbia, l&apos;ocra solo per le mete minerarie nel tabellone «Sardegna».
           </p>
           <p className="mt-3 max-w-prose text-xs text-ochre-deep">
             ⚠ TODO cliente: i valori del brand vengono dal brief (logo a bassa risoluzione). Vanno ricampionati da
@@ -233,7 +233,7 @@ export default function DesignSystemPage() {
               </div>
               <div className="space-y-3 md:col-span-6">
                 <p className="text-lead">Il sud-ovest della Sardegna, alla tua velocità. Scegli l&apos;auto, scrivici e parti.</p>
-                <p className="text-base">Noleggio auto a San Giovanni Suergiu, nel cuore del Sulcis Iglesiente. Da qui Sant&apos;Antioco, Calasetta e Porto Pino sono lì, oltre il parabrezza.</p>
+                <p className="text-base">Noleggio auto in Sardegna, aperti 24 ore su 24: le spiagge del sud, Alghero, la Costa Smeralda, la Barbagia. Scegli tu dove andare.</p>
                 <p className="text-sm text-stone">Testo secondario in Pietra, 6.2:1 su sabbia.</p>
                 <p className="text-xs text-stone">Note e didascalie.</p>
                 <p className="eyebrow">Eyebrow · 12px · +16% tracking · 600</p>
@@ -468,11 +468,11 @@ export default function DesignSystemPage() {
       <section className="bg-sand py-section" aria-labelledby="ds-hero">
         <div className="wrap">
           <SectionHead index="06" label="Hero · reveal a rombi" />
-          <h2 id="ds-hero" className="display mt-8 text-d-m">Il Sulcis si apre a rombi</h2>
+          <h2 id="ds-hero" className="display mt-8 text-d-m">La Sardegna si apre a rombi</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[0.12, 0.5, 1].map((p) => (
               <figure key={p} className="border-filo border-trachite">
-                <RevealFrame progress={p} />
+                <RevealFrame progress={p} word="SARDEGNA" />
                 <figcaption className="border-t-filo border-trachite p-3 text-xs">Scroll {Math.round(p * 100)}%</figcaption>
               </figure>
             ))}
@@ -485,17 +485,16 @@ export default function DesignSystemPage() {
         </div>
       </section>
 
-      {/* 07 NOTTE */}
-      <section className="relative overflow-hidden bg-trachite py-section text-sand" aria-labelledby="ds-notte">
+      {/* 07 SARDEGNA */}
+      <section className="relative overflow-hidden bg-trachite py-section text-sand" aria-labelledby="ds-sard">
         <Trama motif="occhio" fg="ochre" cell={22} opacity={0.12} />
         <div className="wrap relative">
-          <SectionHead index="07" label="L'unico momento notte · pannello Iglesiente" tone="dark" />
-          <p id="ds-notte" className="display mt-10 text-d-xl text-ochre">Porto Flavia</p>
+          <SectionHead index="07" label="Sezione «Sardegna» · tabellone delle mete" tone="dark" />
+          <p id="ds-sard" className="display mt-10 text-d-xl">Scegli la tua <span className="text-magenta">Sardegna.</span></p>
           <p className="mt-6 max-w-prose text-lead text-sand/85">
-            Nello scroll orizzontale del Territorio, un solo pannello si spegne: trachite, ocra e la geometria
-            «occhio» a bassa intensità. Il resto del sito resta in pieno sole.
+            Fondo trachite, mappa dell&apos;isola fissa a sinistra, elenco delle mete in tipografia gigante a destra,
+            filtri per zona. Nessuna zona è «centrale»: il sud-ovest è una zona come le altre. L&apos;ocra resta per le mete minerarie.
           </p>
-          <p className="mt-3 text-xs text-sand/50">Copy e foto definitivi nella fase sezioni. Nessun dato su distanze o tempi.</p>
         </div>
       </section>
 

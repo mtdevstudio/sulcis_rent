@@ -9,14 +9,14 @@ const tones: Record<Tone, string> = {
 };
 
 /** Badge «Aperto h24» con battito magenta (fermo con reduced-motion). */
-export function BadgeOpen({ tone = "sand" }: { tone?: Tone }) {
+export function BadgeOpen({ tone = "sand", label = "Aperto h24" }: { tone?: Tone; label?: string }) {
   return (
     <span className={`inline-flex h-9 items-center gap-2.5 border-filo px-3.5 eyebrow ${tones[tone]}`}>
       <span className="relative flex h-2.5 w-2.5" aria-hidden>
         <span className="absolute inset-0 animate-ping bg-magenta opacity-60 motion-reduce:hidden" />
         <span className="relative h-2.5 w-2.5 bg-magenta" />
       </span>
-      Aperto h24
+      {label}
     </span>
   );
 }

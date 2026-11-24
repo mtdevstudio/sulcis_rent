@@ -39,7 +39,7 @@ L'API è il **confine** tra interfaccia e logica di dominio. Oggi è PHP 8.1 in 
 | GET | `/data/reviews.json?v=` | `{ version, reviews: Review[] }` (solo pubblicate) |
 | GET | `/data/faq.json?v=` | `{ version, items: { q, a }[] }` |
 | GET | `/data/settings.json?v=` | contatti pubblici (telefono, WhatsApp, indirizzo, orari, social, P.IVA) |
-| GET | `/flotta/{slug}/` · `/en/fleet/{slug}/` | HTML con meta SEO e JSON-LD (`car.php`) · 404 se l'auto non è pubblicata |
+| GET | `/flotta/{slug}/` · `/{en,fr,es,pt,pl}/fleet/{slug}/` | HTML con meta SEO e JSON-LD (`car.php`) · 404 se l'auto non è pubblicata |
 | GET | `/sitemap.xml` | sitemap dinamica (`sitemap.php`) |
 | GET | `/api/auth/users.php` | `{ users: { id, name, color }[] }`: solo gli utenti attivi, per la schermata «Chi sei?» |
 
@@ -121,7 +121,7 @@ Cosa succede a ogni foto caricata:
 | Metodo | Percorso | Ruolo | Note |
 |---|---|---|---|
 | GET/POST/PUT/DELETE | `/api/admin/reviews.php[?id=]` | staff | `{ author, text, rating 1–5, date AAAA-MM-GG, url?, published? }`. Solo recensioni reali da Google |
-| GET/POST/PUT/DELETE/PATCH | `/api/admin/faq.php[?id=]` | staff | `{ question: { it, en? }, answer: { it, en? }, published? }`. Il riordino è `PATCH { ids }` |
+| GET/POST/PUT/DELETE/PATCH | `/api/admin/faq.php[?id=]` | staff | `{ question: { it, en?, fr?, es?, pt?, pl? }, answer: { … }, published? }`. Il riordino è `PATCH { ids }` |
 | GET/PUT | `/api/admin/settings.php` | **owner** | contatti (`Catalog::contactSchema()`) |
 | GET/POST/PUT | `/api/admin/users.php[?id=]` | **owner** | `POST { name, pin, color? }` crea uno staff. `PUT { action: activate\|deactivate\|rename\|reset_pin\|unlock\|color, … }` |
 | GET/DELETE | `/api/admin/sessions.php[?id=\|?all=1]` | **owner** | elenco delle sessioni attive, revoca singola o «Disconnetti tutti» (tranne la sessione corrente) |

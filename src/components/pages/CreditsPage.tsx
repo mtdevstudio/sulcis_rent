@@ -7,7 +7,7 @@ type Credit = { title: string; creator: string; creatorUrl: string | null; licen
 export function CreditsPage() {
   const list = Object.entries(credits as Record<string, Credit>);
   return (
-    <SiteShell lang="it" altHref="/en/">
+    <SiteShell lang="it">
       <article className="wrap max-w-4xl pb-section pt-32">
         <h1 className="display text-d-l">Crediti foto</h1>
         <p className="mt-4 max-w-prose text-lead">
