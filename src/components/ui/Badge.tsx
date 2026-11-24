@@ -22,7 +22,16 @@ export function BadgeOpen({ tone = "sand", label = "Aperto h24" }: { tone?: Tone
 }
 
 /** Badge rating Google: solo il dato reale da site.ts. */
-export function BadgeGoogle({ tone = "sand", href }: { tone?: Tone; href?: string }) {
+const G: Record<string, (r: string, n: number) => string> = {
+  it: (r, n) => `Valutazione ${r} su 5 su Google, ${n} recensioni`,
+  en: (r, n) => `Rated ${r} out of 5 on Google, ${n} reviews`,
+  fr: (r, n) => `Note de ${r} sur 5 sur Google, ${n} avis`,
+  es: (r, n) => `Valoración de ${r} sobre 5 en Google, ${n} reseñas`,
+  pt: (r, n) => `Avaliação de ${r} em 5 no Google, ${n} avaliações`,
+  pl: (r, n) => `Ocena ${r} na 5 w Google, ${n} opinii`,
+};
+
+export function BadgeGoogle({ tone = "sand", href, lang = "it" }: { tone?: Tone; href?: string; lang?: string }) {
   const inner = (
     <>
       <span className="font-display text-lg leading-none" style={{ fontVariationSettings: '"wdth" 75, "wght" 800' }}>
@@ -35,7 +44,7 @@ export function BadgeGoogle({ tone = "sand", href }: { tone?: Tone; href?: strin
     </>
   );
   const cls = `inline-flex h-9 items-center gap-2.5 border-filo px-3.5 eyebrow ${tones[tone]}`;
-  const label = `Valutazione ${site.google.ratingLabel} su 5 su Google, ${site.google.reviewCount} recensioni`;
+  const label = (G[lang] ?? G.it)(site.google.ratingLabel, site.google.reviewCount);
   return href ? (
     <a href={href} className={`${cls} hover:bg-trachite hover:text-sand transition-colors`} aria-label={label} target="_blank" rel="noopener noreferrer">{inner}</a>
   ) : (

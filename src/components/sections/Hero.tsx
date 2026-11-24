@@ -144,7 +144,7 @@ export function Hero() {
               <p className="mt-4 max-w-md bg-sand/90 p-2 text-lead font-semibold text-trachite">{d.payoff}</p>
             </div>
             <div className="flex flex-col gap-3 md:col-span-5 md:items-end">
-              <div className="flex flex-wrap gap-2"><BadgeOpen label={d.open24} /><BadgeGoogle href={c.googleReviewsUrl || undefined} /></div>
+              <div className="flex flex-wrap gap-2"><BadgeOpen label={d.open24} /><BadgeGoogle href={c.googleReviewsUrl || undefined} lang={lang} /></div>
               <div className="flex flex-wrap gap-3">
                 <Magnetic><Button variant="magenta" size="xl" nodo onClick={() => open()} data-cursor={d.bookCursor} title={d.ajoTr}>{d.ajo}</Button></Magnetic>
                 <a href="#flotta" onClick={(e) => { e.preventDefault(); scrollToHash("#flotta"); }}
